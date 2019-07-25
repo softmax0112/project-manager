@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && enabled
   end
+
+  def inactive_message
+    'Your account has currently been disabled, please contact website administrator.'
+  end
 end
