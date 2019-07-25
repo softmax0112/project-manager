@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get 'users/edit'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'users#show'
+  match 'users/:id' => 'users#toggle', via: :delete, as: :admin_destroy_user
 end

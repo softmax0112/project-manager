@@ -8,6 +8,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(email: current_user.email)
+    @user = User.find(params[:id])
+  end
+
+  def show
+    @users = User.all
+  end
+
+  def toggle
+    @user = User.find(params[:id])
+    @user.update(enabled: !@user.enabled)
+
+    redirect_to root_path
   end
 end
