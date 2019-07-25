@@ -12,12 +12,10 @@
   <div class='clearfix'></div>
 
   <% if current_user.user? %>
-    <p> This is a User role! </p>
+    <%= render 'user' %>
   <% elsif current_user.admin? %>
-    <p> This is an Admin Role! </p>
+    <%= render 'admin' %>
   <% else %>
-    <p> This is a manager role! </p>
+    <%= render 'manager' %>
   <% end %>
-
-  <%= link_to 'Edit Profile', users_edit_path, class: 'btn btn-primary' %>
 </div>

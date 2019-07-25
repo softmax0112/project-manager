@@ -1,0 +1,20 @@
+<h3>Administrative Console</h3>
+
+<table class='table table-condensed table-hover table-striped'>
+  <tr>
+    <th>E-mail</th>
+    <th>Name</th>
+    <th>Role</th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.name %></td>
+      <td><%= user.role %></td>
+      <td><%= link_to enable_or_disable(user), admin_destroy_user_path(user),
+        method: :delete, data: { confirm: 'Are you sure?' },
+        class: 'btn btn-primary' %></td>
+    </tr>
+  <% end %>
+</table>
