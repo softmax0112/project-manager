@@ -6,11 +6,13 @@ class User < ApplicationRecord
 
   validates :name, presence: true,
                    length: { minimum: 5 },
-                   format: { with: /^[a-zA-Z]*$/, message: 'Only letters allowed' }
+                   format: { with: /[a-zA-Z\s]*/, message: 'Only letters allowed' }
 
   mount_uploader :image, ImageUploader
 
+  enum role: { user: 'user', admin: 'admin', manager: 'manager' }
+
   def active_for_authentication?
-    super && enabledend
+    super && enabled
   end
 end
