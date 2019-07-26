@@ -30,3 +30,6 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Exclude:
     - db/**/*
+
+Metrics/AbcSize:
+  Enabled: false
