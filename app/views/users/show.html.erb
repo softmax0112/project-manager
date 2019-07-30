@@ -1,21 +1,4 @@
 <div class='container'>
-  <%= render 'shared/navbar' %>
-  <h1><%= current_user.name %></h1>
-  <div class='clearfix'></div>
-
-  <% if current_user.image.present? %>
-    <%= image_tag current_user.image_url, class: 'img-thumbnail' %>
-    <div class='clearfix'></div>
-  <% end %>
-
-  <p> E-mail: <%= current_user.email %></p>
-  <div class='clearfix'></div>
-
-  <% if current_user.user? %>
-    <%= render 'user' %>
-  <% elsif current_user.admin? %>
-    <%= render 'admin' %>
-  <% else %>
-    <%= render 'manager' %>
-  <% end %>
+  <%= render 'shared/user' %>
+  <h3>User Console!</h3>
 </div>
