@@ -38,6 +38,16 @@ class Admin::UsersController < ApplicationController
              end
   end
 
+  def destroy
+    @user.destroy
+    redirect_to home_path, notice: 'User succesfully deleted'
+  end
+
+  def toggle
+    @user.update(enabled: !@user.enabled)
+    redirect_to home_path
+  end
+
   def set_user
     @user = User.find(params[:id])
     authorize @user
