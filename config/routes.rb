@@ -25,5 +25,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'devise/sessions#new'
+  root to: 'welcome#index'
 end
