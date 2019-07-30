@@ -1,11 +1,22 @@
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top">
-  <ul class="navbar-nav ml-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="<%= url_for edit_user_registration_path %>">
-        Edit Profile </a>
+<nav class='navbar navbar-expand-sm bg-primary navbar-dark fixed-top'>
+  <ul class='navbar-nav ml-auto'>
+    <li class='nav-item dropdown active'>
+      <a class='nav-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true'
+        aria-expanded='false'>
+        Edit Profile
+      </a>
+      <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+        <a class='dropdown-item' href='<%= url_for edit_user_path(current_user) %>'>
+          Edit Info
+        </a>
+        <a class='dropdown-item'
+          href='<%= url_for change_password_user_path(current_user) %>'>
+          Change Password
+        </a>
+      </div>
     </li>
-    <li class="nav-item active">
-      <a class="nav-link" href="<%= url_for destroy_user_session_path %>"> Sign Out </a>
+    <li class='nav-item active'>
+      <a class='nav-link' href='<%= url_for destroy_user_session_path %>'> Sign Out </a>
     </li>
   </ul>
 </nav>
