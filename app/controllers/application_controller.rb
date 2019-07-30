@@ -2,6 +2,14 @@
 
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  include Pundit
+
+  rescue_from Pundit::NotAuthorizedError do |_exception|
+    flash[:alert] = 'You can not access this namespace or action'
+    redirect_to user_path(current_user) if current_user.user?
+    redirect_to admin_user_path(current_user) if current_user.admin?
+    redirect_to manager_user_path(current_user) if current_user.manager?
+  end
 
   def after_sign_out_path_for(_resource_or_scope)
     root_path
