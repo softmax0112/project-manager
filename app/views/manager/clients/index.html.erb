@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Manager Clients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @manager_clients.each do |manager_client| %>
+      <tr>
+        <td><%= link_to 'Show', manager_client %></td>
+        <td><%= link_to 'Edit', edit_manager_client_path(manager_client) %></td>
+        <td><%= link_to 'Destroy', manager_client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Manager Client', new_manager_client_path %>

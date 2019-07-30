@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do
+    resources :clients
     resources :users do
       member do
         put :toggle
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   namespace :manager do
+    resources :clients
     resources :users, only: %i[show edit update destroy]
   end
 
