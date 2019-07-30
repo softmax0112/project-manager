@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def enable_or_disable(user)
-    user.enabled? ? 'Disabled' : 'Enabled'
+    user.enabled? ? 'Disable' : 'Enable'
   end
 end
