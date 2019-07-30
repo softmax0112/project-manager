@@ -38,13 +38,13 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3.1'
-gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'carrierwave'
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'devise-i18n'
 gem 'jquery-rails'
+gem 'kaminari'
 gem 'pundit'
 gem 'rubocop'
 
