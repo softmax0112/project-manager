@@ -1,0 +1,38 @@
+<div class='container'>
+  <%= render 'shared/navbarback' %>
+
+  <div class='row'>
+    <div class='col'>
+      <h1>Edit Profile</h1>
+    </div>
+    <div class='col'>
+      <%= link_to 'Delete Profile', user_path(current_user), method: :delete,
+        data: { confirm: 'Are you sure?' }, class: 'btn btn-primary float-right' %>
+    </div>
+  </div>
+
+  <%= render 'shared/errors' %>
+
+  <%= form_for(current_user, url: user_path(current_user),
+    html: { method: :put, multipart: :true }) do |f| %>
+    <%= image_tag current_user.image_url.to_s, class: 'img-thumbnail' %>
+
+    <div class="form-group">
+      <%= f.file_field :image, class: 'file-field filestyle' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit 'Update', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
