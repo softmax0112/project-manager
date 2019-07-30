@@ -1,4 +1,7 @@
-<div class='container'>
-  <h1> Root Page! </h1>
-  <%= link_to 'Sign in', new_user_session_path %>
+<div class='container text-center'>
+  <h1>Project Manager</h1>W
+  <div class='d-inline'>
+    <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary' %>
+    <%= link_to 'Log in', new_user_session_path, class: 'btn btn-primary' %>
+  </div>
 </div>
