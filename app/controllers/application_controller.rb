@@ -16,11 +16,13 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(_resource_or_scope)
-    if current_user.admin?
-      admin_user_path(current_user)
-    else
-      user_path(current_user)
-    end
+    home_path
+  end
+
+  def home_path
+    return admin_user_path(current_user) if current_user.admin?
+    return user_path(current_user) if current_user.user?
+    return manager_user_path(current_user) if current_user.manager?
   end
 
   protected
