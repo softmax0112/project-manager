@@ -28,10 +28,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    permitted_params = %i[name password enabled image]
+    permitted_params = %i[name password enabled image email role]
     devise_parameter_sanitizer.permit(:account_update, keys: permitted_params)
-
-    permitted_params << :email
     devise_parameter_sanitizer.permit(:sign_up, keys: permitted_params)
   end
 end
