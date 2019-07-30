@@ -4,6 +4,22 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: %i[edit update toggle destroy]
 
+  def new
+    @user = User.new
+    authorize @user
+  end
+
+  def create
+    @user = User.new(user_permit_params)
+    authorize @user
+
+    if @user.save
+      redirect_to home_path, notice: 'User succesfully created'
+    else
+      render 'new'
+    end
+  end
+
   def edit; end
 
   def update
