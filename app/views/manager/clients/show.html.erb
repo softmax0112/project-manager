@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Name:</strong>
+  <%= @manager_client.name %>
+</p>
+
+<p>
+  <strong>Affiliation:</strong>
+  <%= @manager_client.affiliation %>
+</p>
+
 <%= link_to 'Edit', edit_manager_client_path(@manager_client) %> |
 <%= link_to 'Back', manager_clients_path %>

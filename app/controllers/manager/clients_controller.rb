@@ -69,6 +69,6 @@ class Manager::ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def manager_client_params
-      params.fetch(:manager_client, {})
+      params.require(:manager_client).permit(:name, :affiliation)
     end
 end

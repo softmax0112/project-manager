@@ -5,6 +5,8 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
+      <th>Affiliation</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +14,8 @@
   <tbody>
     <% @manager_clients.each do |manager_client| %>
       <tr>
+        <td><%= manager_client.name %></td>
+        <td><%= manager_client.affiliation %></td>
         <td><%= link_to 'Show', manager_client %></td>
         <td><%= link_to 'Edit', edit_manager_client_path(manager_client) %></td>
         <td><%= link_to 'Destroy', manager_client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
