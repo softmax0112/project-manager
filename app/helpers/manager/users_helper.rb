@@ -1,0 +1,2 @@
+module Manager::UsersHelper
+end
