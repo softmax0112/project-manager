@@ -2,23 +2,37 @@
 
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :shorten_params, only: %i[update update_password]
+  before_action :set_user, only: %i[show edit update destroy]
 
-  def index
-    redirect_to root_path unless user_signed_in?
+  def show; end
+
+  def edit; end
+
+  def update
+    if @user.update(user_params)
+      redirect_to home_path, notice: 'User successfully updated'
+    else
+      render :edit
+    end
   end
 
-  def edit
+  def destroy
+    @user.destroy
+    redirect_to home_path, notice: 'Sorry to see you go!'
+  end
+
+  def set_user
     @user = User.find(params[:id])
   end
 
-  def show
-    @users = User.all
+  def shorten_params
+    @user_params = params[:user]
   end
 
-  def toggle
-    @user = User.find(params[:id])
-    @user.update(enabled: !@user.enabled)
+  private
 
-    redirect_to root_path
+  def user_params
+    params.require(:user).permit(:email, :name, :password, :image)
   end
 end
