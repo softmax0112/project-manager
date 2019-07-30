@@ -2,9 +2,28 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  get 'welcome/index'
-  get 'users/edit'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'users#show'
-  match 'users/:id' => 'users#toggle', via: :delete, as: :admin_destroy_user
+
+  namespace :admin do
+    resources :users do
+      member do
+        put :toggle
+      end
+    end
+  end
+
+  namespace :manager do
+    resources :users, only: %i[show edit update destroy]
+  end
+
+  resources :users, only: %i[show edit update destroy] do
+    member do
+      get :change_password
+    end
+    member do
+      patch :update_password
+    end
+  end
+
+  root to: 'devise/sessions#new'
 end
