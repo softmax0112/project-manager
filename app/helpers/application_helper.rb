@@ -6,4 +6,8 @@ module ApplicationHelper
     return user_path(current_user) if current_user.user?
     return manager_user_path(current_user) if current_user.manager?
   end
+
+  def enable_or_disable(user)
+    user.enabled? ? 'Disabled' : 'Enabled'
+  end
 end
