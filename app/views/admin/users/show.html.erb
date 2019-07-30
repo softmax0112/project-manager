@@ -1,0 +1,37 @@
+<div class='container'>
+  <%= render 'shared/user' %>
+  <h3>Administrative Console</h3>
+
+  <div class='form-inline d-flex flex-row-reverse'>
+    <div class='form-group'>
+      <%= form_tag(admin_user_path(current_user), method: :get) do %>
+        <%= text_field_tag :name, params[:name], class: 'form-control' %>
+        <%= submit_tag 'Search', name: nil, class: 'btn btn-primary' %>
+        <%= link_to 'New User', new_admin_user_path,
+          class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+  <%= page_entries_info @users, entry_name: 'user' %>
+  <table class='table table-condensed table-hover table-striped'>
+    <tr>
+      <th>E-mail</th>
+      <th>Name</th>
+      <th>Role</th>
+    </tr>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.name %></td>
+        <td><%= user.role %></td>
+        <td><%= link_to 'Edit User', edit_admin_user_path(user),
+          class: 'btn btn-primary' %>
+        <td><%= link_to enable_or_disable(user), toggle_admin_user_path(user),
+          method: :put, data: { confirm: 'Are you sure?' },
+          class: 'btn btn-primary' %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @users, theme: 'twitter-bootstrap-4' %>
+</div>
