@@ -11,6 +11,7 @@ class Admin::ClientsController < ApplicationController
                      else
                        Client.page(params[:page])
                      end
+    authorize @admin_clients
   end
 
   # GET /manager/clients/1
@@ -20,6 +21,7 @@ class Admin::ClientsController < ApplicationController
   # GET /manager/clients/new
   def new
     @admin_client = Client.new
+    authorize @admin_client
   end
 
   # GET /manager/clients/1/edit
@@ -29,6 +31,7 @@ class Admin::ClientsController < ApplicationController
   # POST /manager/clients.json
   def create
     @admin_client = Client.new(admin_client_params)
+    authorize @admin_client
 
     respond_to do |format|
       if @admin_client.save
@@ -70,6 +73,7 @@ class Admin::ClientsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_client
     @admin_client = Client.find(params[:id])
+    authorize @admin_client
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
