@@ -14,7 +14,7 @@
 
 <%= form_for(@user, url:admin_user_path(@user),
   html: { method: :put, multipart: :true }) do |f| %>
-  <%= image_tag @user.image_url.to_s, class: 'img-thumbnail' %>
+  <%= image_tag image_url_validate(@user.image_url.to_s), class: 'img-thumbnail' %>
 
   <div class="form-group">
     <%= f.file_field :image, class: 'file-field filestyle' %>

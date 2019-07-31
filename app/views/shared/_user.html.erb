@@ -2,10 +2,8 @@
 <h1><%= current_user.name %></h1>
 <div class='clearfix'></div>
 
-<% if current_user.image.present? %>
-  <%= image_tag current_user.image_url, class: 'img-thumbnail' %>
-  <div class='clearfix'></div>
-<% end %>
+<%= image_tag image_url_validate(current_user.image_url.to_s), class: 'img-thumbnail' %>
+<div class='clearfix'></div>
 
 <p> E-mail: <%= current_user.email %></p>
 <div class='clearfix'></div>
