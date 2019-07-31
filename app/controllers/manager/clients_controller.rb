@@ -10,7 +10,7 @@ class Manager::ClientsController < ApplicationController
                          Manager::Client.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
                        else
                          Manager::Client.page(params[:page])
-                        end
+                       end
   end
 
   # GET /manager/clients/1
