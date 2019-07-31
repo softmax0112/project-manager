@@ -1,6 +1,6 @@
 <%= form_with(model: manager_client, local: true) do |form| %>
-  <% if manager_client.errors.any? %>
-    <div id="error_explanation">
+  <% if manager_client.errors.any?%>
+    <div id="error_explanation" class='alert alert-danger'>
       <h2><%= pluralize(manager_client.errors.count, "error") %> prohibited this manager_client from being saved:</h2>
 
       <ul>
@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :affiliation %>
-    <%= form.text_field :affiliation %>
+    <%= form.text_field :affiliation, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
   </div>
 <% end %>
