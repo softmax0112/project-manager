@@ -1,9 +1,10 @@
 <%= render 'shared/navbar' %>
-<h1><%= current_user.name %></h1>
-<div class='clearfix'></div>
 
-<%= image_tag image_url_validate(current_user.image_url.to_s), class: 'img-thumbnail' %>
-<div class='clearfix'></div>
-
-<p> E-mail: <%= current_user.email %></p>
-<div class='clearfix'></div>
+<div class='card indigo'>
+  <%= image_tag image_url_validate(current_user.image_url.to_s),
+    class: 'img-thumbnail' %>
+  <div class='card-body'>
+    <h4 class='card-title text-white'><%= current_user.name %></h4>
+    <p class='card-text text-white'><small><%= current_user.email %></small></p>
+  </div>
+</div>
