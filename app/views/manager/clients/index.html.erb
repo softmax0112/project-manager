@@ -1,38 +1,60 @@
 <%= render 'shared/navbarback' %>
-<h1>Clients</h1>
+<div class='card indigo text-white'>
+  <div class='card-body'>
+    <h2 class='font-up font-bold py-4 text-white'>Clients</h2>
 
-<div class='form-inline d-flex flex-row-reverse'>
-  <div class='form-group'>
-    <%= form_tag(manager_clients_path, method: :get) do %>
-      <%= text_field_tag :name, params[:name], class: 'form-control' %>
-      <%= submit_tag 'Search', name: nil, class: 'btn btn-outline-white waves-effect waves-light' %>
-      <%= link_to 'New Client', new_manager_client_path,
-        class: 'btn btn-outline-white waves-effect waves-light' %>
-    <% end %>
+    <div class="d-flex justify-content-between bd-highlight mb-2">
+      <div class='p-2 bd-highlight'>
+        <%= link_to 'New Client', new_manager_client_path, class: 'btn btn-outline-white waves-effect waves-light' %>
+      </div>
+      <div class='p-2 bd-highlight'>
+        <div class='form-inline d-flex flex-row-reverse'>
+          <div class='form-group'>
+            <%= form_tag(manager_clients_path, method: :get) do %>
+              <%= text_field_tag :name, params[:name],
+                class: 'form-control indigo text-white' %>
+              <%= submit_tag 'Search', name: nil, class: 'btn btn-outline-white waves-effect waves-light' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= page_entries_info @manager_clients %>
+    <table class='table table-condensed table-hover table-striped text-white'>
+      <thead>
+        <tr>
+          <th>Client Information</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @manager_clients.each do |manager_client| %>
+          <tr>
+            <td>
+              <div class='row'>
+                <div class='col'>
+                  <div class='form-group'>
+                    <b>Name: </b><%= manager_client.name %>
+                  </div>
+                  <div class='form-group'>
+                    <b>Affiliation: </b><%= manager_client.affiliation %>
+                  </div>
+                </div>
+                <div class='col'>
+                  <div class='float-right'>
+                    <%= link_to 'Show', manager_client_path(manager_client), class: 'btn btn-outline-white waves-effect waves-light' %>
+                    <%= link_to 'Edit', edit_manager_client_path(manager_client),
+                    class: 'btn btn-outline-white waves-effect waves-light' %>
+                    <%= link_to 'Destroy', manager_client_path(manager_client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red' %>
+                  </div>
+                </div>
+              </div>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @manager_clients, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>
-
-<%= page_entries_info @manager_clients %>
-<table class='table table-condensed table-hover table-striped'>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Affiliation</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @manager_clients.each do |manager_client| %>
-      <tr>
-        <td><%= manager_client.name %></td>
-        <td><%= manager_client.affiliation %></td>
-        <td><%= link_to 'Show', manager_client_path(manager_client), class: 'btn btn-outline-white waves-effect waves-light' %></td>
-        <td><%= link_to 'Edit', edit_manager_client_path(manager_client),
-          class: 'btn btn-outline-white waves-effect waves-light' %></td>
-        <td><%= link_to 'Destroy', manager_client_path(manager_client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @manager_clients, theme: 'twitter-bootstrap-4' %>

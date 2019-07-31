@@ -1,6 +1,9 @@
-<%= render 'shared/navbarback' %>
-<h1>New Manager Client</h1>
-
-<%= render 'form', manager_client: @manager_client %>
-
-<%= link_to 'Back', manager_clients_path, class: 'btn btn-outline-white waves-effect waves-light' %>
+<%= render 'navbarback' %>
+<div class='card indigo text-white'>
+  <div class='card-body'>
+    <h2 class='font-up font-bold py-4 text-white'>
+      New Client
+    </h2>
+    <%= render 'form', manager_client: @manager_client %>
+  </div>
+</div>

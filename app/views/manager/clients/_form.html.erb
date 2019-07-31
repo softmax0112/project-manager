@@ -1,4 +1,4 @@
-<%= form_with(model: manager_client, local: true, url: url_for(:controller => 'manager/clients', :action => 'create')) do |form| %>
+<%= form_with(model: manager_client, local: true, url: get_controller_action) do |form| %>
   <% if manager_client.errors.any?%>
     <div id="error_explanation" class='alert alert-danger'>
       <h2><%= pluralize(manager_client.errors.count, "error") %> prohibited this manager_client from being saved:</h2>
@@ -13,12 +13,12 @@
 
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name, class: 'text-white' %>
   </div>
 
   <div class="form-group">
     <%= form.label :affiliation %>
-    <%= form.text_field :affiliation, class: 'form-control' %>
+    <%= form.text_field :affiliation, class: 'text-white' %>
   </div>
 
   <div class="actions">

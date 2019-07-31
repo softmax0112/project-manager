@@ -14,4 +14,8 @@ module ApplicationHelper
   def image_url_validate(url)
     url.blank? ? 'silhouette.png' : url
   end
+
+  def get_controller_action
+    params[:id].nil? ? url_for(:controller => 'manager/clients', :action => 'create') : url_for(:controller => 'manager/clients', :action => 'update')
+  end
 end
