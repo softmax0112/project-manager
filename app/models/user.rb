@@ -8,6 +8,8 @@ class User < ApplicationRecord
                    length: { minimum: 1, maximum: 50 },
                    format: { with: /[a-zA-Z\s]*/, message: 'Only letters allowed' }
 
+  validates_inclusion_of :role, :in => %w(admin user manager)
+
   mount_uploader :image, ImageUploader
 
   enum role: { user: 'user', admin: 'admin', manager: 'manager' }
