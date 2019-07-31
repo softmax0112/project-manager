@@ -14,21 +14,47 @@
 <%= page_entries_info @users, entry_name: 'user' %>
 <table class='table table-condensed table-hover table-striped'>
   <tr>
-    <th>E-mail</th>
-    <th>Name</th>
-    <th>Role</th>
+    <th>User Information</th>
   </tr>
 
   <% @users.each do |user| %>
     <tr>
-      <td><%= user.email %></td>
-      <td><%= user.name %></td>
-      <td><%= user.role %></td>
-      <td><%= link_to 'Edit User', edit_admin_user_path(user),
-        class: 'btn btn-primary' %>
-      <td><%= link_to enable_or_disable(user), toggle_admin_user_path(user),
-        method: :put, data: { confirm: 'Are you sure?' },
-        class: 'btn btn-primary' %></td>
+      <td>
+        <div class='row'>
+          <div class='col sm-6'>
+            <div class='row'>
+              <div class='col'>
+                <%= image_tag user.image_url.to_s, class: 'img-thumbnail' %>
+              </div>
+              <div class='col'>
+                <div class='float-left'>
+                  <div class='form-group'>
+                    <b> Name: </b>
+                    <%= user.name %>
+                  </div>
+                  <div class='form-group'>
+                    <b> E-mail: </b>
+                    <%= user.email %>
+                  </div>
+                  <div class='form-group'>
+                    <b> Role: </b>
+                    <%= user.role %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='col'>
+            <div class='float-right'>
+              <%= link_to 'Edit User', edit_admin_user_path(user),
+                class: 'btn btn-primary' %>
+              <%= link_to enable_or_disable(user), toggle_admin_user_path(user),
+                method: :put, data: { confirm: 'Are you sure?' },
+                class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      </td>
     </tr>
   <% end %>
 </table>
