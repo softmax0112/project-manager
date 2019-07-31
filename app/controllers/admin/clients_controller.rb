@@ -7,10 +7,10 @@ class Admin::ClientsController < ApplicationController
   # GET /manager/clients.json
   def index
     @admin_clients = if params[:name]
-                         Client.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
-                       else
-                         Client.page(params[:page])
-                       end
+                       Client.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
+                     else
+                       Client.page(params[:page])
+                     end
   end
 
   # GET /manager/clients/1

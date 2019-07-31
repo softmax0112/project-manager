@@ -16,18 +16,26 @@ module ApplicationHelper
   end
 
   def decide_controller_action
-    if self.class.parent == Manager
-      if params[:id].nil?
-        url_for(controller: 'manager/clients', action: 'create')
-      else
-        url_for(controller: 'manager/clients', action: 'update')
-      end
+    self.class.parent == Manager ? decide_manager_controller_action : decide_admin_controller_action
+  end
+
+  def decide_manager_controller_action
+    if params[:id].nil?
+      url_for(controller: 'manager/clients', action: 'create')
     else
-      if params[:id].nil?
-        url_for(controller: 'admin/clients', action: 'create')
-      else
-        url_for(controller: 'admin/clients', action: 'update')
-      end
+      url_for(controller: 'manager/clients', action: 'update')
     end
+  end
+
+  def decide_admin_controller_action
+    if params[:id].nil?
+      url_for(controller: 'admin/clients', action: 'create')
+    else
+      url_for(controller: 'admin/clients', action: 'update')
+    end
+  end
+
+  def decide_client_path
+    current_user.admin? ? admin_clients_path : manager_clients_path
   end
 end
