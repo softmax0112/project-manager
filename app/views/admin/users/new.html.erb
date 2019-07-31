@@ -1,41 +1,48 @@
 <%= render 'shared/navbarback' %>
-<%= render 'shared/errors' %>
 
-<%= form_with model: @user, url: admin_users_path(@user), class: 'form-vertical', local: true do |form| %>
+<div class="card indigo">
+  <div class="card-body">
+    <%= form_with model: @user, url: admin_users_path(@user), class: 'form-vertical', local: true do |form| %>
+      <h2 class="text-center font-up font-bold py-4 white-text">New User</h2>
+      <%= render 'shared/errors' %>
 
-  <div class="form-group">
-    <%= form.file_field :image, class: 'file-field filestyle' %>
+      <div class='md-form'>
+        <i class='fa fa-camera-retro prefix'></i>
+        <%= form.file_field :image, class: 'file-field filestyle text-white' %>
+      </div>
+
+      <p class='md-form'>
+        <i class='fa fa-id-card prefix'></i>
+        <%= form.text_field :name, class: 'text-white', placeholder: 'Name' %>
+      </p>
+
+      <p class='md-form'>
+        <i class='fa fa-envelope prefix'></i>
+        <%= form.email_field :email, class: 'text-white', placeholder: 'E-mail' %>
+      </p>
+
+      <p class='md-form'>
+        <i class='fa fa-lock prefix'></i>
+        <%= form.password_field :password, class: 'text-white',
+          placeholder: 'Password' %>
+      </p>
+
+      <div class='form-group'>
+        <%= form.label :role, class: 'text-white' %> <br>
+        <%= form.select :role, options_for_select(['manager','admin', 'user'],
+        @user.role), class: 'dropdown text-white' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label 'Status', class: 'text-white' %> <br>
+        <%= form.select :enabled, options_for_select([{'Enabled' => true},
+          {'Disabled' => false}], @user.enabled), class: 'dropdown form-control' %>
+      </div>
+
+      <p class='form-group'>
+        <%= form.submit 'Submit', class: 'btn btn-primary' %>
+      </p>
+
+    <% end %>
   </div>
-
-  <p class='form-group'>
-    <%= form.label :name, class: 'label' %>
-    <%= form.text_field :name, class: 'form-control' %>
-  </p>
-
-  <p class='form-group'>
-    <%= form.label :email, class: 'label' %>
-    <%= form.email_field :email, class: 'form-control' %>
-  </p>
-
-  <p class='form-group'>
-    <%= form.label :password, class: 'label' %>
-    <%= form.password_field :password, class: 'form-control' %>
-  </p>
-
-  <div class="form-group">
-    <%= form.label :role %>
-    <%= form.select :role, options_for_select(['manager','admin', 'user'],
-    @user.role), class: 'dropdown form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label 'Status' %>
-    <%= form.select :enabled, options_for_select([{'Enabled' => true},
-      {'Disabled' => false}], @user.enabled), class: 'dropdown form-control' %>
-  </div>
-
-  <p class='form-group'>
-    <%= form.submit 'Submit', class: 'btn btn-primary' %>
-  </p>
-
-<% end %>
+</div>
