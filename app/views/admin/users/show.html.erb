@@ -1,16 +1,22 @@
 <%= render 'shared/user' %>
 <h3>Administrative Console</h3>
 
-<div class='form-inline d-flex flex-row-reverse'>
-  <div class='form-group'>
-    <%= form_tag(admin_user_path(current_user), method: :get) do %>
-      <%= text_field_tag :name, params[:name], class: 'form-control' %>
-      <%= submit_tag 'Search', name: nil, class: 'btn btn-primary' %>
-      <%= link_to 'New User', new_admin_user_path,
-        class: 'btn btn-primary' %>
-    <% end %>
+<div class="d-flex justify-content-between bd-highlight mb-2">
+  <div class='p-2 bd-highlight'>
+    <%= link_to 'New User', new_admin_user_path, class: 'btn btn-primary' %>
+  </div>
+  <div class='p-2 bd-highlight'>
+    <div class='form-inline d-flex flex-row-reverse'>
+      <div class='form-group'>
+        <%= form_tag(admin_user_path(current_user), method: :get) do %>
+          <%= text_field_tag :name, params[:name], class: 'form-control' %>
+          <%= submit_tag 'Search', name: nil, class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
+
 <%= page_entries_info @users, entry_name: 'user' %>
 <table class='table table-condensed table-hover table-striped'>
   <tr>
