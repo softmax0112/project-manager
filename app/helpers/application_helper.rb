@@ -11,7 +11,7 @@ module ApplicationHelper
     user.enabled? ? 'Disable' : 'Enable'
   end
 
-  def image_url(url)
+  def image_url_validate(url)
     url.blank? ? 'silhouette.png' : url
   end
 end
