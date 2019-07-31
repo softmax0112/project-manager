@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true,
-                   length: { minimum: 5 },
+                   length: { minimum: 1, maximum: 50 },
                    format: { with: /[a-zA-Z\s]*/, message: 'Only letters allowed' }
 
   mount_uploader :image, ImageUploader
@@ -13,7 +13,7 @@ class User < ApplicationRecord
   enum role: { user: 'user', admin: 'admin', manager: 'manager' }
 
   def active_for_authentication?
-    super && enabled
+    super && enabled?
   end
 
   def inactive_message
