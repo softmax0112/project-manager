@@ -7,9 +7,9 @@ class Manager::ClientsController < ApplicationController
   # GET /manager/clients.json
   def index
     @manager_clients = if params[:name]
-                         Manager::Client.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
+                         Client.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
                        else
-                         Manager::Client.page(params[:page])
+                         Client.page(params[:page])
                        end
   end
 
@@ -19,7 +19,7 @@ class Manager::ClientsController < ApplicationController
 
   # GET /manager/clients/new
   def new
-    @manager_client = Manager::Client.new
+    @manager_client = Client.new
   end
 
   # GET /manager/clients/1/edit
@@ -28,11 +28,11 @@ class Manager::ClientsController < ApplicationController
   # POST /manager/clients
   # POST /manager/clients.json
   def create
-    @manager_client = Manager::Client.new(manager_client_params)
+    @manager_client = Client.new(manager_client_params)
 
     respond_to do |format|
       if @manager_client.save
-        format.html { redirect_to @manager_client, notice: 'Client was successfully created.' }
+        format.html { redirect_to manager_client_path(@manager_client), notice: 'Client was successfully created' }
         format.json { render :show, status: :created, location: @manager_client }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class Manager::ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @manager_client.update(manager_client_params)
-        format.html { redirect_to @manager_client, notice: 'Client was successfully updated.' }
+        format.html { redirect_to manager_client_path(@manager_client), notice: 'Client was successfully updated' }
         format.json { render :show, status: :ok, location: @manager_client }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class Manager::ClientsController < ApplicationController
   def destroy
     @manager_client.destroy
     respond_to do |format|
-      format.html { redirect_to manager_clients_url, notice: 'Client was successfully destroyed.' }
+      format.html { redirect_to manager_clients_path, notice: 'Client was successfully destroyed' }
       format.json { head :no_content }
     end
   end
@@ -69,11 +69,11 @@ class Manager::ClientsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_manager_client
-    @manager_client = Manager::Client.find(params[:id])
+    @manager_client = Client.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def manager_client_params
-    params.require(:manager_client).permit(:name, :affiliation)
+    params.require(:client).permit(:name, :affiliation)
   end
 end

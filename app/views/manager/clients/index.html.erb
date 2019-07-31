@@ -27,10 +27,10 @@
       <tr>
         <td><%= manager_client.name %></td>
         <td><%= manager_client.affiliation %></td>
-        <td><%= link_to 'Show', manager_client, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Show', manager_client_path(manager_client), class: 'btn btn-primary' %></td>
         <td><%= link_to 'Edit', edit_manager_client_path(manager_client),
           class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Destroy', manager_client, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Destroy', manager_client_path(manager_client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %></td>
       </tr>
     <% end %>
   </tbody>
