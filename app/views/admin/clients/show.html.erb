@@ -1,0 +1,13 @@
+<%= render 'navbarback' %>
+<p>
+  <strong>Name:</strong>
+  <%= @admin_client.name %>
+</p>
+
+<p>
+  <strong>Affiliation:</strong>
+  <%= @admin_client.affiliation %>
+</p>
+
+<%= link_to 'Edit', edit_admin_client_path(@admin_client),
+  class: 'btn btn-outline-white waves-effect waves-light' %>

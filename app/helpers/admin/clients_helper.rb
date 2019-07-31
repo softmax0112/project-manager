@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class Client < ApplicationRecord
+module Admin::ClientsHelper
 end

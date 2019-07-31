@@ -15,7 +15,19 @@ module ApplicationHelper
     url.blank? ? 'silhouette.png' : url
   end
 
-  def get_controller_action
-    params[:id].nil? ? url_for(:controller => 'manager/clients', :action => 'create') : url_for(:controller => 'manager/clients', :action => 'update')
+  def decide_controller_action
+    if self.class.parent == Manager
+      if params[:id].nil?
+        url_for(controller: 'manager/clients', action: 'create')
+      else
+        url_for(controller: 'manager/clients', action: 'update')
+      end
+    else
+      if params[:id].nil?
+        url_for(controller: 'admin/clients', action: 'create')
+      else
+        url_for(controller: 'admin/clients', action: 'update')
+      end
+    end
   end
 end
