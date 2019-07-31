@@ -30,9 +30,16 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def search_results
+    @users_by_name = User.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
+    @users_by_email = User.where('email LIKE ?', "%#{params[:name]}%").page(params[:page])
+    @results = @users_by_name.or(@users_by_email)
+    return @results
+  end
+
   def show
     @users = if params[:name]
-               User.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
+               search_results
              else
                User.page(params[:page])
              end
