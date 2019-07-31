@@ -4,7 +4,11 @@ class Manager::ClientsController < ApplicationController
   # GET /manager/clients
   # GET /manager/clients.json
   def index
-    @manager_clients = Manager::Client.page(params[:page])
+    @manager_clients =  if params[:name]
+                          Manager::Client.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
+                        else
+                          Manager::Client.page(params[:page])
+                        end
   end
 
   # GET /manager/clients/1

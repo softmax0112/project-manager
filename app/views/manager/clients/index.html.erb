@@ -1,4 +1,15 @@
-<h1>Manager Clients</h1>
+<h1>Clients</h1>
+
+<div class='form-inline d-flex flex-row-reverse'>
+  <div class='form-group'>
+    <%= form_tag(manager_clients_path, method: :get) do %>
+      <%= text_field_tag :name, params[:name], class: 'form-control' %>
+      <%= submit_tag 'Search', name: nil, class: 'btn btn-primary' %>
+      <%= link_to 'New Client', new_manager_client_path,
+        class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
 
 <%= page_entries_info @manager_clients %>
 <table class='table table-condensed table-hover table-striped'>
@@ -24,7 +35,3 @@
   </tbody>
 </table>
 <%= paginate @manager_clients, theme: 'twitter-bootstrap-4' %>
-
-<br>
-
-<%= link_to 'New Client', new_manager_client_path, class: 'btn btn-primary' %>
