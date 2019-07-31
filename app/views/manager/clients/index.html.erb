@@ -1,5 +1,6 @@
 <h1>Manager Clients</h1>
 
+<%= page_entries_info @manager_clients %>
 <table class='table table-condensed table-hover table-striped'>
   <thead>
     <tr>
@@ -22,6 +23,7 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @manager_clients, theme: 'twitter-bootstrap-4' %>
 
 <br>
 

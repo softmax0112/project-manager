@@ -4,7 +4,7 @@ class Manager::ClientsController < ApplicationController
   # GET /manager/clients
   # GET /manager/clients.json
   def index
-    @manager_clients = Manager::Client.all
+    @manager_clients = Manager::Client.page(params[:page])
   end
 
   # GET /manager/clients/1
