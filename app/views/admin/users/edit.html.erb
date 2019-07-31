@@ -1,43 +1,48 @@
 <%= render 'shared/navbarback' %>
 
-<div class='row'>
-  <div class='col'>
-    <h1>Edit User Profile</h1>
-  </div>
-  <div class='col'>
-    <%= link_to 'Delete User', admin_user_path(@user), method: :delete,
-      data: { confirm: 'Are you sure?' }, class: 'btn btn-primary float-right' %>
+<div class="card indigo">
+  <div class="card-body">
+    <div class='row'>
+      <div class='col'>
+        <h1 class='float-left'>Edit User Profile</h1>
+      </div>
+      <div class='col'>
+        <%= link_to 'Delete User', admin_user_path(@user), method: :delete,
+          data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light float-right red' %>
+      </div>
+    </div>
+
+    <%= render 'shared/errors' %>
+
+    <%= form_for(@user, url:admin_user_path(@user),
+      html: { method: :put, multipart: :true }) do |f| %>
+      <%= image_tag image_url_validate(@user.image_url.to_s), class: 'img-thumbnail' %>
+
+      <div class="md-form">
+        <i class='fa fa-camera-retro prefix'></i>
+        <%= f.file_field :image, class: 'file-field filestyle' %>
+      </div>
+
+      <div class="md-form">
+        <i class='fa fa-id-card prefix'></i>
+        <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'text-white', placeholder: 'Name' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :role, class: 'text-white' %> <br>
+        <%= f.select :role, options_for_select(['manager','admin', 'user'],
+          @user.role), class: 'dropdowntext-white' %>
+      </div>
+
+      <div class="md-form">
+        <i class='fa fa-envelope prefix'></i>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'text-white', placeholder: 'E-mail' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit 'Update User', class: 'btn btn-outline-white waves-effect waves-light' %>
+      </div>
+    <% end %>
   </div>
 </div>
-
-<%= render 'shared/errors' %>
-
-<%= form_for(@user, url:admin_user_path(@user),
-  html: { method: :put, multipart: :true }) do |f| %>
-  <%= image_tag image_url_validate(@user.image_url.to_s), class: 'img-thumbnail' %>
-
-  <div class="form-group">
-    <%= f.file_field :image, class: 'file-field filestyle' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :role %>
-    <%= f.select :role, options_for_select(['manager','admin', 'user'],
-      @user.role), class: 'dropdown form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit 'Update User', class: 'btn btn-primary' %>
-  </div>
-<% end %>
 
