@@ -6,13 +6,18 @@
   height: 275px;
 }
 
+.card {
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
 .card-size {
   max-width: 200px;
   max-height: 500px;
 }
 
 .light-indigo {
-  background-color: #BE91F7;
+  background-color: #F2CDFF;
 }
 
 body {
