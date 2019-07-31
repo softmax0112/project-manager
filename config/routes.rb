@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   end
 
   root to: 'welcome#index'
+  get '*path', controller: 'application', action: 'show_error_page'
 end
