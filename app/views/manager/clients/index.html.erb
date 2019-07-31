@@ -5,9 +5,9 @@
   <div class='form-group'>
     <%= form_tag(manager_clients_path, method: :get) do %>
       <%= text_field_tag :name, params[:name], class: 'form-control' %>
-      <%= submit_tag 'Search', name: nil, class: 'btn btn-primary' %>
+      <%= submit_tag 'Search', name: nil, class: 'btn btn-outline-white waves-effect waves-light' %>
       <%= link_to 'New Client', new_manager_client_path,
-        class: 'btn btn-primary' %>
+        class: 'btn btn-outline-white waves-effect waves-light' %>
     <% end %>
   </div>
 </div>
@@ -27,10 +27,10 @@
       <tr>
         <td><%= manager_client.name %></td>
         <td><%= manager_client.affiliation %></td>
-        <td><%= link_to 'Show', manager_client_path(manager_client), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Show', manager_client_path(manager_client), class: 'btn btn-outline-white waves-effect waves-light' %></td>
         <td><%= link_to 'Edit', edit_manager_client_path(manager_client),
-          class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Destroy', manager_client_path(manager_client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %></td>
+          class: 'btn btn-outline-white waves-effect waves-light' %></td>
+        <td><%= link_to 'Destroy', manager_client_path(manager_client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light' %></td>
       </tr>
     <% end %>
   </tbody>
