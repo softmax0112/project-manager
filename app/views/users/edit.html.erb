@@ -1,36 +1,40 @@
 <%= render 'shared/navbarback' %>
 
-<div class='row'>
-  <div class='col'>
-    <h1>Edit Profile</h1>
-  </div>
-  <div class='col'>
-    <%= link_to 'Delete Profile', user_path(current_user), method: :delete,
-      data: { confirm: 'Are you sure?' }, class: 'btn btn-primary float-right' %>
+<div class="card indigo">
+  <div class="card-body">
+    <div class='row'>
+      <div class='col'>
+        <h2 class="text-center font-up font-bold py-4 white-text float-left">Edit Profile</h2>
+      </div>
+      <div class='col'>
+        <%= link_to 'Delete Profile', user_path(current_user), method: :delete,
+          data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light float-right red' %>
+      </div>
+    </div>
+
+    <%= render 'shared/errors' %>
+
+    <%= form_for(current_user, url: user_path(current_user),
+      html: { method: :put, multipart: :true }) do |f| %>
+      <%= image_tag current_user.image_url.to_s, class: 'img-thumbnail' %>
+
+      <div class='md-form text-white'>
+        <%= f.file_field :image, class: 'file-field filestyle' %>
+      </div>
+
+      <div class='form-group text-white'>
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true, autocomplete: 'name' %>
+      </div>
+
+      <div class='form-group text-white'>
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'email' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit 'Update', class: 'btn btn-outline-white waves-effect waves-light' %>
+      </div>
+    <% end %>
   </div>
 </div>
-
-<%= render 'shared/errors' %>
-
-<%= form_for(current_user, url: user_path(current_user),
-  html: { method: :put, multipart: :true }) do |f| %>
-  <%= image_tag current_user.image_url.to_s, class: 'img-thumbnail' %>
-
-  <div class="form-group">
-    <%= f.file_field :image, class: 'file-field filestyle' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit 'Update', class: 'btn btn-primary' %>
-  </div>
-<% end %>
