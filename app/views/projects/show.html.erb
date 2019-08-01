@@ -22,17 +22,12 @@
 
 <p>
   <strong>Manager:</strong>
-  <%= @project.manager %>
+  <%= @project.manager_id %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @project.user %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @project.user %>
+  <strong>Creator:</strong>
+  <%= @project.creator_id %>
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

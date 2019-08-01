@@ -10,8 +10,7 @@
       <th>Hours spent</th>
       <th>Total payment</th>
       <th>Manager</th>
-      <th>User</th>
-      <th>User</th>
+      <th>Creator</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,9 +22,8 @@
         <td><%= project.description %></td>
         <td><%= project.hours_spent %></td>
         <td><%= project.total_payment %></td>
-        <td><%= project.manager %></td>
-        <td><%= project.user %></td>
-        <td><%= project.user %></td>
+        <td><%= project.manager_id %></td>
+        <td><%= project.creator_id %></td>
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>

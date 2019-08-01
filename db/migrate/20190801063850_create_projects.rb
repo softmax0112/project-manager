@@ -5,9 +5,8 @@ class CreateProjects < ActiveRecord::Migration[5.2]
       t.string :description
       t.integer :hours_spent
       t.integer :total_payment
-      t.references :manager, foreign_key: true
-      t.refernces :user
-      t.references :user, foreign_key: true
+      t.integer :manager_id, index: true
+      t.integer :creator_id, index: true
 
       t.timestamps
     end
