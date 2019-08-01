@@ -33,15 +33,7 @@ class Manager::ClientsController < ApplicationController
     @manager_client = Client.new(manager_client_params)
     authorize @manager_client
 
-    respond_to do |format|
-      if @manager_client.save
-        format.html { redirect_to manager_client_path(@manager_client), notice: 'Client was successfully created' }
-        format.json { render :show, status: :created, location: @manager_client }
-      else
-        format.html { render :new }
-        format.json { render json: @manager_client.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to manager_client_path(@manager_client), notice: 'Client was successfully created'
   end
 
   # PATCH/PUT /manager/clients/1
