@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ClientPolicy < ApplicationPolicy
+  def index?
+    user.admin? || user.manager?
+  end
+
   def edit?
     user.admin? || user.manager?
   end
