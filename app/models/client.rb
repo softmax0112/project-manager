@@ -6,4 +6,5 @@ class Client < ApplicationRecord
                    format: { with: /[a-zA-Z\s]*/, message: 'Only letters allowed' }
 
   validates :affiliation, length: { maximum: 50 }
+  has_many :projects, dependent: :destroy
 end
