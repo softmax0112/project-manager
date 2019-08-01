@@ -1,5 +1,9 @@
-<h1>New Payment</h1>
-
-<%= render 'form', payment: @payment %>
-
-<%= link_to 'Back', payments_path %>
+<%= render 'navbarback' %>
+<div class='card indigo text-white'>
+  <div class='card-body'>
+    <h2 class='font-up font-bold py-4 text-white'>
+      New Payment
+    </h2>
+    <%= render 'form', payment: @payment %>
+  </div>
+</div>

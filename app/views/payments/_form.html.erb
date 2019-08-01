@@ -1,7 +1,7 @@
 <%= form_with(model: payment, local: true) do |form| %>
   <% if payment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+    <div id='error_explanation' class='alert alert-danger'>
+      <h2><%= pluralize(payment.errors.count, 'error') %> prohibited this payment from being saved:</h2>
 
       <ul>
       <% payment.errors.full_messages.each do |message| %>
@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class='form-group'>
     <%= form.label :amount %>
-    <%= form.number_field :amount %>
+    <%= form.number_field :amount, class: 'form-control text-white' %>
   </div>
 
-  <div class="field">
-    <%= form.label :projects_id %>
-    <%= form.text_field :projects_id %>
+  <div class='form-group'>
+    <%= form.label :project_id %>
+    <%= form.select :project_id, Project.all.map{ |u| [u.title, u.id] } %>
   </div>
 
-  <div class="field">
+  <div class='form-group'>
     <%= form.label :creator_id %>
-    <%= form.number_field :creator_id %>
+    <%= form.select :creator_id, User.where('role = "admin"').or(User.where('role = "manager"')).map { |u| [u.name, u.id] } %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class='actions'>
+    <%= form.submit 'Submit', class: 'btn btn-outline-white waves-effect waves-light' %>
   </div>
 <% end %>

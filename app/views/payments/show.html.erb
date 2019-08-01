@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<%= render 'navbarback' %>
 
 <p>
   <strong>Amount:</strong>
@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Projects:</strong>
-  <%= @payment.projects %>
+  <strong>Project:</strong>
+  <%= Project.find(@payment.project_id).title %>
 </p>
 
 <p>
@@ -15,5 +15,5 @@
   <%= @payment.creator_id %>
 </p>
 
-<%= link_to 'Edit', edit_payment_path(@payment) %> |
-<%= link_to 'Back', payments_path %>
+<%= link_to 'Edit', edit_payment_path(@payment), class: 'btn btn-outline-white waves-effect waves-light' %>
+<%= link_to 'Back', payments_path, class: 'btn btn-outline-white waves-effect waves-light' %>

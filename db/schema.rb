@@ -20,12 +20,12 @@ ActiveRecord::Schema.define(version: 2019_08_01_105755) do
 
   create_table "payments", force: :cascade do |t|
     t.integer "amount"
-    t.integer "projects_id"
+    t.integer "project_id"
     t.integer "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_payments_on_creator_id"
-    t.index ["projects_id"], name: "index_payments_on_projects_id"
+    t.index ["project_id"], name: "index_payments_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|

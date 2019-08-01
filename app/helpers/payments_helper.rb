@@ -27,7 +27,7 @@ module PaymentsHelper
     current_user.admin? ? admin_payment_path(payment) : manager_payment_path(payment)
   end
 
-  def decide_payment_path
+  def decide_payments_path
     current_user.admin? ? admin_payments_path : manager_payments_path
   end
 

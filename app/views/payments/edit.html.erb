@@ -1,6 +1,10 @@
-<h1>Editing Payment</h1>
-
-<%= render 'form', payment: @payment %>
-
-<%= link_to 'Show', @payment %> |
-<%= link_to 'Back', payments_path %>
+<%= render 'navbarback' %>
+<div class='card indigo text-white'>
+  <div class='card-body'>
+    <h2 class='font-up font-bold py-4 text-white'>
+      Edit Payment
+    </h2>
+    <%= render 'form', payment: @payment %>
+    <%= link_to 'Show', @payment, class: 'btn btn-outline-white waves-effect waves-light' %>
+  </div>
+</div>

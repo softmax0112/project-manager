@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all
+    @payments = Payment.page(params[:page])
   end
 
   # GET /payments/1
@@ -70,6 +70,6 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:amount, :projects_id, :creator_id)
+      params.require(:payment).permit(:amount, :project_id, :creator_id)
     end
 end
