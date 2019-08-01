@@ -9,10 +9,6 @@ class ApplicationController < ActionController::Base
     home_path
   end
 
-  rescue_from ActionController::RoutingError do |_exception|
-    render '404.html'
-  end
-
   def after_sign_out_path_for(_resource_or_scope)
     root_path
   end
