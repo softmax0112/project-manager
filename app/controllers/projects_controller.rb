@@ -7,7 +7,11 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = if params[:title]
+                  Project.where('title LIKE ?', "%#{params[:title]}%").page(params[:page])
+                else
+                  Project.page(params[:page])
+                end
   end
 
   # GET /projects/1
@@ -71,6 +75,7 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:title, :description, :hours_spent, :total_payment, :manager_id, :creator_id)
+    params.require(:project).permit(:title, :description, :hours_spent, :total_payment,
+                                    :manager_id, :creator_id, :client_id)
   end
 end

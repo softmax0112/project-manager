@@ -1,7 +1,7 @@
 <%= form_with(model: project, url: decide_projects_controller_action, local: true) do |form| %>
   <% if project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+    <div id='error_explanation' class='alert alert-danger'>
+      <h2><%= pluralize(project.errors.count, 'error') %> prohibited this project from being saved:</h2>
 
       <ul>
       <% project.errors.full_messages.each do |message| %>
@@ -11,37 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class='form-group'>
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'text-white' %>
   </div>
 
-  <div class="field">
+  <div class='form-group'>
     <%= form.label :description %>
-    <%= form.text_field :description %>
+    <%= form.text_area :description, class: 'text-white' %>
   </div>
 
-  <div class="field">
-    <%= form.label :hours_spent %>
-    <%= form.number_field :hours_spent %>
-  </div>
-
-  <div class="field">
-    <%= form.label :total_payment %>
-    <%= form.number_field :total_payment %>
-  </div>
-
-  <div class="field">
+  <div class='form-group'>
     <%= form.label :manager_id %>
-    <%= form.number_field :manager_id %>
+    <%= form.select :manager_id, User.where('role = "manager"').map { |u| [u.name, u.id] }, class: 'text-white' %>
   </div>
 
-  <div class="field">
+  <div class='form-group'>
     <%= form.label :creator_id %>
-    <%= form.number_field :creator_id %>
+    <%= form.select :creator_id, User.where('role = "admin"').or(User.where('role = "manager"')).map { |u| [u.name, u.id] }, class: 'text-white form-control', class: 'text-white' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class='form-group'>
+    <%= form.label :client_id %>
+    <%= form.select :client_id, Client.all.map { |u| [u.name, u.id] }, class: 'text-white' %>
+  </div>
+
+  <div class='actions'>
+    <%= form.submit 'Submit', class: 'btn btn-outline-white waves-effect waves-light' %>
   </div>
 <% end %>

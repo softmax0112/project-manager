@@ -1,6 +1,11 @@
-<h1>Editing Project</h1>
+<%= render 'navbarback' %>
 
-<%= render 'form', project: @project %>
-
-<%= link_to 'Show', decide_project_path(@project) %> |
-<%= link_to 'Back', decide_projects_path %>
+<div class='card indigo text-white'>
+  <div class='card-body'>
+    <h2 class='font-up font-bold py-4 text-white'>
+      Edit Project
+    </h2>
+    <%= render 'form', project: @project %>
+    <%= link_to 'Show', decide_project_path(@project), class: 'btn btn-outline-white waves-effect waves-light' %>
+  </div>
+</div>

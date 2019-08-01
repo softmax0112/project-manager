@@ -1,32 +1,42 @@
-<p>
-  <strong>Title:</strong>
-  <%= @project.title %>
-</p>
+<%= render 'navbarback' %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
+<div class='card indigo text-white'>
+  <div class='card-body'>
+    <p>
+      <strong>Title:</strong>
+      <%= @project.title %>
+    </p>
 
-<p>
-  <strong>Hours spent:</strong>
-  <%= @project.hours_spent %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @project.description %>
+    </p>
 
-<p>
-  <strong>Total payment:</strong>
-  <%= @project.total_payment %>
-</p>
+    <p>
+      <strong>Hours spent:</strong>
+      <%= @project.hours_spent %>
+    </p>
 
-<p>
-  <strong>Manager:</strong>
-  <%= @project.manager_id %>
-</p>
+    <p>
+      <strong>Total payment:</strong>
+      <%= @project.total_payment %>
+    </p>
 
-<p>
-  <strong>Creator:</strong>
-  <%= @project.creator_id %>
-</p>
+    <p>
+      <strong>Manager:</strong>
+      <%= @project.manager.name %>
+    </p>
 
-<%= link_to 'Edit', edit_decide_project_path(@project) %> |
-<%= link_to 'Back', decide_projects_path %>
+    <p>
+      <strong>Creator:</strong>
+      <%= @project.creator.name %>
+    </p>
+
+    <p>
+      <strong>Creator:</strong>
+      <%= @project.client.name %>
+    </p>
+
+    <%= link_to 'Edit', edit_decide_project_path(@project), class: 'btn btn-outline-white waves-effect waves-light' %>
+</div>
+</div>

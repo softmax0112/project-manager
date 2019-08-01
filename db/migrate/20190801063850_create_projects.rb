@@ -9,6 +9,7 @@ class CreateProjects < ActiveRecord::Migration[5.2]
       t.integer :total_payment
       t.integer :manager_id, index: true
       t.integer :creator_id, index: true
+      t.references :client, index: true
 
       t.timestamps
     end
