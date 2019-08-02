@@ -69,6 +69,7 @@ class PaymentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_payment
     @payment = Payment.find(params[:id])
+    @project = Project.find(@payment.project_id)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

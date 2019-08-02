@@ -6,6 +6,7 @@ class CreateTimeLogs < ActiveRecord::Migration[5.2]
       t.belongs_to :project, foreign_key: true
       t.belongs_to :user, foreign_key: true
       t.integer :hours, null: false
+      t.belongs_to :projects
 
       t.timestamps
     end

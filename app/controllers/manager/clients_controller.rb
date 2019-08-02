@@ -36,7 +36,11 @@ class Manager::ClientsController < ApplicationController
     @manager_client = Client.new(manager_client_params)
     authorize @manager_client
 
-    redirect_to manager_client_path(@manager_client), notice: 'Client was successfully created'
+    if @manager_client.save
+      redirect_to manager_client_path(@manager_client), notice: 'Client was successfully created'
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /manager/clients/1
