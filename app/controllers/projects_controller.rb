@@ -34,14 +34,10 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     authorize @project
 
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.save
+      redirect_to @project, notice: 'Project was successfully created'
+    else
+      render :new
     end
   end
 

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TimeLogsController < ApplicationController
-  before_action :set_time_log, only: [:show, :edit, :update, :destroy]
+  before_action :set_time_log, only: %i[show edit update destroy]
 
   # GET /time_logs
   # GET /time_logs.json
@@ -9,8 +11,7 @@ class TimeLogsController < ApplicationController
 
   # GET /time_logs/1
   # GET /time_logs/1.json
-  def show
-  end
+  def show; end
 
   # GET /time_logs/new
   def new
@@ -18,24 +19,17 @@ class TimeLogsController < ApplicationController
   end
 
   # GET /time_logs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /time_logs
   # POST /time_logs.json
   def create
     request.params[:time_log][:user_id] = current_user.id
-    logger.error (request.params)
     @time_log = TimeLog.new(time_log_params)
-
-    respond_to do |format|
-      if @time_log.save
-        format.html { redirect_to @time_log, notice: 'Time log was successfully created.' }
-        format.json { render :show, status: :created, location: @time_log }
-      else
-        format.html { render :new }
-        format.json { render json: @time_log.errors, status: :unprocessable_entity }
-      end
+    if @time_log.save
+      redirect_to @time_log, notice: 'Time log was successfully created'
+    else
+      render :new
     end
   end
 
@@ -65,13 +59,14 @@ class TimeLogsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_time_log
-      @time_log = TimeLog.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def time_log_params
-      params.require(:time_log).permit(:project_id, :user_id, :hours)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_time_log
+    @time_log = TimeLog.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def time_log_params
+    params.require(:time_log).permit(:project_id, :user_id, :hours)
+  end
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_payment, only: [:show, :edit, :update, :destroy]
+  before_action :set_payment, only: %i[show edit update destroy]
 
   # GET /payments
   # GET /payments.json
@@ -10,8 +12,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1
   # GET /payments/1.json
-  def show
-  end
+  def show; end
 
   # GET /payments/new
   def new
@@ -19,8 +20,7 @@ class PaymentsController < ApplicationController
   end
 
   # GET /payments/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /payments
   # POST /payments.json
@@ -63,13 +63,14 @@ class PaymentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_payment
-      @payment = Payment.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def payment_params
-      params.require(:payment).permit(:amount, :project_id, :creator_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_payment
+    @payment = Payment.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def payment_params
+    params.require(:payment).permit(:amount, :project_id, :creator_id)
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PaymentsHelper
   def decide_payments_controller_action
     if current_user.admin?
