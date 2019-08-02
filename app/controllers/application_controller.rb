@@ -21,6 +21,14 @@ class ApplicationController < ActionController::Base
     render '404'
   end
 
+  def auth_admin
+    raise Pundit::NotAuthorizedError unless current_user.admin?
+  end
+
+  def auth_manager
+    raise Pundit::NotAuthorizedError unless current_user.manager?
+  end
+
   def home_path
     return admin_user_path(current_user) if current_user.admin?
     return user_path(current_user) if current_user.user?

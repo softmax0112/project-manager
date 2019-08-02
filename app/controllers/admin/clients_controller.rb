@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::ClientsController < ApplicationController
+  before_action :auth_admin
   before_action :set_admin_client, only: %i[show edit update destroy]
 
   # GET /manager/clients
