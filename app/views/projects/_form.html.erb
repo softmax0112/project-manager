@@ -27,11 +27,6 @@
   </div>
 
   <div class='form-group'>
-    <%= form.label :creator_id %>
-    <%= form.select :creator_id, User.where('role = "admin"').or(User.where('role = "manager"')).map { |u| [u.name, u.id] }, class: 'text-white form-control' %>
-  </div>
-
-  <div class='form-group'>
     <%= form.label :client_id %>
     <%= form.select :client_id, Client.all.map { |u| [u.name, u.id] }, class: 'text-white' %>
   </div>

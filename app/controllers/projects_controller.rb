@@ -31,6 +31,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    request.params[:project][:creator_id] = current_user.id
     @project = Project.new(project_params)
     authorize @project
 
@@ -44,6 +45,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    request.params[:project][:creator_id] = current_user.id
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
