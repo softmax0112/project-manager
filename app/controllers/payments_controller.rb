@@ -25,6 +25,7 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
+    request.params[:payment][:creator_id] = current_user.id
     @payment = Payment.new(payment_params)
 
     respond_to do |format|
@@ -41,6 +42,7 @@ class PaymentsController < ApplicationController
   # PATCH/PUT /payments/1
   # PATCH/PUT /payments/1.json
   def update
+    request.params[:payment][:creator_id] = current_user.id
     respond_to do |format|
       if @payment.update(payment_params)
         format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }

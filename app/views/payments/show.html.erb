@@ -12,7 +12,7 @@
 
 <p>
   <strong>Creator:</strong>
-  <%= @payment.creator_id %>
+  <%= User.find(@payment.creator_id).name %>
 </p>
 
 <%= link_to 'Edit', edit_payment_path(@payment), class: 'btn btn-outline-white waves-effect waves-light' %>
