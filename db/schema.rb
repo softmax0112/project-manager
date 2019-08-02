@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_091753) do
+ActiveRecord::Schema.define(version: 2019_08_02_113347) do
 
   create_table "clients", force: :cascade do |t|
     t.string "name", null: false
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 2019_08_02_091753) do
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "hours_spent"
-    t.integer "total_payment"
+    t.integer "hours_spent", default: 0
+    t.integer "total_payment", default: 0
     t.integer "manager_id"
     t.integer "creator_id"
     t.integer "client_id"

@@ -18,7 +18,7 @@ class Admin::ClientsController < ApplicationController
   # GET /manager/clients/1
   # GET /manager/clients/1.json
   def show
-    @projects = Project.where('client_id = ?', @admin_client.id).page(params[:page])
+    @projects = @admin_client.projects.page(params[:page])
   end
 
   # GET /manager/clients/new

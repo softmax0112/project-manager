@@ -2,12 +2,12 @@
 
 <p>
   <strong>Project:</strong>
-  <%= @time_log.project.title %>
+  <%= Project.find(@time_log.project_id).title %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @time_log.user.name %>
+  <%= User.find(@time_log.user_id).name %>
 </p>
 
 <p>

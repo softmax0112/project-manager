@@ -24,7 +24,7 @@ class Admin::UsersController < ApplicationController
   def edit; end
 
   def update
-    if @user.update(user_permit_params)
+    if @user.update(user_params)
       redirect_to home_path, notice: 'User succesfully updated'
     else
       render 'edit'

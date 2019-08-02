@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   resources :time_logs
   resources :payments
   resources :projects
-  namespace :manager do
-    resources :clients
-  end
+
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

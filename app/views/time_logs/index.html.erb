@@ -15,8 +15,8 @@
   <tbody>
     <% @time_logs.each do |time_log| %>
       <tr>
-        <td><%= time_log.project.title %></td>
-        <td><%= time_log.user.name %></td>
+        <td><%= Project.find(time_log.project_id).title %></td>
+        <td><%= User.find(time_log.user_id).name %></td>
         <td><%= time_log.hours %></td>
         <td><%= link_to 'Show', time_log %></td>
         <td><%= link_to 'Edit', edit_time_log_path(time_log) %></td>

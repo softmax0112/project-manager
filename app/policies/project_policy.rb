@@ -26,6 +26,6 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin || user.manager?
+    user.admin? || user.manager?
   end
 end
