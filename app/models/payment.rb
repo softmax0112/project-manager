@@ -1,5 +1,6 @@
 class Payment < ApplicationRecord
   belongs_to :projects, optional: true
+  belongs_to :user, foreign_key: 'creator_id'
 
   validates :amount, presence: true
   validates :creator_id, presence: true
