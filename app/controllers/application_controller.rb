@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError do |_exception|
     flash[:alert] = 'You can not access this namespace or action'
-    home_path
+    redirect_to home_path
   end
 
   def after_sign_out_path_for(_resource_or_scope)

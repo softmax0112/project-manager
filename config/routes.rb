@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :time_logs
   resources :payments
   resources :projects
   namespace :manager do

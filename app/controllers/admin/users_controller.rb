@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::UsersController < ApplicationController
+  before_action :auth_admin
   before_action :authenticate_user!
   before_action :set_user, only: %i[edit update toggle destroy]
 

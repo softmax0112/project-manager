@@ -1,0 +1,27 @@
+<%= form_with(model: time_log, local: true) do |form| %>
+  <% if time_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(time_log.errors.count, "error") %> prohibited this time_log from being saved:</h2>
+
+      <ul>
+      <% time_log.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :project_id %>
+    <%= form.select :project_id, Project.all.map{ |u| [u.title, u.id] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hours %>
+    <%= form.number_field :hours %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
