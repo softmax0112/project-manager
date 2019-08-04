@@ -38,6 +38,6 @@ module TimeLogsHelper
   end
 
   def edit_decide_time_log_path(time_log)
-    current_user.admin? ? edit_admin_admin_time_log_path(time_log) : edit_manager_manager_time_log_path(time_log)
+    current_user.admin? ? edit_admin_time_log_path(time_log) : edit_manager_time_log_path(time_log)
   end
 end
