@@ -21,7 +21,7 @@ module ProjectsHelper
     if params[:id].nil?
       url_for(controller: 'manager/manager_projects', action: 'create')
     else
-      url_for(controller: 'manager/manger_projects', action: 'update')
+      url_for(controller: 'manager/manager_projects', action: 'update')
     end
   end
 
