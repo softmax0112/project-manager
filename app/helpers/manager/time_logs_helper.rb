@@ -1,0 +1,2 @@
+module Manager::TimeLogsHelper
+end
