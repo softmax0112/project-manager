@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :admin_projects
     resources :payments
     resources :clients
+    resources :time_logs
     resources :users do
       member do
         put :toggle
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
     resources :manager_projects
     resources :payments
     resources :clients
+    resources :time_logs
     resources :users, only: %i[show edit update destroy]
   end
 

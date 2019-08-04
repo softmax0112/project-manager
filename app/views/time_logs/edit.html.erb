@@ -1,6 +1,10 @@
-<h1>Editing Time Log</h1>
-
-<%= render 'form', time_log: @time_log %>
-
-<%= link_to 'Show', @time_log %> |
-<%= link_to 'Back', time_logs_path %>
+<%= render 'navbarback' %>
+<div class='card indigo text-white'>
+  <div class='card-body'>
+    <h2 class='font-up font-bold py-4 text-white'>
+      Edit Time Log
+    </h2>
+    <%= render 'form', time_log: @time_log %>
+    <%= link_to 'Show', @time_log, class: 'btn btn-outline-white waves-effect waves-light' %>
+  </div>
+</div>

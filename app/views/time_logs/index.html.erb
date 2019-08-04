@@ -1,31 +1,59 @@
-<p id="notice"><%= notice %></p>
+<%= render 'shared/navbarback' %>
+<div class='card indigo text-white'>
+  <div class='card-body'>
 
-<h1>Time Logs</h1>
+    <div class='row'>
+      <div class='col'>
+        <h2 class='font-up font-bold py-4 text-white float-left'>Time Logs</h2>
+      </div>
+      <div class='col'>
+        <%= link_to 'New Time Log', new_decide_time_log_path, class: 'btn btn-outline-white waves-effect waves-light float-right' %>
+      </div>
+    </div>
+    <div class='clearfix'></div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Project</th>
-      <th>User</th>
-      <th>Hours</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <%= page_entries_info @time_logs %>
+    <table class='table table-condensed table-hover table-striped text-white'>
+      <thead>
+        <tr>
+          <th>Time Log Information</th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @time_logs.each do |time_log| %>
-      <tr>
-        <td><%= Project.find(time_log.project_id).title %></td>
-        <td><%= User.find(time_log.user_id).name %></td>
-        <td><%= time_log.hours %></td>
-        <td><%= link_to 'Show', time_log %></td>
-        <td><%= link_to 'Edit', edit_time_log_path(time_log) %></td>
-        <td><%= link_to 'Destroy', time_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Time Log', new_time_log_path %>
+      <tbody>
+        <% @time_logs.each do |time_log| %>
+          <tr>
+            <td>
+              <div class='row'>
+                <div class='col'>
+                  <div class='form-group'>
+                    <b>Hours: </b><%= time_log.hours %>
+                  </div>
+                  <div class='form-group'>
+                    <b>Project: </b><%= Project.find(time_log.project_id).title %>
+                  </div>
+                  <div class='form-group'>
+                    <b>Creator: </b><%= User.find(time_log.user_id).name %>
+                  </div>
+                </div>
+                <div class='col'>
+                  <div class='float-right'>
+                    <div class='form-group'>
+                      <%= link_to 'Show', decide_time_log_path(time_log), class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
+                    </div>
+                    <div class='form-group'>
+                      <%= link_to 'Edit', edit_decide_time_log_path(time_log),
+                        class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
+                    </div>
+                    <%= link_to 'Destroy', decide_time_log_path(time_log), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red custom-button-size' %>
+                  </div>
+                </div>
+              </div>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @time_logs, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>

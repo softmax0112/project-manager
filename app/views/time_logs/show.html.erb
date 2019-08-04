@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%= render 'navbarback' %>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @time_log.hours %>
+</p>
 
 <p>
   <strong>Project:</strong>
@@ -6,14 +11,8 @@
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>Creator:</strong>
   <%= User.find(@time_log.user_id).name %>
 </p>
 
-<p>
-  <strong>Hours:</strong>
-  <%= @time_log.hours %>
-</p>
-
-<%= link_to 'Edit', edit_time_log_path(@time_log) %> |
-<%= link_to 'Back', time_logs_path %>
+<%= link_to 'Edit', edit_time_log_path(@time_log), class: 'btn btn-outline-white waves-effect waves-light' %>
