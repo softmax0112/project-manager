@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AttachmentsController < ApplicationController
+  before_action :set_attachment, only: %i[show edit]
+
   def index
     @attachments = Attachment.all
   end

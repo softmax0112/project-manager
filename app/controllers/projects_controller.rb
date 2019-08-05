@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
     @time_logs = TimeLog.where('project_id = ?', @project.id).page(params[:page])
 
     @payments = Payment.where('project_id = ?', @project.id).page(params[:page])
+    @attachments = Attachment.where('project_id = ?', @project.id).limit(5)
     authorize @payments
   end
 

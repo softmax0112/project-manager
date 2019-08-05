@@ -35,8 +35,21 @@
   <%= @project.client.name %>
 </p>
 
+<h2 class='font-up font-bold py-4 text-center'>Attachments</h2>
+
+<div class='row'>
+  <% @attachments.each do |attachment| %>
+    <div class='col'>
+      <a href="<%= attachment.filename_url %>" download=''>
+        <%= File.basename(attachment.filename.to_s) %>
+      </a>
+    </div>
+  <% end %>
+</div>
+
 <div class='card indigo text-white'>
   <div class='card-body'>
+
     <div class='row'>
       <div class='col'>
         <div class='row'>
