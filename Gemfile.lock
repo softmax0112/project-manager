@@ -77,6 +77,10 @@ GEM
       mime-types (>= 1.16)
     childprocess (1.0.1)
       rake (< 13.0)
+    chosen-rails (1.8.7)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
@@ -274,6 +278,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   carrierwave
+  chosen-rails
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
