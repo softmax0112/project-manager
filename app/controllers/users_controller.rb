@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :shorten_params, only: %i[update update_password]
-  before_action :set_user, only: %i[show edit update destroy change_password update_password]
+  before_action :set_user, only: %i[show edit update destroy update_password]
 
   def show; end
 
@@ -16,6 +16,7 @@ class UsersController < ApplicationController
       validate_and_confirm_password_update
     else
       @user.errors.add(:password, 'Current password does not match')
+      logger.error(@user.errors.count)
       render :change_password
     end
   end
