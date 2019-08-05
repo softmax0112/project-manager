@@ -36,6 +36,9 @@ class ProjectsController < ApplicationController
     authorize @project
 
     if @project.save
+      params[:project][:users_ids].each do |uid|
+        Projects_User.create!(user_id: uid, project_id: params[:id]) unless uid.blank?
+      end
       redirect_to @project, notice: 'Project was successfully created'
     else
       render :new
@@ -46,9 +49,15 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     request.params[:project][:creator_id] = current_user.id
+
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html {
+          params[:project][:users_ids].each do |uid|
+            Projects_User.create!(user_id: uid, project_id: params[:id]) unless uid.blank?
+          end
+          redirect_to @project, notice: 'Project was successfully updated'
+        }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }

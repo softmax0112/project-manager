@@ -28,8 +28,8 @@
 
   <div class='form-group'>
     <%= form.label 'Assign Employees' %>
-    <%= form.select :user_ids, User.where('role = "user"').map { |u| [u.name, u.id] },
-      {}, { id: 'choose-client', :class => 'chosen-select', multiple: true} %>
+    <%= form.select :users_ids, User.where('role = "user"').map { |u| [u.name, u.id] },
+      { selected: Projects_User.where('project_id = ?', params[:id]).pluck(:user_id) }, { id: 'choose-client', :class => 'chosen-select', multiple: true } %>
   </div>
 
   <div class='form-group'>
