@@ -27,6 +27,12 @@
   </div>
 
   <div class='form-group'>
+    <%= form.label 'Assign Employees' %>
+    <%= form.select :user_ids, User.where('role = "user"').map { |u| [u.name, u.id] },
+      {}, { id: 'choose-client', :class => 'chosen-select', multiple: true} %>
+  </div>
+
+  <div class='form-group'>
     <%= form.label :client_id %>
     <%= form.select :client_id, Client.all.map { |u| [u.name, u.id] }, class: 'text-white' %>
   </div>

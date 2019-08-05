@@ -8,8 +8,8 @@ class Project < ApplicationRecord
   has_many :time_logs, dependent: :destroy, after_add: :add_to_time,
                        after_remove: :remove_from_time
   belongs_to :client
-  has_many :projects_users, dependent: :destroy
-  has_many :users, through: :projects_users
+  has_many :projects_users, dependent: :destroy, class_name: 'Projects_User'
+  has_many :users, through: :projects_users, class_name: 'User'
 
   def manager
     User.find(manager_id)
