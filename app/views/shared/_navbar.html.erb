@@ -1,27 +1,23 @@
 <nav class='navbar navbar-expand-sm navbar-dark fixed-top indigo'>
   <ul class='navbar-nav ml-auto'>
-    <% if current_user.admin? || current_user.manager? %>
-      <li class='nav-item dropdown active'>
-        <a class='nav-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true'
-          aria-expanded='false'>
-          Manage
+    <li class='nav-item dropdown active'>
+      <a class='nav-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true'
+        aria-expanded='false'>
+        Manage
+      </a>
+      <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+        <a class='dropdown-item' href='<%= url_for decide_client_path %>'>
+          Clients
         </a>
-        <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-          <a class='dropdown-item' href='<%= url_for decide_client_path %>'>
-            Clients
-          </a>
-          <a class='dropdown-item' href='<%= url_for decide_projects_path %>'>
-            Projects
-          </a>
-          <a class='dropdown-item' href='<%= url_for decide_payments_path %>'>
-            Payments
-          </a>
-          <a class='dropdown-item' href='<%= url_for decide_time_logs_path %>'>
-            Time Logs
-          </a>
-        </div>
-      </li>
-    <% end %>
+        <a class='dropdown-item' href='<%= url_for decide_projects_path %>'>
+          Projects
+        </a>
+        <a class='dropdown-item' href='<%= url_for decide_time_logs_path %>'>
+          Time Logs
+        </a>
+      </div>
+    </li>
+
     <li class='nav-item dropdown active'>
       <a class='nav-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true'
         aria-expanded='false'>
