@@ -10,6 +10,7 @@ class Project < ApplicationRecord
   belongs_to :client
   has_many :projects_users, dependent: :destroy, class_name: 'Projects_User'
   has_many :users, through: :projects_users, class_name: 'User'
+  has_many :attachments, dependent: :destroy
 
   def manager
     User.find(manager_id)

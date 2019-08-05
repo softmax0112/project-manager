@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_043053) do
+ActiveRecord::Schema.define(version: 2019_08_05_102206) do
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "filename"
+    t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_attachments_on_project_id"
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string "name", null: false
