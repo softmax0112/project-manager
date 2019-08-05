@@ -8,6 +8,7 @@ class PaymentsController < ApplicationController
   # GET /payments.json
   def index
     @payments = Payment.page(params[:page])
+    authorize @payments
   end
 
   # GET /payments/1
@@ -30,7 +31,10 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
-        format.html { redirect_to payment_path(@payment), notice: 'Payment was successfully created.' }
+        format.html {
+          authorize @payment
+          redirect_to payment_path(@payment), notice: 'Payment was successfully created.'
+        }
         format.json { render :show, status: :created, location: @payment }
       else
         format.html { render :new }
@@ -70,6 +74,7 @@ class PaymentsController < ApplicationController
   def set_payment
     @payment = Payment.find(params[:id])
     @project = Project.find(@payment.project_id)
+    authorize @payment
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
