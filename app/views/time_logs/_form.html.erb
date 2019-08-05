@@ -18,7 +18,7 @@
 
   <div class='form-group'>
     <%= form.label :project_id %>
-    <%= form.select :project_id, Project.all.map{ |u| [u.title, u.id] }, { selected: params[:format] } %>
+    <%= form.select :project_id, Project.all.map{ |u| [u.title, u.id] }, { selected: params[:format] }, { class: 'chosen-select chosen-select-fix' } %>
   </div>
 
   <div class='actions'>

@@ -31,7 +31,7 @@
       <div class="form-group">
         <%= f.label :role, class: 'text-white' %> <br>
         <%= f.select :role, options_for_select(['manager','admin', 'user'],
-          @user.role), class: 'dropdowntext-white' %>
+          @user.role), {}, { class: 'chosen-select chosen-select-fix' } %>
       </div>
 
       <div class="md-form">

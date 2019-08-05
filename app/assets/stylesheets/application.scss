@@ -11,6 +11,14 @@
   background-color: indigo !important;
 }
 
+.chosen-select-fix {
+  width: 0px !important;
+  height: 0px !important;
+  overflow: hidden;
+  display: inline-block;
+  position: absolute;
+}
+
 .card {
   border-radius: 5px;
   margin-bottom: 20px;
