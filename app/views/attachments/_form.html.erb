@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :filename %>
-    <%= form.text_field :filename %>
+    <%= form.file_field :filename, multiple: true %>
   </div>
 
   <div class="field">
-    <%= form.label :projects_id %>
-    <%= form.text_field :projects_id %>
+    <%= form.label :project_id %>
+    <%= form.select :project_id, Project.all.map { |u| [u.title, u.id] } %>
   </div>
 
   <div class="actions">

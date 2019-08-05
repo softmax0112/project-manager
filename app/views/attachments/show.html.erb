@@ -7,7 +7,7 @@
 
 <p>
   <strong>Projects:</strong>
-  <%= @attachment.projects %>
+  <%= Project.find(@attachment.project_id).title %>
 </p>
 
 <%= link_to 'Edit', edit_attachment_path(@attachment) %> |
