@@ -1,24 +1,15 @@
 # frozen_string_literal: true
 
 class AttachmentsController < ApplicationController
-  before_action :set_attachment, only: %i[show edit]
-
   def index
-    @attachments = Attachment.all
+    @project = Project.find(params[:project_id])
+    @attachments = Attachment.where('project_id = ?', @project.id)
   end
-
-  # GET /attachments/1
-  # GET /attachments/1.json
-  def show; end
 
   # GET /attachments/new
   def new
     @attachment = Attachment.new
   end
-
-  # GET /attachments/1/edit
-  def edit; end
-
   # POST /attachments
   # POST /attachments.json
   def create
@@ -33,6 +24,13 @@ class AttachmentsController < ApplicationController
         format.json { render json: @attachment.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def destroy
+    @attachment = @attachment.find(params[:id])
+    @attachment.destroy
+
+    redirect_to decide_project_path(@project)
   end
 
   private

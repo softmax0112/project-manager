@@ -36,4 +36,14 @@ module ApplicationHelper
       clients_path
     end
   end
+
+  def decide_project_path(project)
+    if current_user.admin?
+      admin_admin_project_path(project)
+    elsif current_user.manager?
+      manager_manager_project_path(project)
+    else
+      project_path(project)
+    end
+  end
 end
