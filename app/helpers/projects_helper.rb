@@ -7,7 +7,7 @@ module ProjectsHelper
     elsif current_user.manager?
       decide_manager_projects_controller_action
     else
-      decide_projects_controller_action
+      decide_user_projects_controller_action
     end
   end
 
@@ -27,7 +27,7 @@ module ProjectsHelper
     end
   end
 
-  def decide_projects_controller_action
+  def decide_user_projects_controller_action
     if params[:id].nil?
       url_for(controller: 'projects', action: 'create')
     else
