@@ -52,6 +52,7 @@ module ProjectsHelper
       manager_manager_projects_path
     else
       projects_path
+    end
   end
 
   def new_decide_project_path
