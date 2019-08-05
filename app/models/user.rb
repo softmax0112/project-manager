@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :projects_users, dependent: :destroy
+  has_many :projects, through: :projects_users
+
   validates :name, presence: true,
                    length: { minimum: 1, maximum: 50 },
                    format: { with: /[a-zA-Z\s]*/, message: 'Only letters allowed' }
