@@ -4,8 +4,10 @@ module ProjectsHelper
   def decide_projects_controller_action
     if current_user.admin?
       decide_admin_projects_controller_action
-    else
+    elsif current_user.manager?
       decide_manager_projects_controller_action
+    else
+      decide_projects_controller_action
     end
   end
 
@@ -25,12 +27,31 @@ module ProjectsHelper
     end
   end
 
+  def decide_projects_controller_action
+    if params[:id].nil?
+      url_for(controller: 'projects', action: 'create')
+    else
+      url_for(controller: 'projects', action: 'update')
+    end
+  end
+
   def decide_project_path(project)
-    current_user.admin? ? admin_admin_project_path(project) : manager_manager_project_path(project)
+    if current_user.admin?
+      admin_admin_project_path(project)
+    elsif current_user.manager?
+      manager_manager_project_path(project)
+    else
+      project_path(project)
+    end
   end
 
   def decide_projects_path
-    current_user.admin? ? admin_admin_projects_path : manager_manager_projects_path
+    if current_user.admin?
+      admin_admin_projects_path
+    elsif current_user.manaher?
+      manager_manager_projects_path
+    else
+      projects_path
   end
 
   def new_decide_project_path
