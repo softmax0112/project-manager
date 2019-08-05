@@ -32,6 +32,8 @@ module ApplicationHelper
       admin_clients_path
     elsif current_user.manager?
       manager_clients_path
+    else
+      clients_path
     end
   end
 end

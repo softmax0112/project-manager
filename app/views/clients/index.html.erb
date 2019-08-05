@@ -1,0 +1,57 @@
+<%= render 'shared/navbarback' %>
+<div class='card indigo text-white'>
+  <div class='card-body'>
+    <h2 class='font-up font-bold py-4 text-white'>Clients</h2>
+
+    <div class="d-flex justify-content-between bd-highlight mb-2">
+      <div class='p-2 bd-highlight'>
+        <%= link_to 'New Client', new_client_path, class: 'btn btn-outline-white waves-effect waves-light' %>
+      </div>
+      <div class='p-2 bd-highlight'>
+        <div class='form-inline d-flex flex-row-reverse'>
+          <div class='form-group'>
+            <%= form_tag(clients_path, method: :get) do %>
+              <%= text_field_tag :name, params[:name],
+                class: 'form-control indigo text-white' %>
+              <%= submit_tag 'Search', name: nil, class: 'btn btn-outline-white waves-effect waves-light' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= page_entries_info @clients %>
+    <table class='table table-condensed table-hover table-striped text-white'>
+      <thead>
+        <tr>
+          <th>Client Information</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @clients.each do |client| %>
+          <tr>
+            <td>
+              <div class='row'>
+                <div class='col'>
+                  <div class='form-group'>
+                    <b>Name: </b><%= client.name %>
+                  </div>
+                  <div class='form-group'>
+                    <b>Affiliation: </b><%= client.affiliation %>
+                  </div>
+                </div>
+                <div class='col'>
+                  <div class='float-right'>
+                    <%= link_to 'Show', client_path(client), class: 'btn btn-outline-white waves-effect waves-light' %>
+                  </div>
+                </div>
+              </div>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @clients, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>
