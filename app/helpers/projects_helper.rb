@@ -48,7 +48,7 @@ module ProjectsHelper
   def decide_projects_path
     if current_user.admin?
       admin_admin_projects_path
-    elsif current_user.manaher?
+    elsif current_user.manager?
       manager_manager_projects_path
     else
       projects_path
