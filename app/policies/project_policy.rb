@@ -2,7 +2,7 @@
 
 class ProjectPolicy < ApplicationPolicy
   def index?
-    user.admin? || user.manager?
+    true
   end
 
   def edit?
@@ -14,7 +14,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.manager?
+    true
   end
 
   def create?
