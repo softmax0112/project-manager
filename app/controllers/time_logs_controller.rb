@@ -27,7 +27,7 @@ class TimeLogsController < ApplicationController
     request.params[:time_log][:user_id] = current_user.id
     @time_log = TimeLog.new(time_log_params)
     if @time_log.save
-      redirect_to @time_log, notice: 'Time log was successfully created'
+      redirect_to decide_project_path(@proj_id), notice: 'Time log was successfully created'
     else
       render :new
     end
@@ -39,7 +39,7 @@ class TimeLogsController < ApplicationController
     request.params[:time_log][:user_id] = current_user.id
     respond_to do |format|
       if @time_log.update(time_log_params)
-        format.html { redirect_to @time_log, notice: 'Time log was successfully updated.' }
+        format.html { redirect_to decide_project_path(@proj_id), notice: 'Time log was successfully updated.' }
         format.json { render :show, status: :ok, location: @time_log }
       else
         format.html { render :edit }
@@ -51,9 +51,10 @@ class TimeLogsController < ApplicationController
   # DELETE /time_logs/1
   # DELETE /time_logs/1.json
   def destroy
+    @proj_id = @time_log.project_id
     @time_log.destroy
     respond_to do |format|
-      format.html { redirect_to time_logs_url, notice: 'Time log was successfully destroyed.' }
+      format.html { redirect_to decide_project_path(@proj_id), notice: 'Time log was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

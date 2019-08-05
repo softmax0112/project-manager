@@ -35,6 +35,16 @@ class ApplicationController < ActionController::Base
     return manager_user_path(current_user) if current_user.manager?
   end
 
+  def decide_project_path(project)
+    if current_user.admin?
+      admin_admin_project_path(project)
+    elsif current_user.manager?
+      manager_manager_project_path(project)
+    else
+      project_path(project)
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
