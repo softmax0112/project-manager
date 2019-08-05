@@ -15,6 +15,7 @@ class AttachmentsController < ApplicationController
       format.js
     end
   end
+
   # POST /attachments
   # POST /attachments.json
   def create
@@ -48,6 +49,6 @@ class AttachmentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def attachment_params
-    params.require(:attachment).permit( :filename, :project_id)
+    params.require(:attachment).permit(:filename, :project_id)
   end
 end

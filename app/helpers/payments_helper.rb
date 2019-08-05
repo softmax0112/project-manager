@@ -37,6 +37,10 @@ module PaymentsHelper
     current_user.admin? ? new_admin_payment_path : new_manager_payment_path
   end
 
+  def new_decide_payment_path_with_project(project)
+    current_user.admin? ? new_admin_payment_path(project_id: project.id) : new_manager_payment_path(project_id: project.id)
+  end
+
   def edit_decide_payment_path(payment)
     current_user.admin? ? edit_admin_payment_path(payment) : edit_manager_payment_path(payment)
   end

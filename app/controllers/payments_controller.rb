@@ -18,6 +18,11 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   def new
     @payment = Payment.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /payments/1/edit
@@ -27,13 +32,14 @@ class PaymentsController < ApplicationController
   # POST /payments.json
   def create
     request.params[:payment][:creator_id] = current_user.id
+    request.params[:payment][:project_id] = params[:project_id]
     @payment = Payment.new(payment_params)
 
     respond_to do |format|
       if @payment.save
         format.html do
           authorize @payment
-          redirect_to payment_path(@payment), notice: 'Payment was successfully created.'
+          redirect_to decide_project_path(params[:project_id]), notice: 'Payment was successfully created'
         end
         format.json { render :show, status: :created, location: @payment }
       else

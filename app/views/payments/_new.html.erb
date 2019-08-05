@@ -1,6 +1,6 @@
 <div class="modal-header">
   <div class='d-flex flex-row-reverse'>
-    <h4 class="modal-title font-up font-bold py-4 float-left" id="myModalLabel">Add Attachment</h4>
+    <h4 class="modal-title font-up font-bold py-4 float-left" id="myModalLabel">Add Payment</h4>
   </div>
   <div class='row'>
     <div class='col'>
@@ -13,13 +13,13 @@
   </div>
 </div>
 <div class="modal-body">
-  <%= form_with(model: @attachment, local: true) do |form| %>
-    <% if @attachment.errors.any? %>
+  <%= form_with(model: @payment, local: true) do |form| %>
+    <% if @payment.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@attachment.errors.count, "error") %> prohibited this attachment from being saved:</h2>
+        <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
 
         <ul>
-        <% @attachment.errors.full_messages.each do |message| %>
+        <% @payment.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
         </ul>
@@ -27,13 +27,13 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :filename, class: 'label' %>
-      <%= form.file_field :filename, class: 'form-control' %>
+      <%= form.label :amount, class: 'label' %>
+      <%= form.number_field :amount, class: 'form-control' %>
     </div>
 
     <div class="actions modal-footer">
       <%= hidden_field_tag(:project_id, params[:project_id]) %>
-      <%= form.submit 'Done', class: 'btn btn-outline-white waves-effect waves-light ajax-attachment', :remote => true %>
+      <%= form.submit 'Done', class: 'btn btn-outline-white waves-effect waves-light ajax-payment', :remote => true %>
     </div>
   <% end %>
 </div>
