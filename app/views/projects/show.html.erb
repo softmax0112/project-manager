@@ -34,3 +34,118 @@
   <strong>Client:</strong>
   <%= @project.client.name %>
 </p>
+
+<div class='card indigo text-white'>
+  <div class='card-body'>
+    <div class='row'>
+      <div class='col'>
+        <div class='row'>
+          <div class='col'>
+            <h2 class='font-up font-bold py-4 text-white float-left'>Project Logs</h2>
+          </div>
+          <div class='col'>
+          </div>
+        </div>
+        <div class='clearfix'></div>
+        <%= page_entries_info @time_logs %>
+        <table class='table table-condensed table-hover table-striped text-white'>
+          <thead>
+            <tr>
+              <th>Time Log Information</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @time_logs.each do |time_log| %>
+              <tr>
+                <td>
+                  <div class='row'>
+                    <div class='col'>
+                      <div class='form-group'>
+                        <b>Hours: </b><%= time_log.hours %>
+                      </div>
+                      <div class='form-group'>
+                        <b>Project: </b><%= Project.find(time_log.project_id).title %>
+                      </div>
+                      <div class='form-group'>
+                        <b>Creator: </b><%= User.find(time_log.user_id).name %>
+                      </div>
+                    </div>
+                    <div class='col'>
+                      <div class='float-right'>
+                        <div class='form-group'>
+                          <%= link_to 'Show', decide_time_log_path(time_log), class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
+                        </div>
+                        <div class='form-group'>
+                          <%= link_to 'Edit', edit_decide_time_log_path(time_log),
+                            class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
+                        </div>
+                        <%= link_to 'Destroy', decide_time_log_path(time_log), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red custom-button-size' %>
+                      </div>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @time_logs, theme: 'twitter-bootstrap-4' %>
+      </div>
+      <div class='col'>
+        <div class='row'>
+          <div class='col'>
+            <h2 class='font-up font-bold py-4 text-white float-left'>Payments</h2>
+          </div>
+          <div class='col'>
+            <%= link_to 'New Payment', new_decide_payment_path, class: 'btn btn-outline-white waves-effect waves-light float-right' %>
+          </div>
+        </div>
+        <div class='clearfix'></div>
+
+        <%= page_entries_info @payments %>
+        <table class='table table-condensed table-hover table-striped text-white'>
+          <thead>
+            <tr>
+              <th>Payment Information</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @payments.each do |payment| %>
+              <tr>
+                <td>
+                  <div class='row'>
+                    <div class='col'>
+                      <div class='form-group'>
+                        <b>Amount: </b><%= payment.amount %>
+                      </div>
+                      <div class='form-group'>
+                        <b>Project: </b><%= Project.find(payment.project_id).title %>
+                      </div>
+                      <div class='form-group'>
+                        <b>Creator: </b><%= User.find(payment.creator_id).name %>
+                      </div>
+                    </div>
+                    <div class='col'>
+                      <div class='float-right'>
+                        <div class='form-group'>
+                          <%= link_to 'Show', decide_payment_path(payment), class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
+                        </div>
+                        <div class='form-group'>
+                          <%= link_to 'Edit', edit_decide_payment_path(payment),
+                            class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
+                        </div>
+                        <%= link_to 'Destroy', decide_payment_path(payment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red custom-button-size' %>
+                      </div>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @payments, theme: 'twitter-bootstrap-4' %>
+      </div>
+    </div>
+  </div>
+</div>

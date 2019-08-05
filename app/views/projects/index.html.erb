@@ -55,7 +55,7 @@
                 </div>
                 <div class='col'>
                   <div class='float-right'>
-                    <% if Projects_User.where('user_id = ? AND project_id = ?', current_user.id, project.id).blank? %>
+                    <% unless Projects_User.where('user_id = ? AND project_id = ?', current_user.id, project.id).blank? %>
                       <div class='form-group'>
                         <%= link_to 'Log Time', new_decide_time_log_path_project(project), class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
                       </div>

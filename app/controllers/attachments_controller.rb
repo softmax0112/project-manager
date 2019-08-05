@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AttachmentsController < ApplicationController
   def index
     @attachments = Attachment.all
@@ -5,8 +7,7 @@ class AttachmentsController < ApplicationController
 
   # GET /attachments/1
   # GET /attachments/1.json
-  def show
-  end
+  def show; end
 
   # GET /attachments/new
   def new
@@ -14,8 +15,7 @@ class AttachmentsController < ApplicationController
   end
 
   # GET /attachments/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /attachments
   # POST /attachments.json
@@ -34,13 +34,14 @@ class AttachmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_attachment
-      @attachment = Attachment.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def attachment_params
-      params.require(:attachment).permit({filename: []}, :project_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_attachment
+    @attachment = Attachment.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def attachment_params
+    params.require(:attachment).permit({ filename: [] }, :project_id)
+  end
 end

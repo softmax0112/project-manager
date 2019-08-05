@@ -17,7 +17,12 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   # GET /projects/1.json
-  def show; end
+  def show
+    @time_logs = TimeLog.where('project_id = ?', @project.id).page(params[:page])
+
+    @payments = Payment.where('project_id = ?', @project.id).page(params[:page])
+    authorize @payments
+  end
 
   # GET /projects/new
   def new
@@ -52,12 +57,12 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update(project_params)
-        format.html {
+        format.html do
           params[:project][:users_ids].each do |uid|
             Projects_User.create!(user_id: uid, project_id: params[:id]) unless uid.blank?
           end
           redirect_to @project, notice: 'Project was successfully updated'
-        }
+        end
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }

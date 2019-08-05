@@ -7,9 +7,9 @@ class ClientsController < ApplicationController
   # GET /manager/clients.json
   def index
     @clients = if params[:name]
-                       Client.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
-                     else
-                       Client.page(params[:page])
+                 Client.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
+               else
+                 Client.page(params[:page])
                      end
     authorize @clients
   end

@@ -31,10 +31,10 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
-        format.html {
+        format.html do
           authorize @payment
           redirect_to payment_path(@payment), notice: 'Payment was successfully created.'
-        }
+        end
         format.json { render :show, status: :created, location: @payment }
       else
         format.html { render :new }
