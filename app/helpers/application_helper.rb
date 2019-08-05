@@ -28,6 +28,10 @@ module ApplicationHelper
   end
 
   def decide_client_path
-    current_user.admin? ? admin_clients_path : manager_clients_path
+    if current_user.admin?
+      admin_clients_path
+    elsif current_user.manager?
+      manager_clients_path
+    end
   end
 end

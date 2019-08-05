@@ -55,6 +55,16 @@ module TimeLogsHelper
     end
   end
 
+  def new_decide_time_log_path_project(project)
+    if current_user.admin?
+      new_admin_time_log_path(project)
+    elsif current_user.manager?
+      new_manager_time_log_path(project)
+    else
+      new_time_log_path(project)
+    end
+  end
+
   def new_decide_time_log_path
     if current_user.admin?
       new_admin_time_log_path

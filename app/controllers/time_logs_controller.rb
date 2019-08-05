@@ -6,7 +6,7 @@ class TimeLogsController < ApplicationController
   # GET /time_logs
   # GET /time_logs.json
   def index
-    @time_logs = TimeLog.page(params[:page])
+    @time_logs = TimeLog.where('creator_id = ?', current_user.id).page(params[:page])
   end
 
   # GET /time_logs/1

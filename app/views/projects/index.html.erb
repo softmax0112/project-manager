@@ -55,14 +55,21 @@
                 </div>
                 <div class='col'>
                   <div class='float-right'>
+                    <% if Projects_User.where('user_id = ? AND project_id = ?', current_user.id, project.id).blank? %>
+                      <div class='form-group'>
+                        <%= link_to 'Log Time', new_decide_time_log_path_project(project), class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
+                      </div>
+                    <% end %>
                     <div class='form-group'>
                       <%= link_to 'Show', decide_project_path(project), class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
                     </div>
-                    <div class='form-group'>
-                      <%= link_to 'Edit', edit_decide_project_path(project),
-                        class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
-                    </div>
-                    <%= link_to 'Destroy', decide_project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red custom-button-size' %>
+                    <% unless current_user.user? %>
+                      <div class='form-group'>
+                        <%= link_to 'Edit', edit_decide_project_path(project),
+                          class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
+                      </div>
+                      <%= link_to 'Destroy', decide_project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red custom-button-size' %>
+                    <% end %>
                   </div>
                 </div>
               </div>
