@@ -2,7 +2,7 @@
 
 class ClientPolicy < ApplicationPolicy
   def index?
-    user.admin? || user.manager?
+    true
   end
 
   def edit?
@@ -14,15 +14,15 @@ class ClientPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.manager?
+    true
   end
 
   def create?
-    user.admin? || user.manager?
+    user.admin?
   end
 
   def new?
-    user.admin? || user.manager?
+    user.admin?
   end
 
   def destroy?
