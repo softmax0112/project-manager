@@ -5,7 +5,7 @@
   <%= bootstrap_devise_error_messages! %>
   <div class="form-group">
     <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control' %>
+    <%= f.email_field :email, autofocus: true, autocomplete: 'off', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control' %>
   </div>
 
   <div class="form-group">

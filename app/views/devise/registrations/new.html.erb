@@ -6,22 +6,22 @@
 
       <div class="md-form">
         <i class="fa fa-camera-retro prefix"></i>
-        <%= f.file_field :image, autofocus: true, autocomplete: 'email', class: 'text-white' %>
+        <%= f.file_field :image, autofocus: true, autocomplete: 'off', class: 'text-white' %>
       </div>
 
       <div class='md-form'>
         <i class='fa fa-id-card prefix'></i>
-        <%= f.text_field :name, class: 'text-white', placeholder: 'Name' %>
+        <%= f.text_field :name, class: 'text-white', placeholder: 'Name', autocomplete: 'off' %>
       </div>
 
       <div class="md-form">
         <i class='fa fa-envelope prefix'></i>
-        <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'text-white', placeholder: 'E-mail' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'off', class: 'text-white', placeholder: 'E-mail' %>
       </div>
 
       <div class="md-form">
         <i class='fa fa-lock prefix'></i>
-        <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control', placeholder: 'Password' %>
+        <%= f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password' %>
 
         <% if @minimum_password_length %>
           <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
@@ -30,7 +30,7 @@
 
       <div class="md-form">
         <i class='fa fa-handshake-o prefix'></i>
-        <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'text-white', placeholder: 'Confirm Password' %>
+        <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'text-white', placeholder: 'Confirm Password' %>
       </div>
 
       <div class="form-group">

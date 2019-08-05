@@ -5,12 +5,12 @@
 
       <div class="md-form">
         <i class="fa fa-envelope prefix"></i>
-        <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'text-white', placeholder: 'E-mail' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'off', class: 'text-white', placeholder: 'E-mail' %>
       </div>
 
       <div class="md-form">
         <i class="fa fa-lock prefix"></i>
-        <%= f.password_field :password, autocomplete: 'current-password', class: 'text-white', placeholder: 'Password' %>
+        <%= f.password_field :password, autocomplete: 'off', class: 'text-white', placeholder: 'Password' %>
       </div>
 
       <% if devise_mapping.rememberable? %>
