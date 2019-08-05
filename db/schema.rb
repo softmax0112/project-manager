@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2019_08_05_043053) do
   create_table "projects_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "project_id", null: false
-    t.index ["project_id", "user_id"], name: "index_projects_users_on_project_id_and_user_id"
-    t.index ["user_id", "project_id"], name: "index_projects_users_on_user_id_and_project_id"
+    t.index ["project_id", "user_id"], name: "index_projects_users_on_project_id_and_user_id", unique: true
+    t.index ["user_id", "project_id"], name: "index_projects_users_on_user_id_and_project_id", unique: true
   end
 
   create_table "time_logs", force: :cascade do |t|
