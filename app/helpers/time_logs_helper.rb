@@ -4,7 +4,7 @@ module TimeLogsHelper
   def decide_time_logs_controller_action
     if current_user.admin?
       decide_admin_time_logs_controller_action
-    else
+    elsif current_user.manager?
       decide_manager_time_logs_controller_action
     else
       decide_user_time_logs_controller_action
