@@ -26,10 +26,10 @@ class AttachmentsController < ApplicationController
     respond_to do |format|
       if @attachment.save
         format.html { redirect_to decide_project_path(params[:project_id]), notice: 'Attachment was successfully created' }
-        format.json { render :show, status: :created, location: @attachment }
+        format.json
       else
         format.html{ render partial: 'new' }
-        format.js{}
+        format.js
       end
     end
   end
@@ -51,6 +51,6 @@ class AttachmentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def attachment_params
-    params.require(:attachment).permit(:filename, :project_id)
+    params.permit(:filename, :project_id)
   end
 end

@@ -28,7 +28,9 @@
     <table class='table table-condensed table-hover table-striped text-white'>
       <thead>
         <tr>
-          <th>Client Information</th>
+          <th>Name</th>
+          <th>Affiliation</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
@@ -36,31 +38,27 @@
         <% @admin_clients.each do |admin_client| %>
           <tr>
             <td>
-              <div class='row'>
-                <div class='col'>
-                  <div class='form-group text-white'>
-                    <b>Name: </b><%= admin_client.name %>
-                  </div>
-                  <div class='form-group text-white'>
-                    <b>Affiliation: </b><%= admin_client.affiliation %>
-                  </div>
-                </div>
-                <div class='col'>
-                  <div class='float-right'>
-                    <%= link_to admin_client_path(admin_client), class: 'btn btn-primary bg-success' do %>
-                      <i class='fa fa-id-card-o'></i>
-                    <% end %>
-                    <%= link_to edit_admin_client_path(admin_client),
-                      class: 'btn btn-primary bg-warning' do %>
-                      <i class='fa fa-pencil'></i>
-                    <% end %>
-                    <%= link_to admin_client_path(admin_client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
-                      <i class='fa fa-remove'></i>
-                    <% end %>
-                  </div>
-                </div>
+              <div class='text-white'>
+                <%= admin_client.name %>
               </div>
-              </td>
+            </td>
+            <td>
+              <div class='text-white'>
+                <%= admin_client.affiliation %>
+              </div>
+            </td>
+            <td>
+              <%= link_to admin_client_path(admin_client), class: 'btn btn-primary bg-success' do %>
+                <i class='fa fa-id-card-o'></i>
+              <% end %>
+              <%= link_to edit_admin_client_path(admin_client),
+                class: 'btn btn-primary bg-warning' do %>
+                <i class='fa fa-pencil'></i>
+              <% end %>
+              <%= link_to admin_client_path(admin_client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
+                <i class='fa fa-remove'></i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
