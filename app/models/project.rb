@@ -12,6 +12,12 @@ class Project < ApplicationRecord
   has_many :users, through: :projects_users, class_name: 'User'
   has_many :attachments, dependent: :destroy
 
+  validates :title, presence: true, length: { minimum: 1, maximum: 50 }
+  validates :description, presence: true, length: { minimum: 50, maximum: 250 }
+  validates :manager_id, presence: true
+  validates :creator_id, presence: true
+  validates :client_id, presence: true
+
   def manager
     User.find(manager_id)
   end
