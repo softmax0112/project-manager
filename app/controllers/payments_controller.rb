@@ -32,7 +32,9 @@ class PaymentsController < ApplicationController
   # POST /payments.json
   def create
     request.params[:payment][:creator_id] = current_user.id
-    request.params[:payment][:project_id] = params[:project_id]
+    request.params[:payment][:project_id] = params[:project_id] unless request.params[:attachment].nil?
+    request.params[:project_id] = params[:project_id]
+
     @payment = Payment.new(payment_params)
 
     respond_to do |format|
