@@ -111,14 +111,16 @@
                     </div>
                     <div class='col'>
                       <div class='float-right'>
-                        <div class='form-group'>
-                          <%= link_to 'Show', decide_time_log_path(time_log), class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
-                        </div>
-                        <div class='form-group'>
-                          <%= link_to 'Edit', edit_decide_time_log_path(time_log),
-                            class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
-                        </div>
-                        <%= link_to 'Destroy', decide_time_log_path(time_log), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red custom-button-size' %>
+                        <%= link_to decide_time_log_path(time_log), class: 'btn btn-primary bg-success' do %>
+                          <i class='fa fa-id-card-o'></i>
+                        <% end %>
+                        <%= link_to edit_decide_time_log_path(time_log),
+                          class: 'btn btn-primary bg-warning' do %>
+                          <i class='fa fa-pencil'></i>
+                        <% end %>
+                        <%= link_to decide_time_log_path(time_log), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
+                          <i class='fa fa-close'></i>
+                        <% end %>
                       </div>
                     </div>
                   </div>
@@ -136,7 +138,9 @@
               <h2 class='font-up font-bold py-4 text-white float-left'>Payments</h2>
             </div>
             <div class='col'>
-              <%= link_to 'Add Payment', new_decide_payment_path_with_project(@project),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-white waves-effect waves-light float-right' }  %>
+              <%= link_to new_decide_payment_path_with_project(@project),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary bg-warning float-right' } do %>
+                <i class='fa fa-plus'></i>
+              <% end %>
               <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content"></div>
@@ -169,14 +173,16 @@
                       </div>
                       <div class='col'>
                         <div class='float-right'>
-                          <div class='form-group'>
-                            <%= link_to 'Show', decide_payment_path(payment), class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
-                          </div>
-                          <div class='form-group'>
-                            <%= link_to 'Edit', edit_decide_payment_path(payment),
-                              class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
-                          </div>
-                          <%= link_to 'Destroy', decide_payment_path(payment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red custom-button-size' %>
+                          <%= link_to decide_payment_path(payment), class: 'btn btn-primary bg-success' do %>
+                            <i class='fa fa-id-card-o'></i>
+                          <% end %>
+                          <%= link_to edit_decide_payment_path(payment),
+                            class: 'btn btn-primary bg-warning' do %>
+                            <i class='fa fa-pencil'></i>
+                          <% end %>
+                          <%= link_to decide_payment_path(payment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
+                            <i class='fa fa-close'></i>
+                          <% end %>
                         </div>
                       </div>
                     </div>
