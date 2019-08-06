@@ -42,9 +42,9 @@
     <% @attachments.each do |attachment| %>
     <div class='col'>
       <div class='card attachment-size'>
-        <div class='card-header'>
+        <div class='card-header indigo'>
           <div class='d-flex flex-row-reverse'>
-            <%= link_to 'X', attachment, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'X', attachment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-white' %>
           </div>
         </div>
         <div class='card-body'>

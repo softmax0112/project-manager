@@ -12,7 +12,9 @@
             <%= form_tag(manager_clients_path, method: :get) do %>
               <%= text_field_tag :name, params[:name],
                 class: 'form-control indigo text-white' %>
-              <%= submit_tag 'Search', name: nil, class: 'btn btn-outline-white waves-effect waves-light' %>
+              <%= button_tag(type: 'submit', name: nil, class: 'btn btn-primary') do %>
+                <i class='fa fa-search'></i>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -42,10 +44,16 @@
                 </div>
                 <div class='col'>
                   <div class='float-right'>
-                    <%= link_to 'Show', manager_client_path(manager_client), class: 'btn btn-outline-white waves-effect waves-light' %>
-                    <%= link_to 'Edit', edit_manager_client_path(manager_client),
-                    class: 'btn btn-outline-white waves-effect waves-light' %>
-                    <%= link_to 'Destroy', manager_client_path(manager_client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red' %>
+                    <%= link_to manager_client_path(manager_client), class: 'btn btn-primary bg-success' do %>
+                      <i class='fa fa-id-card-o'></i>
+                    <% end %>
+                    <%= link_to edit_manager_client_path(manager_client),
+                      class: 'btn btn-primary bg-warning' do %>
+                      <i class='fa fa-pencil'></i>
+                    <% end %>
+                    <%= link_to manager_client_path(manager_client), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
+                      <i class='fa fa-remove'></i>
+                    <% end %>
                   </div>
                 </div>
               </div>

@@ -5,7 +5,9 @@
 
     <div class="d-flex justify-content-between bd-highlight mb-2">
       <div class='p-2 bd-highlight'>
-        <%= link_to 'New Client', new_client_path, class: 'btn btn-outline-white waves-effect waves-light' %>
+        <%= link_to new_client_path, class: 'btn btn-primary bg-warning' do%>
+          <i class='fa fa-plus'></i>
+        <% end %>
       </div>
       <div class='p-2 bd-highlight'>
         <div class='form-inline d-flex flex-row-reverse'>
@@ -13,7 +15,9 @@
             <%= form_tag(clients_path, method: :get) do %>
               <%= text_field_tag :name, params[:name],
                 class: 'form-control indigo text-white' %>
-              <%= submit_tag 'Search', name: nil, class: 'btn btn-outline-white waves-effect waves-light' %>
+              <%= button_tag(type: 'submit', name: nil, class: 'btn btn-outline-white waves-effect waves-light') do %>
+                <i class='fa fa-search'></i>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -43,7 +47,9 @@
                 </div>
                 <div class='col'>
                   <div class='float-right'>
-                    <%= link_to 'Show', client_path(client), class: 'btn btn-outline-white waves-effect waves-light' %>
+                    <%= link_to client_path(client), class: 'btn btn-primary bg-success' do %>
+                      <i class='fa fa-id-card-o'></i>
+                    <% end %>
                   </div>
                 </div>
               </div>
