@@ -13,7 +13,7 @@
   </div>
 </div>
 <div class="modal-body">
-  <%= form_with(model: @attachment, local: true) do |form| %>
+  <%= form_with(model: @attachment, local: true, :remote => true) do |form| %>
     <% if @attachment.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@attachment.errors.count, "error") %> prohibited this attachment from being saved:</h2>
