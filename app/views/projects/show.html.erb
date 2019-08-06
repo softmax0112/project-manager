@@ -38,13 +38,27 @@
 <h2 class='font-up font-bold py-4 text-center'>Attachments</h2>
 
 <div class='row'>
-  <% @attachments.each do |attachment| %>
+  <div class='row'>
+    <% @attachments.each do |attachment| %>
     <div class='col'>
-      <a href="<%= attachment.filename_url %>" download=''>
-        <%= File.basename(attachment.filename.to_s) %>
-      </a>
+      <div class='card attachment-size'>
+        <div class='card-header'>
+          <div class='d-flex flex-row-reverse'>
+            <%= link_to 'X', attachment, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </div>
+        <div class='card-body'>
+          <a href="<%= attachment.filename_url %>" download=''>
+            <%= @str = File.basename(attachment.filename.to_s).truncate(10) + File.extname(attachment.filename.to_s) %>
+          </a>
+        </div>
+      </div>
     </div>
-  <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class='text-center'>
   <%= link_to 'View all', attachments_path(project_id: @project.id), class: 'btn btn-outline-white waves-effect waves-light' %>
 
   <%= link_to 'Upload Attachment', new_attachment_path(project_id: @project.id),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-white waves-effect waves-light' }  %>
@@ -124,7 +138,7 @@
               <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content"></div>
-                </div>
+                </div>font-up font-bold py-4 text-white
               </div>
             </div>
           </div>

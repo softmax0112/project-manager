@@ -21,10 +21,10 @@ class AttachmentsController < ApplicationController
   def create
     request.params[:attachment][:project_id] = params[:project_id] unless request.params[:attachment].nil?
     request.params[:project_id] = params[:project_id]
-    @attachment = Attachment.new
+    @attachment = Attachment.new(attachment_params)
 
     respond_to do |format|
-      if @attachment.save(attachment_params)
+      if @attachment.save
         format.html { redirect_to decide_project_path(params[:project_id]), notice: 'Attachment was successfully created' }
         format.json { render :show, status: :created, location: @attachment }
       else
@@ -35,10 +35,11 @@ class AttachmentsController < ApplicationController
   end
 
   def destroy
-    @attachment = @attachment.find(params[:id])
+    @attachment = Attachment.find(params[:id])
+    @project_id = @attachment.project_id
     @attachment.destroy
 
-    redirect_to attachments_path(project_id: params[:project_id])
+    redirect_to attachments_path(project_id: @project_id), notice: 'Attachment successfully deleted'
   end
 
   private
@@ -50,6 +51,6 @@ class AttachmentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def attachment_params
-    params.permit(:filename, :project_id)
+    params.require(:attachment).permit(:filename, :project_id)
   end
 end

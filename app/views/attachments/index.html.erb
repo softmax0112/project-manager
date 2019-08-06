@@ -1,29 +1,21 @@
 <%= render 'navbarback' %>
-<h1>Attachments</h1>
+<h1 class='font-up font-bold py-4'><%= Project.find(params[:project_id]).title %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Filename</th>
-      <th>Projects</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @attachments.each do |attachment| %>
-      <tr>
-        <td><%= image_tag image_url_validate(attachment.filename_url.to_s),
-          class: 'img-thumbnail' %></td>
-        <td><%= Project.find(attachment.project_id).title %></td>
-        <td><%= link_to 'Download', attachment.filename_url, download: '' %></td>
-        <td><%= link_to 'Edit', edit_attachment_path(attachment) %></td>
-        <td><%= link_to 'Destroy', attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Attachment', new_attachment_path %>
+<div class='row'>
+  <% @attachments.each do |attachment| %>
+    <div class='col'>
+      <div class='card attachment-size'>
+        <div class='card-header'>
+          <div class='d-flex flex-row-reverse'>
+            <%= link_to 'X', attachment, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </div>
+        <div class='card-body'>
+          <a href="<%= attachment.filename_url %>" download=''>
+            <%= @str = File.basename(attachment.filename.to_s).truncate(10) + File.extname(attachment.filename.to_s) %>
+          </a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
