@@ -30,6 +30,24 @@ class Project < ApplicationRecord
     Client.find(client_id)
   end
 
+  def payment
+    @sum = 0
+    Payment.where('project_id = ?', self.id).each do |payment|
+      @sum += payment.amount
+    end
+
+    return @sum
+  end
+
+  def hours
+    @sum = 0
+    TimeLog.where('project_id = ?', self.id).each do |timelog|
+      @sum += timelog.hours
+    end
+
+    return @sum
+  end
+
   def add_to_payments(payment)
     self[:total_payment] += payment.amount
   end
