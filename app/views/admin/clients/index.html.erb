@@ -30,7 +30,7 @@
         <tr>
           <th>Name</th>
           <th>Affiliation</th>
-          <th>Actions</th>
+          <th><div class='float-right'>Actions</div></th>
         </tr>
       </thead>
 
@@ -47,7 +47,7 @@
                 <%= admin_client.affiliation %>
               </div>
             </td>
-            <td>
+            <td class='float-right'>
               <%= link_to admin_client_path(admin_client), class: 'btn btn-primary bg-success' do %>
                 <i class='fa fa-id-card-o'></i>
               <% end %>
