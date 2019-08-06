@@ -18,11 +18,15 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @time_logs = TimeLog.where('project_id = ?', @project.id).page(params[:page])
+    @time_logs = if current_user.user?
+                   TimeLog.where('project_id = ? AND user_id = ?', @project.id, current_user.id).page(params[:page])
+                 else
+                   TimeLog.where('project_id = ?', @project.id).page(params[:page])
+                 end
 
-    @payments = Payment.where('project_id = ?', @project.id).page(params[:page])
+    @payments = Payment.where('project_id = ?', @project.id).page(params[:page]) unless current_user.user?
     @attachments = Attachment.where('project_id = ?', @project.id).limit(5)
-    authorize @payments
+    authorize @payments unless current_user.user?
   end
 
   # GET /projects/new
