@@ -44,7 +44,9 @@
       <div class='card attachment-size'>
         <div class='card-header indigo'>
           <div class='d-flex flex-row-reverse'>
-            <%= link_to 'X', attachment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-white' %>
+            <%= link_to attachment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-white' do %>
+              <i class='fa fa-close'></i>
+            <% end %>
           </div>
         </div>
         <div class='card-body'>
