@@ -26,13 +26,13 @@
             <td>
               <div class='row'>
                 <div class='col'>
-                  <div class='form-group'>
+                  <div class='form-group text-white'>
                     <b>Hours: </b><%= time_log.hours %>
                   </div>
-                  <div class='form-group'>
+                  <div class='form-group text-white'>
                     <b>Project: </b><%= Project.find(time_log.project_id).title %>
                   </div>
-                  <div class='form-group'>
+                  <div class='form-group text-white'>
                     <b>Creator: </b><%= User.find(time_log.user_id).name %>
                   </div>
                 </div>

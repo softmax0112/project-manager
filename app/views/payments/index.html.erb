@@ -26,13 +26,13 @@
             <td>
               <div class='row'>
                 <div class='col'>
-                  <div class='form-group'>
+                  <div class='form-group text-white'>
                     <b>Amount: </b><%= payment.amount %>
                   </div>
-                  <div class='form-group'>
+                  <div class='form-group text-white'>
                     <b>Project: </b><%= Project.find(payment.project_id).title %>
                   </div>
-                  <div class='form-group'>
+                  <div class='form-group text-white'>
                     <b>Creator: </b><%= User.find(payment.creator_id).name %>
                   </div>
                 </div>

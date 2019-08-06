@@ -86,10 +86,10 @@
                 <td>
                   <div class='row'>
                     <div class='col'>
-                      <div class='form-group'>
+                      <div class='form-group text-white'>
                         <b>Hours: </b><%= time_log.hours %>
                       </div>
-                      <div class='form-group'>
+                      <div class='form-group text-white'>
                         <b>Creator: </b><%= User.find(time_log.user_id).name %>
                       </div>
                     </div>
@@ -144,10 +144,10 @@
                   <td>
                     <div class='row'>
                       <div class='col'>
-                        <div class='form-group'>
+                        <div class='form-group text-white'>
                           <b>Amount: </b><%= payment.amount %>
                         </div>
-                        <div class='form-group'>
+                        <div class='form-group text-white'>
                           <b>Creator: </b><%= User.find(payment.creator_id).name %>
                         </div>
                       </div>
