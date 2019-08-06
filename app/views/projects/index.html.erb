@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between bd-highlight mb-2">
       <div class='p-2 bd-highlight'>
         <%= link_to new_decide_project_path, class: 'btn btn-primary bg-success' do %>
-          <i class='fa fa-plus'></i>
+          <i class='fa fa-plus'>New Project</i>
         <% end %>
       </div>
       <div class='p-2 bd-highlight'>
@@ -65,7 +65,7 @@
                       <% end %>
                     <% end %>
                     <%= link_to decide_project_path(project), class: 'btn btn-primary bg-success' do %>
-                      <i class='fa fa-id-card-o'></i>
+                      <i class='fa fa-eye'></i>
                     <% end %>
                     <% unless current_user.user? %>
                       <%= link_to edit_decide_project_path(project),
