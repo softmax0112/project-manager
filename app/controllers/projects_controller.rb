@@ -26,6 +26,7 @@ class ProjectsController < ApplicationController
 
     @payments = Payment.where('project_id = ?', @project.id).page(params[:page]) unless current_user.user?
     @attachments = Attachment.where('project_id = ?', @project.id).limit(6)
+    @comments = Comment.where('commentable_id = ? AND commentable_type = ?', @project.id, 'Project').order('created_at DESC').limit(3)
     authorize @payments unless current_user.user?
   end
 

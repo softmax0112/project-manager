@@ -7,7 +7,9 @@
     </div>
     <div class='col'>
       <div class='float-right'>
-        <button type="button" class='close' data-dismiss="modal">x</button>
+        <button type="button" class='close' data-dismiss="modal">
+          <i class='fa fa-close'></i>
+        </button>
       </div>
     </div>
   </div>
@@ -27,7 +29,7 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :filename, class: 'label' %>
+      <%= form.label :filename %>
       <%= form.file_field :filename, class: 'form-control' %>
     </div>
 

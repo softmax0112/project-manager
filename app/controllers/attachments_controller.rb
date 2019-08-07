@@ -26,7 +26,7 @@ class AttachmentsController < ApplicationController
     respond_to do |format|
       if @attachment.save
         format.html { redirect_to decide_project_path(params[:project_id]), notice: 'Attachment was successfully created' }
-        format.json
+        format.js
       else
         format.html { render partial: 'new' }
         format.js

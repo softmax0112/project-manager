@@ -35,6 +35,37 @@
   <%= @project.client.name %>
 </p>
 
+<div class='card indigo'>
+  <table class='table table-condensed table-hover table-striped text-white'>
+    <tr>
+      <th class='text-white'>Recent Comments</th>
+    </tr>
+
+    <% @comments.each do |cmnt| %>
+    <tr>
+      <td>
+        <div class='form-group text-white'>
+          <b><%= cmnt.commenter %></b>
+        </div>
+        <div class='form-group text-white'>
+          <%= cmnt.comment %>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+  <div class='text-center'>
+    <%= link_to 'View all', comments_path(commentable_id: @project.id, commentable_type: 'Project'), class: 'btn btn-outline-white waves-effect waves-light' %>
+    <%= link_to 'Add Comment', new_comment_path(commentable_id: @project.id, commentable_type: 'Project'),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-white waves-effect waves-light' }  %>
+    <div id="modal-window2" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <h2 class='font-up font-bold py-4 text-center'>Attachments</h2>
 
 <div class='row'>
@@ -43,11 +74,6 @@
     <div class='col'>
       <div class='card attachment-size'>
         <div class='card-header indigo'>
-          <div class='d-flex flex-row-reverse'>
-            <%= link_to attachment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-white' do %>
-              <i class='fa fa-close'></i>
-            <% end %>
-          </div>
         </div>
         <div class='card-body'>
           <a href="<%= attachment.filename_url %>" download=''>
