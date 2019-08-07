@@ -48,7 +48,7 @@ class Manager::ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @manager_client.update(manager_client_params)
-        format.html { redirect_to manager_client_path(@manager_client), notice: 'Client was successfully updated' }
+        format.html { redirect_to manager_clients_path, notice: 'Client was successfully updated' }
         format.json { render :show, status: :ok, location: @manager_client }
       else
         format.html { render :edit }

@@ -60,7 +60,7 @@
                 <div class='col'>
                   <div class='float-right'>
                     <% unless Projects_User.where('user_id = ? AND project_id = ?', current_user.id, project.id).blank? %>
-                      <%= link_to new_decide_time_log_path_project(project), class: 'btn btn-primary bg-success' do %>
+                      <%= link_to new_time_log_path(project_id: project.id), class: 'btn btn-primary bg-success' do %>
                         <i class='fa fa-plus'></i>
                       <% end %>
                     <% end %>

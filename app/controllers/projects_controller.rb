@@ -65,7 +65,10 @@ class ProjectsController < ApplicationController
       if @project.update(project_params)
         format.html do
           params[:project][:users_ids].each do |uid|
-            Projects_User.create!(user_id: uid, project_id: params[:id]) unless uid.blank?
+
+            unless Projects_User.exists?(user_id: uid, project_id: params[:id])
+              Projects_User.create(user_id: uid, project_id: params[:id]) unless uid.blank?
+            end
           end
           redirect_to @project, notice: 'Project was successfully updated'
         end

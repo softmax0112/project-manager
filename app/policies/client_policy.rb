@@ -2,7 +2,7 @@
 
 class ClientPolicy < ApplicationPolicy
   def index?
-    true
+    return true
   end
 
   def edit?
@@ -14,7 +14,7 @@ class ClientPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    return true
   end
 
   def create?
