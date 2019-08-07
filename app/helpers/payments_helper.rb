@@ -29,6 +29,10 @@ module PaymentsHelper
     current_user.admin? ? admin_payment_path(payment) : manager_payment_path(payment)
   end
 
+  def decide_payment_path_with_project(payment, project_id)
+    current_user.admin? ? admin_payment_path(payment, project_id: project_id) : manager_payment_path(payment, project_id: project_id)
+  end
+
   def decide_payments_path
     current_user.admin? ? admin_payments_path : manager_payments_path
   end
@@ -43,5 +47,9 @@ module PaymentsHelper
 
   def edit_decide_payment_path(payment)
     current_user.admin? ? edit_admin_payment_path(payment) : edit_manager_payment_path(payment)
+  end
+
+  def edit_decide_payment_path_with_project(payment, project_id)
+    current_user.admin? ? edit_admin_payment_path(payment, project_id: project_id) : edit_manager_payment_path(payment, project_id: project_id)
   end
 end

@@ -13,7 +13,9 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1
   # GET /payments/1.json
-  def show; end
+  def show
+    @comments = Comment.where('commentable_type = ? and commentable_id = ?', 'Payment', @payment.id).order('created_at DESC').limit(3)
+  end
 
   # GET /payments/new
   def new
@@ -32,13 +34,13 @@ class PaymentsController < ApplicationController
   # POST /payments.json
   def create
     request.params[:payment][:creator_id] = current_user.id
-    request.params[:payment][:project_id] = params[:project_id] unless request.params[:attachment].nil?
+    request.params[:payment][:project_id] = params[:project_id] unless request.params[:payment].nil?
     request.params[:project_id] = params[:project_id]
 
     @payment = Payment.new(payment_params)
 
     respond_to do |format|
-      if @payment.save
+      if @payment.save!
         format.html do
           authorize @payment
           redirect_to decide_project_path(params[:project_id]), notice: 'Payment was successfully created'

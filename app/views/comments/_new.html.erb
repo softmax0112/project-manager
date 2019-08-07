@@ -36,6 +36,7 @@
     <div class="actions modal-footer">
       <%= hidden_field_tag(:commentable_id, params[:commentable_id]) %>
       <%= hidden_field_tag(:commentable_type, params[:commentable_type]) %>
+      <%= hidden_field_tag(:project_id, params[:project_id]) %>
       <%= form.submit 'Done', class: 'btn btn-outline-white waves-effect waves-light' %>
     </div>
   <% end %>

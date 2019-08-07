@@ -45,6 +45,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def decide_payment_path(payment)
+    if current_user.admin?
+      admin_payment_path(payment)
+    elsif current_user.manager?
+      manager_payment_path(payment)
+    else
+      payment_path(payment)
+    end
+  end
+
+  def decide_payment_path_with_project(payment, project_id)
+    current_user.admin? ? admin_payment_path(payment, project_id: project_id) : manager_payment_path(payment, project_id: project_id)
+  end
+
   protected
 
   def configure_permitted_parameters

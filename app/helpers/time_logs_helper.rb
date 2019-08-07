@@ -45,6 +45,16 @@ module TimeLogsHelper
     end
   end
 
+  def decide_time_log_path_with_project(time_log, project_id)
+    if current_user.admin?
+      admin_time_log_path(time_log, project_id: project_id)
+    elsif current_user.manager?
+      manager_time_log_path(time_log, project_id: project_id)
+    else
+      time_log_path(time_log, project_id: project_id)
+    end
+  end
+
   def decide_time_logs_path
     if current_user.admin?
       admin_time_logs_path
@@ -82,6 +92,16 @@ module TimeLogsHelper
       edit_manager_time_log_path(time_log)
     else
       edit_time_log_path(time_log)
+    end
+  end
+
+  def edit_decide_time_log_path_with_project(time_log, project_id)
+    if current_user.admin?
+      edit_admin_time_log_path(time_log, project_id: project_id)
+    elsif current_user.manager?
+      edit_manager_time_log_path(time_log, project_id: project_id)
+    else
+      edit_time_log_path(time_log, project_id: project_id)
     end
   end
 end

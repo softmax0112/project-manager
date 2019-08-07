@@ -14,7 +14,7 @@ class Project < ApplicationRecord
   has_many :comments, as: :commentable
 
   validates :title, presence: true, length: { minimum: 1, maximum: 50 }
-  validates :description, presence: true, length: { minimum: 50, maximum: 250 }
+  validates :description, presence: true, length: { minimum: 50, maximum: 1000 }
   validates :manager_id, presence: true
   validates :creator_id, presence: true
   validates :client_id, presence: true

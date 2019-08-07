@@ -11,8 +11,43 @@
 </p>
 
 <p>
-  <strong>Creator:</strong>
+  <strong>Logged by:</strong>
   <%= User.find(@time_log.user_id).name %>
 </p>
 
-<%= link_to 'Edit', edit_time_log_path(@time_log), class: 'btn btn-outline-white waves-effect waves-light' %>
+<div class='card indigo'>
+
+  <table class='table table-condensed table-hover table-striped text-white'>
+    <tr>
+      <th class='text-white'>Recent Comments</th>
+    </tr>
+
+    <% @comments.reverse.each do |cmnt| %>
+    <tr>
+      <td>
+        <div class='form-group text-white'>
+          <b><%= cmnt.commenter %></b>
+        </div>
+        <div class='form-group text-white'>
+          <%= cmnt.comment %>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+  <div class='text-center'>
+    <%= link_to 'View all', comments_path(commentable_id: @time_log.id, commentable_type: 'TimeLog', project_id: params[:project_id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'btn btn-outline-white waves-effect waves-light' } %>
+    <%= link_to 'Add Comment', new_comment_path(commentable_id: @time_log.id, commentable_type: 'TimeLog', project_id: params[:project_id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-white waves-effect waves-light' } %>
+    <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+    <div id="modal-window3" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+  </div>
+</div>

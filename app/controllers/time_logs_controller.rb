@@ -11,7 +11,10 @@ class TimeLogsController < ApplicationController
 
   # GET /time_logs/1
   # GET /time_logs/1.json
-  def show; end
+  def show
+    @comments = Comment.where('commentable_type = ? and commentable_id = ?', 'TimeLog', @time_log.id).order('created_at DESC').limit(3)
+
+  end
 
   # GET /time_logs/new
   def new
@@ -42,7 +45,7 @@ class TimeLogsController < ApplicationController
         format.html { redirect_to decide_project_path(@time_log.project_id), notice: 'Time log was successfully updated.' }
         format.json { render :show, status: :ok, location: @time_log }
       else
-        format.html { render :edit }
+        format.html { render action: :edit, project_id: params[:project_id] }
         format.json { render json: @time_log.errors, status: :unprocessable_entity }
       end
     end

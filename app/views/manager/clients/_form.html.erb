@@ -1,7 +1,7 @@
 <%= form_with(model: manager_client, local: true, url: decide_controller_action) do |form| %>
   <% if manager_client.errors.any?%>
     <div id='error_explanation' class='alert alert-danger'>
-      <h2><%= pluralize(manager_client.errors.count, 'error') %> prohibited this manager_client from being saved:</h2>
+      <h2><%= pluralize(manager_client.errors.count, 'error') %> prohibited this client from being saved:</h2>
 
       <ul>
       <% manager_client.errors.full_messages.each do |message| %>

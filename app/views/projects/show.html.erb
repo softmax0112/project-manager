@@ -41,7 +41,7 @@
       <th class='text-white'>Recent Comments</th>
     </tr>
 
-    <% @comments.each do |cmnt| %>
+    <% @comments.reverse.each do |cmnt| %>
     <tr>
       <td>
         <div class='form-group text-white'>
@@ -56,9 +56,14 @@
   </table>
 
   <div class='text-center'>
-    <%= link_to 'View all', comments_path(commentable_id: @project.id, commentable_type: 'Project'), class: 'btn btn-outline-white waves-effect waves-light' %>
-    <%= link_to 'Add Comment', new_comment_path(commentable_id: @project.id, commentable_type: 'Project'),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-white waves-effect waves-light' }  %>
-    <div id="modal-window2" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <%= link_to 'View all', comments_path(commentable_id: @project.id, commentable_type: 'Project'), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'btn btn-outline-white waves-effect waves-light' } %>
+    <%= link_to 'Add Comment', new_comment_path(commentable_id: @project.id, commentable_type: 'Project'), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-white waves-effect waves-light' }  %>
+    <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+    <div id="modal-window3" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content"></div>
       </div>
@@ -137,14 +142,14 @@
                     </div>
                     <div class='col'>
                       <div class='float-right'>
-                        <%= link_to decide_time_log_path(time_log), class: 'btn btn-primary bg-success' do %>
+                        <%= link_to decide_time_log_path_with_project(time_log, @project.id), class: 'btn btn-primary bg-success' do %>
                           <i class='fa fa-eye'></i>
                         <% end %>
-                        <%= link_to edit_decide_time_log_path(time_log),
+                        <%= link_to edit_decide_time_log_path_with_project(time_log, @project.id),
                           class: 'btn btn-primary bg-warning' do %>
                           <i class='fa fa-pencil'></i>
                         <% end %>
-                        <%= link_to decide_time_log_path(time_log), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
+                        <%= link_to decide_time_log_path_with_project(time_log, @project.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
                           <i class='fa fa-close'></i>
                         <% end %>
                       </div>
@@ -199,14 +204,14 @@
                       </div>
                       <div class='col'>
                         <div class='float-right'>
-                          <%= link_to decide_payment_path(payment), class: 'btn btn-primary bg-success' do %>
+                          <%= link_to decide_payment_path_with_project(payment, @project.id), class: 'btn btn-primary bg-success' do %>
                             <i class='fa fa-eye'></i>
                           <% end %>
-                          <%= link_to edit_decide_payment_path(payment),
+                          <%= link_to edit_decide_payment_path_with_project(payment, @project.id),
                             class: 'btn btn-primary bg-warning' do %>
                             <i class='fa fa-pencil'></i>
                           <% end %>
-                          <%= link_to decide_payment_path(payment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
+                          <%= link_to decide_payment_path_with_project(payment, @project.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
                             <i class='fa fa-close'></i>
                           <% end %>
                         </div>

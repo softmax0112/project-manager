@@ -71,7 +71,7 @@ class ProjectsController < ApplicationController
         end
         format.json { render :show, status: :ok, location: @project }
       else
-        format.html { render :edit }
+        format.html { render action: :edit, project_id: params[:project_id] }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end

@@ -2,6 +2,11 @@
 
 class CommentsController < ApplicationController
   def index
+    @comments = Comment.where('commentable_id = ? AND commentable_type = ?', params[:commentable_id], params[:commentable_type]).order('created_at DESC').page(params[:page])
+    respond_to do |format|
+      format.html{}
+      format.js{}
+    end
   end
 
   def new
@@ -20,13 +25,13 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     respond_to do |format|
       format.html{
-        if @comment.save
+        if @comment.save!
           if @comment.commentable_type == 'Project'
             redirect_to decide_project_path(@comment.commentable_id), notice: 'Comment succesfully added'
           elsif @comment.commentable_type == 'Payment'
-            redirect_to decide_payment_path(@comment.commentable_id), notice: 'Comment succesfully added'
+            redirect_to decide_payment_path_with_project(@comment.commentable_id, params[:project_id]), notice: 'Comment succesfully added'
           else
-            redirect_to time_log_path(@comment.commentable_id), notice: 'Comment successfully added'
+            redirect_to time_log_path(@comment.commentable_id, project_id: params[:project_id]), notice: 'Comment successfully added'
           end
         else
           render partial: :new
