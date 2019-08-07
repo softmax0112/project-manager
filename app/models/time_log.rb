@@ -2,6 +2,7 @@
 
 class TimeLog < ApplicationRecord
   belongs_to :projects, optional: true
+  has_many :comments, as: :commentable
 
   validates :hours, presence: true
   validates :project_id, presence: true

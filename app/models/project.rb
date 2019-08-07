@@ -11,6 +11,7 @@ class Project < ApplicationRecord
   has_many :projects_users, dependent: :destroy, class_name: 'Projects_User'
   has_many :users, through: :projects_users, class_name: 'User'
   has_many :attachments, dependent: :destroy
+  has_many :comments, as: :commentable
 
   validates :title, presence: true, length: { minimum: 1, maximum: 50 }
   validates :description, presence: true, length: { minimum: 50, maximum: 250 }
@@ -32,20 +33,20 @@ class Project < ApplicationRecord
 
   def payment
     @sum = 0
-    Payment.where('project_id = ?', self.id).each do |payment|
+    Payment.where('project_id = ?', id).each do |payment|
       @sum += payment.amount
     end
 
-    return @sum
+    @sum
   end
 
   def hours
     @sum = 0
-    TimeLog.where('project_id = ?', self.id).each do |timelog|
+    TimeLog.where('project_id = ?', id).each do |timelog|
       @sum += timelog.hours
     end
 
-    return @sum
+    @sum
   end
 
   def add_to_payments(payment)

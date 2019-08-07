@@ -28,7 +28,7 @@ class AttachmentsController < ApplicationController
         format.html { redirect_to decide_project_path(params[:project_id]), notice: 'Attachment was successfully created' }
         format.json
       else
-        format.html{ render partial: 'new' }
+        format.html { render partial: 'new' }
         format.js
       end
     end

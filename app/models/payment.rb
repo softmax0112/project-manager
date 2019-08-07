@@ -3,6 +3,7 @@
 class Payment < ApplicationRecord
   belongs_to :projects, optional: true
   belongs_to :user, foreign_key: 'creator_id'
+  has_many :comments, as: :commentable
 
   validates :amount, presence: true
   validates :creator_id, presence: true
