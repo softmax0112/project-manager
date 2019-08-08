@@ -13,7 +13,6 @@ class TimeLogsController < ApplicationController
   # GET /time_logs/1.json
   def show
     @comments = Comment.where('commentable_type = ? and commentable_id = ?', 'TimeLog', @time_log.id).order('created_at DESC').limit(3)
-
   end
 
   # GET /time_logs/new
@@ -27,8 +26,9 @@ class TimeLogsController < ApplicationController
   # POST /time_logs
   # POST /time_logs.json
   def create
-    request.params[:time_log][:user_id] = current_user.id
+    #params[:time_log][:user_id] = current_user.id
     @time_log = TimeLog.new(time_log_params)
+    @time_log.user = current_user
     if @time_log.save
       redirect_to decide_project_path(@time_log.project_id), notice: 'Time log was successfully created'
     else

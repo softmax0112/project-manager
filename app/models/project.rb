@@ -49,6 +49,12 @@ class Project < ApplicationRecord
     @sum
   end
 
+  def self.apply_filters(results, params)
+    results = results.where("name like title ") if params[:title].present?
+    results = results.where(role: params[role]) if params[:role].present?
+    result
+  end
+
   def add_to_payments(payment)
     self[:total_payment] += payment.amount
   end

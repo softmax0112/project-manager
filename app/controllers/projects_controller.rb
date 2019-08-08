@@ -7,7 +7,8 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = if params[:title]
+    @projects = Project.apply_filters(params).page(para)
+    if params[:title]
                   Project.where('title LIKE ?', "%#{params[:title]}%").page(params[:page])
                 else
                   Project.page(params[:page])
