@@ -1,10 +1,10 @@
-<%= render 'shared/navbarback' %>
+<%= render 'shared/navbar' %>
 
-<div class="card indigo">
-  <div class="card-body">
+<div class='card indigo'>
+  <div class='card-body'>
     <div class='row'>
       <div class='col'>
-        <h2 class="text-center font-up font-bold py-4 white-text float-left">Edit Profile</h2>
+        <h2 class='text-center font-up font-bold py-4 white-text float-left'>Edit Profile</h2>
       </div>
       <div class='col'>
         <%= link_to 'Delete Profile', user_path(current_user), method: :delete,
@@ -24,13 +24,13 @@
 
       <div class='form-group text-white'>
         <%= f.label :name %>
-        <%= f.text_field :name, autofocus: true, autocomplete: 'off', class: 'text-white' %>
+        <%= f.text_field :name, autofocus: true, autocomplete: 'off', class: 'text-white', required: true %>
       </div>
 
       <div class='form-group text-white'>
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, autocomplete: 'off',
-          class: 'text-white' %>
+          class: 'text-white', required: true %>
       </div>
 
       <div class="form-group">

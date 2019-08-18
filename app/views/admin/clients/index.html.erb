@@ -1,9 +1,9 @@
-<%= render 'shared/navbarback' %>
+<%= render 'shared/navbar' %>
 <div class='card indigo text-white'>
   <div class='card-body'>
     <h2 class='font-up font-bold py-4 text-white'>Clients</h2>
 
-    <div class="d-flex justify-content-between bd-highlight mb-2">
+    <div class='d-flex justify-content-between bd-highlight mb-2'>
       <div class='p-2 bd-highlight'>
         <%= link_to new_admin_client_path, class: 'btn btn-primary bg-success' do %>
           <i class='fa fa-plus'>New Client</i>
@@ -30,7 +30,7 @@
         <tr>
           <th>Name</th>
           <th>Affiliation</th>
-          <th><div class='float-right'>Actions</div></th>
+          <th>Actions</th>
         </tr>
       </thead>
 
@@ -47,9 +47,9 @@
                 <%= admin_client.affiliation %>
               </div>
             </td>
-            <td class='float-right'>
+            <td>
               <%= link_to admin_client_path(admin_client), class: 'btn btn-primary bg-success' do %>
-                <i class='fa fa-id-card-o'></i>
+                <i class='fa fa-eye'></i>
               <% end %>
               <%= link_to edit_admin_client_path(admin_client),
                 class: 'btn btn-primary bg-warning' do %>

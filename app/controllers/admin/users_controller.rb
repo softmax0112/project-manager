@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class Admin::UsersController < ApplicationController
-  before_action :auth_admin
-  before_action :authenticate_user!
   before_action :set_user, only: %i[edit update toggle destroy]
+
+  def index
+    @users = User.search(params[:name], current_user.id).page(params[:page])
+  end
 
   def new
     @user = User.new
@@ -31,19 +33,7 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def search_results
-    @users_by_name = User.where('name LIKE ?', "%#{params[:name]}%").page(params[:page])
-    @users_by_email = User.where('email LIKE ?', "%#{params[:name]}%").page(params[:page])
-    @results = @users_by_name.or(@users_by_email)
-    @results
-  end
-
   def show
-    @users = if params[:name]
-               search_results
-             else
-               User.page(params[:page])
-             end
   end
 
   def destroy
@@ -53,6 +43,8 @@ class Admin::UsersController < ApplicationController
 
   def toggle
     @user.update(enabled: !@user.enabled)
+
+    flash[:notice] = @user.toggle_message
     redirect_to home_path
   end
 

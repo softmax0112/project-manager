@@ -1,20 +1,20 @@
-<div class="card indigo">
-  <div class="card-body">
+<div class='card indigo'>
+  <div class='card-body'>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <h2 class="text-center font-up font-bold py-4 white-text">Sign in</h2>
+      <h2 class='text-center font-up font-bold py-4 white-text'>Sign in</h2>
 
-      <div class="md-form">
-        <i class="fa fa-envelope prefix"></i>
+      <div class='md-form'>
+        <i class='fa fa-envelope prefix'></i>
         <%= f.email_field :email, autofocus: true, autocomplete: 'off', class: 'text-white', placeholder: 'E-mail' %>
       </div>
 
-      <div class="md-form">
-        <i class="fa fa-lock prefix"></i>
+      <div class='md-form'>
+        <i class='fa fa-lock prefix'></i>
         <%= f.password_field :password, autocomplete: 'off', class: 'text-white', placeholder: 'Password' %>
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="form-check md-form">
+        <div class='form-check md-form'>
           <%= f.check_box :remember_me, class: 'form-check-input' %>
           <%= f.label :remember_me, class: 'form-check-label text-white' do %>
             <%= resource.class.human_attribute_name('remember_me') %>
@@ -25,7 +25,7 @@
       <br>
       <br>
 
-      <div class="md-form">
+      <div class='md-form'>
         <%= f.submit  t('.sign_in'), class: 'btn btn-outline-white waves-effect waves-light' %>
       </div>
     <% end %>

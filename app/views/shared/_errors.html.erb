@@ -1,6 +1,9 @@
 <% if @user.present? && @user.errors.any? %>
-  <div id="error_explanation" class='alert alert-danger'>
-    <h2> <%= pluralize(@user.errors.count, "error") %> prohibited this article from being saved:</h2>
+  <div id='error_explanation' class='alert alert-danger alert-dismissable fade show'>
+    <h2> <%= pluralize(@user.errors.count, 'error') %> prohibited this article from being saved:</h2>
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button>
     <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

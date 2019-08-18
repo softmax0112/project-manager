@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!
   before_action :shorten_params, only: %i[update update_password]
   before_action :set_user, only: %i[show edit update destroy update_password]
 
@@ -36,6 +35,7 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+    authorize @user
   end
 
   def shorten_params

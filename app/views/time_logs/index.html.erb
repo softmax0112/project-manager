@@ -1,4 +1,4 @@
-<%= render 'shared/navbarback' %>
+<%= render 'shared/navbar' %>
 <div class='card indigo text-white'>
   <div class='card-body'>
 
@@ -7,7 +7,6 @@
         <h2 class='font-up font-bold py-4 text-white float-left'>Time Logs</h2>
       </div>
       <div class='col'>
-        <%= link_to 'New Time Log', new_decide_time_log_path, class: 'btn btn-outline-white waves-effect waves-light float-right' %>
       </div>
     </div>
     <div class='clearfix'></div>
@@ -39,17 +38,14 @@
                 <div class='col'>
                   <div class='float-right'>
                     <div class='form-group'>
-                      <%= link_to 'Show', decide_time_log_path(time_log), class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
+                      <%= link_to decide_time_log_path(time_log), class: 'btn btn-primary bg-success' do %>
+                        <i class='fa fa-eye'></i>
+                      <% end %>
                     </div>
-                    <div class='form-group'>
-                      <%= link_to 'Edit', edit_decide_time_log_path(time_log),
-                        class: 'btn btn-outline-white waves-effect waves-light custom-button-size' %>
-                    </div>
-                    <%= link_to 'Destroy', decide_time_log_path(time_log), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-white waves-effect waves-light red custom-button-size' %>
                   </div>
                 </div>
               </div>
-              </td>
+            </td>
           </tr>
         <% end %>
       </tbody>

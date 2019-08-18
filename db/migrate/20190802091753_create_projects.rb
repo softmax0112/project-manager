@@ -5,12 +5,12 @@ class CreateProjects < ActiveRecord::Migration[5.2]
     create_table :projects do |t|
       t.string :title
       t.string :description
-      t.integer :hours_spent
-      t.integer :total_payment
-      t.integer :manager_id, index: true
-      t.integer :creator_id, index: true
-      t.belongs_to :client, foreign_key: true
-      t.references :payments, foreign_key: true
+      t.integer :hours_spent, default: 0, lesser_than: 0
+      t.integer :total_payment, default: 0, lesser_than: 0
+      t.references :manager, index: true, foreign_key: { to_table: :users }
+      t.references :creator, index: true, foreign_key: { to_table: :users }
+      t.belongs_to :client, index: true, foreign_key: true
+      t.references :payments, index: true, foreign_key: true
 
       t.timestamps
     end

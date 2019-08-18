@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 module ProjectsHelper
+  def shorten_name(attachment)
+    @base_name = File.basename(attachment.filename.to_s)
+
+    @base_name.length > 20 ? @base_name.truncate(20) + File.extname(attachment.filename.to_s) : @base_name
+  end
+
   def decide_projects_controller_action
     if current_user.admin?
       decide_admin_projects_controller_action

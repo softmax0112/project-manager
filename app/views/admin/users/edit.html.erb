@@ -1,7 +1,7 @@
-<%= render 'shared/navbarback' %>
+<%= render 'shared/navbar' %>
 
-<div class="card indigo">
-  <div class="card-body">
+<div class='card indigo'>
+  <div class='card-body'>
     <div class='row'>
       <div class='col'>
         <h2 class='font-up font-bold py-4 float-left text-white'>Edit User Profile</h2>
@@ -18,28 +18,28 @@
       html: { method: :put, multipart: :true }) do |f| %>
       <%= image_tag image_url_validate(@user.image_url.to_s), class: 'img-thumbnail' %>
 
-      <div class="md-form">
+      <div class='md-form'>
         <i class='fa fa-camera-retro prefix'></i>
         <%= f.file_field :image, class: 'file-field filestyle text-white' %>
       </div>
 
-      <div class="md-form">
+      <div class='md-form'>
         <i class='fa fa-id-card prefix'></i>
-        <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'text-white', placeholder: 'Name', autocomplete: 'off' %>
+        <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'text-white', placeholder: 'Name', autocomplete: 'off', required: true %>
       </div>
 
-      <div class="form-group">
+      <div class='form-group'>
         <%= f.label :role, class: 'text-white' %> <br>
         <%= f.select :role, options_for_select(['manager','admin', 'user'],
           @user.role), {}, { class: 'chosen-select chosen-select-fix' } %>
       </div>
 
-      <div class="md-form">
+      <div class='md-form'>
         <i class='fa fa-envelope prefix'></i>
-        <%= f.email_field :email, autofocus: true, autocomplete: 'off', class: 'text-white', placeholder: 'E-mail' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'off', class: 'text-white', placeholder: 'E-mail', required: true %>
       </div>
 
-      <div class="form-group">
+      <div class='form-group'>
         <%= f.submit 'Update User', class: 'btn btn-outline-white waves-effect waves-light' %>
       </div>
     <% end %>

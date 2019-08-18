@@ -1,10 +1,13 @@
-<%= render 'shared/navbarback' %>
+<%= render 'shared/navbar' %>
 <div class='card indigo text-white'>
   <div class='card-body'>
     <h2 class='font-up font-bold py-4 text-white'>Clients</h2>
 
-    <div class="d-flex justify-content-between bd-highlight mb-2">
+    <div class='d-flex justify-content-between bd-highlight mb-2'>
       <div class='p-2 bd-highlight'>
+        <%= link_to new_manager_client_path, class: 'btn btn-primary bg-success' do %>
+          <i class='fa fa-plus'>New Client</i>
+        <% end %>
       </div>
       <div class='p-2 bd-highlight'>
         <div class='form-inline d-flex flex-row-reverse'>
@@ -25,7 +28,9 @@
     <table class='table table-condensed table-hover table-striped text-white'>
       <thead>
         <tr>
-          <th>Client Information</th>
+          <th>Name</th>
+          <th>Affiliation</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
@@ -33,28 +38,24 @@
         <% @manager_clients.each do |manager_client| %>
           <tr>
             <td>
-              <div class='row'>
-                <div class='col'>
-                  <div class='form-group text-white'>
-                    <b>Name: </b><%= manager_client.name %>
-                  </div>
-                  <div class='form-group text-white'>
-                    <b>Affiliation: </b><%= manager_client.affiliation %>
-                  </div>
-                </div>
-                <div class='col'>
-                  <div class='float-right'>
-                    <%= link_to manager_client_path(manager_client), class: 'btn btn-primary bg-success' do %>
-                      <i class='fa fa-id-card-o'></i>
-                    <% end %>
-                    <%= link_to edit_manager_client_path(manager_client),
-                      class: 'btn btn-primary bg-warning' do %>
-                      <i class='fa fa-pencil'></i>
-                    <% end %>
-                  </div>
-                </div>
+              <div class='text-white'>
+                <%= manager_client.name %>
               </div>
-              </td>
+            </td>
+            <td>
+              <div class='text-white'>
+                <%= manager_client.affiliation %>
+              </div>
+            </td>
+            <td>
+              <%= link_to manager_client_path(manager_client), class: 'btn btn-primary bg-success' do %>
+                <i class='fa fa-eye'></i>
+              <% end %>
+              <%= link_to edit_manager_client_path(manager_client),
+                class: 'btn btn-primary bg-warning' do %>
+                <i class='fa fa-pencil'></i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

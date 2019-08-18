@@ -3,9 +3,9 @@
 class CreatePayments < ActiveRecord::Migration[5.2]
   def change
     create_table :payments do |t|
-      t.integer :amount
+      t.integer :amount, null: false
       t.belongs_to :project, foreign_key: true
-      t.integer :creator_id, index: true
+      t.references :creator, index: true, foreign_key: { to_table: :users }
 
       t.timestamps
     end

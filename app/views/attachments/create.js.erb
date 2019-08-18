@@ -1,1 +1,5 @@
-alert('ji')
+<% @attachment.errors.each do |key, value| %>
+  $('#helpBlock').html('<div class="alert alert-danger"><%= key.capitalize %> <%= escape_javascript(value)%></div>')
+<% end %>
+
+$('table#attachments-table tbody').append('<tr><td class="text-white"><%= @str = stripped_whatever(@attachment) %></td><td><a href="<%= @attachment.filename_url %>" download=""><i class="fa fa-download"></i></a><%= link_to @attachment, method: :delete, data: { confirm: "Are you sure?" }, remote: true do %><i class="fa fa-close"></i><% end %></td></tr>').fadeIn()

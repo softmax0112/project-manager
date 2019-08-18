@@ -1,23 +1,37 @@
-<%= render 'navbarback' %>
+<%= render 'shared/navbar' %>
 
-<p>
-  <strong>Hours:</strong>
-  <%= @time_log.hours %>
-</p>
+<div class='row'>
+  <div class='col'>
+    <p>
+      <strong>Hours:</strong>
+      <div class='clearfix'></div>
+      <%= @time_log.created_at.to_date %>
+      <div class='clearfix'></div>
+      <%= @time_log.created_at.to_s(:time) %>
+      -
+      <%= (@time_log.created_at + @time_log.hours.hours).to_s(:time) %>
+    </p>
+  </div>
+  <div class='col'>
+    <%= link_to decide_project_path(@time_log.project), class: 'btn btn-primary bg-success float-right' do %>
+      <i class='fa fa-arrow-left'>Go to project</i>
+    <% end %>
+  </div>
+</div>
 
 <p>
   <strong>Project:</strong>
-  <%= Project.find(@time_log.project_id).title %>
+  <%= @time_log.project.title %>
 </p>
 
 <p>
   <strong>Logged by:</strong>
-  <%= User.find(@time_log.user_id).name %>
+  <%= @time_log.user.name %>
 </p>
 
 <div class='card indigo'>
 
-  <table class='table table-condensed table-hover table-striped text-white'>
+  <table id='comms' class='table table-condensed table-hover table-striped text-white'>
     <tr>
       <th class='text-white'>Recent Comments</th>
     </tr>
@@ -26,27 +40,68 @@
     <tr>
       <td>
         <div class='form-group text-white'>
-          <b><%= cmnt.commenter %></b>
+          <b><%= cmnt.commenter.name %></b>
         </div>
         <div class='form-group text-white'>
           <%= cmnt.comment %>
         </div>
       </td>
+      <td>
+        <% unless current_user.user? %>
+          <div class="float-right">
+            <%= link_to cmnt, method: :delete, data: { confirm: "Are you sure?" }, remote: true do %>
+              <i class="fa fa-close"></i>
+            <% end %>
+          </div>
+        <% end %>
+        <% if current_user.comments.exists?(cmnt.id) && current_user.user? %>
+          <div class='float-right'>
+            <%= link_to cmnt, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+              <i class='fa fa-close'></i>
+            <% end %>
+          </div>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </table>
 
-  <div class='text-center'>
-    <%= link_to 'View all', comments_path(commentable_id: @time_log.id, commentable_type: 'TimeLog', project_id: params[:project_id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'btn btn-outline-white waves-effect waves-light' } %>
-    <%= link_to 'Add Comment', new_comment_path(commentable_id: @time_log.id, commentable_type: 'TimeLog', project_id: params[:project_id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-outline-white waves-effect waves-light' } %>
-    <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content"></div>
+  <div class='container'>
+    <%= form_with(model: @comment, remote: true) do |form| %>
+      <%= form.hidden_field :commentable_id, value: @time_log.id %>
+      <%= form.hidden_field :commentable_type, value: 'TimeLog' %>
+      <%= hidden_field_tag :project_id, value: params[:project_id] %>
+      <%= form.hidden_field :commenter_id, value: current_user.id %>
+      <% if @comment.errors.any? %>
+        <div id='error_explanation'>
+          <h2><%= pluralize(@comment.errors.count, 'error') %> prohibited this comment from being saved:</h2>
+
+          <ul>
+          <% @comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class='form-group text-white'>
+        <%= form.label 'Add Comment' %>
+        <%= form.text_field :comment, autocomplete: 'off', class: 'text-white' %>
       </div>
-    </div>
-    <div id="modal-window3" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content"></div>
+
+      <div class='actions text-white'>
+        <%= button_tag(type: 'submit', title: nil, class: 'btn btn-primary bg-success') do %>
+          <i class='fa fa-plus'>Add Comment</i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='text-center'>
+    <%= link_to 'View all', comments_path(commentable_id: @time_log.id, commentable_type: 'TimeLog', project_id: params[:project_id]), { remote: true, 'data-toggle' =>  'modal', 'data-target' => '#modal-window3', class: 'btn btn-outline-white waves-effect waves-light' } %>
+    <div id='modal-window3' class='modal hide fade' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog' role='document'>
+        <div class='modal-content'></div>
       </div>
     </div>
   </div>

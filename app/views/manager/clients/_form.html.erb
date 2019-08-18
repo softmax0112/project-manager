@@ -1,7 +1,10 @@
 <%= form_with(model: manager_client, local: true, url: decide_controller_action) do |form| %>
   <% if manager_client.errors.any?%>
-    <div id='error_explanation' class='alert alert-danger'>
+    <div id='error_explanation' class='alert alert-danger alert-dismissable fade show'>
       <h2><%= pluralize(manager_client.errors.count, 'error') %> prohibited this client from being saved:</h2>
+      <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+        <span aria-hidden='true'>&times;</span>
+      </button>
 
       <ul>
       <% manager_client.errors.full_messages.each do |message| %>
@@ -11,17 +14,17 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+  <div class='form-group'>
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'text-white', autocomplete: 'off' %>
+    <%= form.text_field :name, class: 'text-white', autocomplete: 'off', required: true %>
   </div>
 
-  <div class="form-group">
+  <div class='form-group'>
     <%= form.label :affiliation %>
     <%= form.text_field :affiliation, class: 'text-white', autocomplete: 'off' %>
   </div>
 
-  <div class="actions">
+  <div class='actions'>
     <%= form.submit 'Submit', class: 'btn btn-outline-white waves-effect waves-light' %>
   </div>
 <% end %>

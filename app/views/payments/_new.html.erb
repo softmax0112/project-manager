@@ -1,22 +1,24 @@
-<div class="modal-header">
+<div class='modal-header'>
   <div class='d-flex flex-row-reverse'>
-    <h4 class="modal-title font-up font-bold py-4 float-left" id="myModalLabel">Add Payment</h4>
+    <h4 class='modal-title font-up font-bold py-4 float-left text-dark' id='myModalLabel'>Add Payment</h4>
   </div>
   <div class='row'>
     <div class='col'>
     </div>
     <div class='col'>
       <div class='float-right'>
-        <button type="button" class='close' data-dismiss="modal">x</button>
+        <button type='button' class='close' data-dismiss='modal'>x</button>
       </div>
     </div>
   </div>
 </div>
-<div class="modal-body">
+<div class='modal-body'>
   <%= form_with(model: @payment, local: true) do |form| %>
+    <%= form.hidden_field :creator_id, value: current_user.id %>
+    <%= form.hidden_field :project_id, value: params[:project_id] %>
     <% if @payment.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+      <div id='error_explanation'>
+        <h2><%= pluralize(@payment.errors.count, 'error') %> prohibited this payment from being saved:</h2>
 
         <ul>
         <% @payment.errors.full_messages.each do |message| %>
@@ -26,14 +28,13 @@
       </div>
     <% end %>
 
-    <div class="form-group">
+    <div class='form-group'>
       <%= form.label :amount, class: 'label' %>
-      <%= form.number_field :amount, class: 'form-control', autocomplete: 'off' %>
+      <%= form.number_field :amount, class: 'form-control', autocomplete: 'off', required: true %>
     </div>
 
-    <div class="actions modal-footer">
-      <%= hidden_field_tag(:project_id, params[:project_id]) %>
-      <%= form.submit 'Done', class: 'btn btn-outline-white waves-effect waves-light ajax-payment', :remote => true %>
+    <div class='actions modal-footer'>
+      <%= form.submit 'Done', class: 'btn btn-outline-white waves-effect waves-light ajax-payment', remote: true %>
     </div>
   <% end %>
 </div>

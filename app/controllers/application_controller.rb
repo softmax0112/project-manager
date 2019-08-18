@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError do |_exception|
-    flash[:alert] = 'You can not access this namespace or action'
-    redirect_to home_path
+    redirect_to home_path, alert: 'You can not access this namespace or action'
   end
 
   def after_sign_out_path_for(_resource_or_scope)
-    root_path
+    new_user_session_path
   end
 
   def after_sign_in_path_for(_resource_or_scope)
@@ -21,14 +21,6 @@ class ApplicationController < ActionController::Base
     render '404'
   end
 
-  def auth_admin
-    raise Pundit::NotAuthorizedError unless current_user.admin?
-  end
-
-  def auth_manager
-    raise Pundit::NotAuthorizedError unless current_user.manager?
-  end
-
   def home_path
     return admin_user_path(current_user) if current_user.admin?
     return user_path(current_user) if current_user.user?
@@ -36,23 +28,21 @@ class ApplicationController < ActionController::Base
   end
 
   def decide_project_path(project)
-    if current_user.admin?
-      admin_admin_project_path(project)
-    elsif current_user.manager?
-      manager_manager_project_path(project)
-    else
-      project_path(project)
-    end
+    return project_path(project) unless current_user.manager? || current_user.admin?
+
+    current_user.admin? ? admin_admin_project_path(project) : manager_manager_project_path(project)
   end
 
   def decide_payment_path(payment)
-    if current_user.admin?
-      admin_payment_path(payment)
-    elsif current_user.manager?
-      manager_payment_path(payment)
-    else
-      payment_path(payment)
-    end
+    return payment_path(payment) unless current_user.manager? || current_user.admin?
+
+    current_user.admin? ? admin_payment_path(payment) : manager_payment_path(payment)
+  end
+
+  def decide_time_log_path(time_log)
+    return time_log_path(time_log) unless current_user.manager? || current_user.admin?
+
+    current_user.admin? ? admin_time_log_path(time_log) : manager_time_log_path(time_log)
   end
 
   def decide_payment_path_with_project(payment, project_id)

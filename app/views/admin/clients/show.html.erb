@@ -1,4 +1,4 @@
-<%= render 'navbarback' %>
+<%= render 'shared/navbar' %>
 <div class='card indigo text-white'>
   <div class='card-body'>
     <h2 class='font-up font-bold py-4 text-white'>
@@ -11,16 +11,15 @@
         <strong>Affiliation:</strong>
         <%= @admin_client.affiliation %>
       </p>
-
-      <%= link_to 'Edit', edit_admin_client_path(@admin_client),
-        class: 'btn btn-outline-white waves-effect waves-light' %>
     </h2>
 
     <%= page_entries_info @projects %>
     <table class='table table-condensed table-hover table-striped text-white'>
       <thead>
         <tr>
-          <th>Client Projects</th>
+          <th>Name</th>
+          <th>Payment</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
@@ -29,10 +28,19 @@
           <tr>
             <td>
               <div class='form-group text-white'>
-                <b>Name: </b><%= project.title %>
+                <%= project.title %>
               </div>
+            </td>
+            <td>
               <div class='form-group text-white'>
-                <b>Payment: </b><%= project.payment %>
+                <%= project.total_payment %>
+              </div>
+            </td>
+            <td>
+              <div class='form-group'>
+                <%= link_to decide_project_path(project), class: 'btn btn-primary bg-success' do %>
+                  <i class='fa fa-eye'></i>
+                <% end %>
               </div>
             </td>
           </tr>

@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class UserPolicy < ApplicationPolicy
+  def index?
+    user.admin?
+  end
+
   def edit?
     return ((user.id == record.id) && (user.role == record.role)) unless user.admin?
 

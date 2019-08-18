@@ -1,9 +1,9 @@
-<%= render 'shared/navbarback' %>
+<%= render 'shared/navbar' %>
 
-<div class="card indigo">
-  <div class="card-body">
+<div class='card indigo'>
+  <div class='card-body'>
     <%= form_with model: @user, url: admin_users_path(@user), class: 'form-vertical', local: true do |form| %>
-      <h2 class="text-center font-up font-bold py-4 white-text">New User</h2>
+      <h2 class='text-center font-up font-bold py-4 white-text'>New User</h2>
       <%= render 'shared/errors' %>
 
       <div class='md-form'>
@@ -13,18 +13,18 @@
 
       <p class='md-form'>
         <i class='fa fa-id-card prefix'></i>
-        <%= form.text_field :name, class: 'text-white', placeholder: 'Name', autocomplete: 'off' %>
+        <%= form.text_field :name, class: 'text-white', placeholder: 'Name', autocomplete: 'off', required: true %>
       </p>
 
       <p class='md-form'>
         <i class='fa fa-envelope prefix'></i>
-        <%= form.email_field :email, class: 'text-white', placeholder: 'E-mail', autocomplete: 'off' %>
+        <%= form.email_field :email, class: 'text-white', placeholder: 'E-mail', autocomplete: 'off', required: true %>
       </p>
 
       <p class='md-form'>
         <i class='fa fa-lock prefix'></i>
         <%= form.password_field :password, class: 'text-white',
-          placeholder: 'Password' %>
+          placeholder: 'Password', required: true %>
       </p>
 
       <div class='form-group'>

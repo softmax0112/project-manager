@@ -1,0 +1,90 @@
+<%= render 'shared/navbar' %>
+
+<div class='card indigo text-white'>
+  <h2 class='font-up font-bold py-4 float-left text-center'>
+    Administrative User Management
+  </h2>
+  <div class='card-body'>
+    <div class='d-flex justify-content-between bd-highlight mb-2'>
+      <div class='p-2 bd-highlight'>
+        <%= link_to new_admin_user_path, class: 'btn btn-primary bg-success' do %>
+          <i class='fa fa-plus'>New User</i>
+        <% end %>
+      </div>
+      <div class='p-2 bd-highlight'>
+        <div class='form-inline d-flex flex-row-reverse'>
+          <div class='form-group'>
+            <%= form_tag(admin_user_path(current_user), method: :get) do %>
+              <%= text_field_tag :name, params[:name],
+                class: 'form-control indigo text-white' %>
+              <%= button_tag(type: 'submit', name: nil, class: 'btn btn-primary') do %>
+                <i class='fa fa-search'></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= page_entries_info @users, entry_name: 'user' %>
+    <table class='table table-condensed table-hover table-striped text-white'>
+      <tr>
+        <th>User Information</th>
+      </tr>
+
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <div class='row'>
+              <div class='col sm-6'>
+                <div class='row'>
+                  <div class='col'>
+                    <%= image_tag image_url_validate(user.image_url.to_s), class: 'img-thumbnail' %>
+                  </div>
+                  <div class='col'>
+                    <div class='float-left'>
+                      <div class='form-group text-white'>
+                        <b> Name: </b>
+                        <%= user.name %>
+                      </div>
+                      <div class='form-group text-white'>
+                        <b> E-mail: </b>
+                        <%= user.email %>
+                      </div>
+                      <div class='form-group text-white'>
+                        <b> Role: </b>
+                        <%= user.role %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class='col'>
+                <div class='float-right'>
+                  <%= link_to edit_admin_user_path(user),
+                    class: 'btn btn-primary bg-warning' do %>
+                    <i class='fa fa-pencil'></i>
+                  <% end %>
+                  <% if user.enabled? %>
+                    <%= link_to toggle_admin_user_path(user),
+                      method: :put, data: { confirm: 'Are you sure?' },
+                      class: 'btn btn-primary bg-danger' do %>
+                      <i class='fa fa-lock'>Disable</i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to toggle_admin_user_path(user),
+                      method: :put, data: { confirm: 'Are you sure?' },
+                      class: 'btn btn-primary bg-success' do %>
+                      <i class='fa fa-lock'>Enable</i>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= paginate @users, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>

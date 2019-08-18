@@ -5,22 +5,32 @@
         Dashboard
       </a>
     </li>
+    <li class='nav-item float-left'>
+      <a class='nav-link' href='<%= url_for decide_client_path %>'>
+        Clients
+      </a>
+    </li>
+    <li class='nav-item float-left'>
+      <a class='nav-link' href='<%= url_for decide_projects_path %>'>
+        Projects
+      </a>
+    </li>
+    <% if current_user.user? %>
+      <li class='nav-item float-left'>
+        <a class='nav-link' href='<%= url_for time_logs_path %>'>
+          Time Logs
+        </a>
+      </li>
+    <% end %>
+    <% if current_user.admin? %>
+      <li class='nav-item float-left'>
+        <a class='nav-link' href='<%= url_for admin_users_path %>'>
+          Users
+        </a>
+      </li>
+    <% end %>
   </ul>
   <ul class='navbar-nav ml-auto'>
-    <li class='nav-item dropdown active'>
-      <a class='nav-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true'
-        aria-expanded='false'>
-        Manage
-      </a>
-      <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-        <a class='dropdown-item' href='<%= url_for decide_client_path %>'>
-          Clients
-        </a>
-        <a class='dropdown-item' href='<%= url_for decide_projects_path %>'>
-          Projects
-        </a>
-      </div>
-    </li>
 
     <li class='nav-item dropdown active'>
       <a class='nav-link dropdown-toggle' data-toggle='dropdown' aria-haspopup='true'

@@ -1,0 +1,45 @@
+<div class='modal-header'>
+  <div class='d-flex flex-row-reverse'>
+    <h4 class='modal-title font-up font-bold py-4 float-left' id='myModalLabel'>Attachments</h4>
+  </div>
+
+  <div class='row'>
+    <div class='col'>
+    </div>
+    <div class='col'>
+      <div class='float-right'>
+        <button type='button' class='close' data-dismiss='modal'>
+          <i class='fa fa-close'></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='modal-body'>
+
+  <%= page_entries_info @attachments %>
+  <table class='table table-condensed table-hover table-striped'>
+    <tr>
+      <th>Attachments</th>
+      <th>Actions</th>
+    </tr>
+
+    <% @attachments.each do |attachment| %>
+      <tr>
+        <td>
+          <%= shorten_name(attachment) %>
+        </td>
+        <td>
+          <a href='<%= attachment.filename_url %>' download=''>
+            <i class='fa fa-download'></i>
+          </a>
+          <%= link_to attachment, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+            <i class='fa fa-close'></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @attachments, theme: 'twitter-bootstrap-4', remote: true %>
+</div>

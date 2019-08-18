@@ -1,107 +1,76 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_project, only: %i[show edit update destroy]
 
-  # GET /projects
-  # GET /projects.json
   def index
-    @projects = Project.apply_filters(params).page(para)
-    if params[:title]
-                  Project.where('title LIKE ?', "%#{params[:title]}%").page(params[:page])
-                else
-                  Project.page(params[:page])
-                end
+    @projects = Project.search(params[:title]).page(params[:page])
     authorize @projects
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
-    @time_logs = if current_user.user?
-                   TimeLog.where('project_id = ? AND user_id = ?', @project.id, current_user.id).page(params[:page])
-                 else
-                   TimeLog.where('project_id = ?', @project.id).page(params[:page])
-                 end
+    @time_logs = TimeLog.search(@project.id, current_user).order('created_at DESC').page(params[:page])
 
-    @payments = Payment.where('project_id = ?', @project.id).page(params[:page]) unless current_user.user?
-    @attachments = Attachment.where('project_id = ?', @project.id).limit(6)
-    @comments = Comment.where('commentable_id = ? AND commentable_type = ?', @project.id, 'Project').order('created_at DESC').limit(3)
-    authorize @payments unless current_user.user?
+    unless current_user.user?
+      @payments = @project.payments.order('created_at DESC').page(params[:page])
+      authorize @payments
+    end
+
+    @attachments = @project.attachments.order('created_at DESC').limit(Project::ATTACHMENTS_PREVIEW_COUNT)
+    @comments = @project.comments.order('created_at DESC').limit(Project::COMMENTS_PREVIEW_COUNT)
+    @comment = Comment.new
+    @attachment = Attachment.new
+    @payment = Payment.new
+    @time_log = TimeLog.new
   end
 
-  # GET /projects/new
   def new
     @project = Project.new
     authorize @project
   end
 
-  # GET /projects/1/edit
   def edit; end
 
-  # POST /projects
-  # POST /projects.json
   def create
-    request.params[:project][:creator_id] = current_user.id
     @project = Project.new(project_params)
     authorize @project
 
-    if @project.save
-      params[:project][:users_ids].each do |uid|
-        Projects_User.create!(user_id: uid, project_id: params[:id]) unless uid.blank?
-      end
+    @uids_length = params[:project][:users_ids].length
+    @project.users = User.find(params[:project][:users_ids].slice(1..@uids_length))
+
+    if @project.save(project_params)
       redirect_to @project, notice: 'Project was successfully created'
     else
       render :new
     end
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
   def update
-    request.params[:project][:creator_id] = current_user.id
+    @uids_length = params[:project][:users_ids].length
+    @project.users = User.find(params[:project][:users_ids].slice(1..@uids_length))
 
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html do
-          params[:project][:users_ids].each do |uid|
-
-            unless Projects_User.exists?(user_id: uid, project_id: params[:id])
-              Projects_User.create(user_id: uid, project_id: params[:id]) unless uid.blank?
-            end
-          end
-          redirect_to @project, notice: 'Project was successfully updated'
-        end
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render action: :edit, project_id: params[:project_id] }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.update(project_params)
+      redirect_to @project, notice: 'Project was successfully updated'
+    else
+      render action: :edit
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
     @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to projects_url, notice: 'Project was successfully destroyed.'
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_project
     @project = Project.find(params[:id])
     authorize @project
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:title, :description, :hours_spent, :total_payment,
-                                    :manager_id, :creator_id, :client_id)
+    params.require(:project).permit(
+      :title, :description, :hours_spent, :total_payment, :manager_id, :creator_id, :client_id
+    )
   end
 end
