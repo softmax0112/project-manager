@@ -9,6 +9,8 @@ class Client < ApplicationRecord
   has_many :projects, dependent: :destroy
 
   def self.search(term)
-    term.present? ? where('name LIKE ?', "%#{term}%") : self
+    clients = self
+    clients = clients.where('name LIKE ?', "%#{term}%") if term.present?
+    clients
   end
 end

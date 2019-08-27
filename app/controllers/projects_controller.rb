@@ -2,9 +2,10 @@
 
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
+  before_action :initialize_roles, only: %i[edit new]
 
   def index
-    @projects = Project.search(params[:title]).page(params[:page])
+    @projects = Project.search(params[:title]).includes(:attachments, :comments, :payments, :time_logs, :users, :creator, :manager, :client).page(params[:page])
     authorize @projects
   end
 
@@ -64,13 +65,19 @@ class ProjectsController < ApplicationController
   private
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.includes(:manager, :creator, :client, :payments, :time_logs, :comments, :attachments, :users).find(params[:id])
     authorize @project
+  end
+
+  def initialize_roles
+    @employees = User.employees
+    @managers = User.managers
+    @clients = Client.all
   end
 
   def project_params
     params.require(:project).permit(
-      :title, :description, :hours_spent, :total_payment, :manager_id, :creator_id, :client_id
+      :title, :description, :hours_spent, :total_payment, :manager_id, :creator_id, :client_id, :is_progress, :is_hourly
     )
   end
 end

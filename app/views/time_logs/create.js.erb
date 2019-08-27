@@ -1,2 +1,8 @@
-$('table#time-logs-table tbody').append('<tr><td class="text-white"><%= @time_log.created_at.to_date %><div class="clearfix"></div><%= @time_log.created_at.to_s(:time) %> - <%= (@time_log.created_at + @time_log.hours.hours).to_s(:time) %></td><td class="text-white"><%= @time_log.user.name.truncate(50) %></td><td><div class="form-group"><%= link_to decide_time_log_path_with_project(@time_log, @project.id), class: "btn btn-primary bg-success" do %><i class="fa fa-eye"></i><% end %> <%= link_to decide_time_log_path_with_project(@time_log, @project.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary bg-danger" do %><i class="fa fa-close"></i><% end %></div></td></tr>').fadeIn()
-$('p#time-log-hours').html('<strong>Hours spent:</strong> <%= @project.hours_spent %>')
+<% @time_log.errors.each do |key, value| %>
+  $('#helpBlock-timelogs').html('<div class="alert alert-danger"><%= key.capitalize %> <%= escape_javascript(value)%></div>')
+<% end %>
+
+<% if @time_log.persisted? %>
+  $('table#time-logs-table tbody').append('<tr><td class="text-white"><%= @time_log.created_at.to_date %><div class="clearfix"></div><%= @time_log.created_at.to_s(:time) %> - <%= (@time_log.created_at + @time_log.hours.hours).to_s(:time) %></td><td class="text-white"><%= @time_log.user.name.truncate(50) %></td><td><div class="form-group"><%= link_to decide_time_log_path_with_project(@time_log, @project.id), class: "btn btn-primary bg-success" do %><i class="fa fa-eye"></i><% end %> <%= link_to edit_time_log_path(@time_log), class: "btn btn-primary bg-warning" do %><i class="fa fa-pencil"></i><% end %> <%= link_to decide_time_log_path_with_project(@time_log, @project.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary bg-danger" do %><i class="fa fa-close"></i><% end %></div></td></tr>').fadeIn()
+  $('p#time-log-hours').html('<strong>Hours spent:</strong> <%= @project.hours_spent %>')
+<% end %>

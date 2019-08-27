@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -40,15 +40,22 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap4-kaminari-views'
 gem 'carrierwave'
+gem 'chartkick'
 gem 'chosen-rails'
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'devise-i18n'
+gem 'devise-jwt'
+gem 'elasticsearch-model', git: 'git://github.com/elastic/elasticsearch-rails.git'
+gem 'fast_jsonapi'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
+gem 'jwt'
 gem 'kaminari'
 gem 'pundit'
+gem 'rack-cors'
 gem 'rubocop'
+gem 'searchkick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

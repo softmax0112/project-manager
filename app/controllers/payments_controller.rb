@@ -3,22 +3,9 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: %i[show edit update destroy]
 
-  def index
-    @payments = Payment.page(params[:page])
-    authorize @payments
-  end
-
   def show
-    @comments = @payment.comments.order('created_at DESC').limit(Payment::COMMENTS_PREVIEW_COUNT)
+    @comments = @payment.comments.order('created_at DESC').includes(:commenter).limit(Payment::COMMENTS_PREVIEW_COUNT)
     @comment = Comment.new
-  end
-
-  def new
-    @payment = Payment.new
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   def edit; end
@@ -31,18 +18,20 @@ class PaymentsController < ApplicationController
         @payment.project.payments << @payment
         format.js
       else
-        format.js
+        format.js do
+          @payment.errors.any?
+          @payment.errors.each do |key, value|
+          end
+        end
       end
     end
   end
 
   def update
-    respond_to do |format|
-      if @payment.update(payment_params)
-        format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @payment.update(payment_params)
+      redirect_to decide_project_path(@payment.project.id), notice: 'Payment was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -55,7 +44,7 @@ class PaymentsController < ApplicationController
   private
 
   def set_payment
-    @payment = Payment.find(params[:id])
+    @payment = Payment.includes(:creator, :project).find(params[:id])
     authorize @payment
   end
 

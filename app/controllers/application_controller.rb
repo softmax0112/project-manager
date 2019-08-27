@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
     redirect_to home_path, alert: 'You can not access this namespace or action'
   end
 
+  rescue_from ActiveRecord::RecordNotFound do
+    flash.now[:alert] = 'The specified record does not exist'
+    render '404'
+  end
+
   def after_sign_out_path_for(_resource_or_scope)
     new_user_session_path
   end
@@ -25,6 +30,12 @@ class ApplicationController < ActionController::Base
     return admin_user_path(current_user) if current_user.admin?
     return user_path(current_user) if current_user.user?
     return manager_user_path(current_user) if current_user.manager?
+  end
+
+  def decide_projects_path
+    return projects_path unless current_user.manager? || current_user.admin?
+
+    current_user.admin? ? admin_admin_projects_path : manager_manager_projects_path
   end
 
   def decide_project_path(project)

@@ -37,6 +37,8 @@
           <th>Manager</th>
           <th>Creator</th>
           <th>Client</th>
+          <th>Status</th>
+          <th>Type</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -44,28 +46,18 @@
       <tbody>
         <% @projects.each do |project| %>
           <tr class='text-white'>
-            <td>
-              <%= project.title %>
-            </td>
-            <td>
-              <%= project.hours_spent %>
-            </td>
-            <td>
-              <%= project.total_payment %>
-            </td>
-            <td>
-              <%= project.manager.name %>
-            </td>
-            <td>
-              <%= project.creator.name %>
-            </td>
-            <td>
-              <%= project.client.name %>
-            </td>
+            <td><%= project.title %></td>
+            <td><%= project.hours_spent %></td>
+            <td><%= project.total_payment %></td>
+            <td><%= project.manager.name %></td>
+            <td><%= project.creator.name %></td>
+            <td><%= project.client.name %></td>
+            <td><%= project.is_progress? ? 'In Progress' : 'Completed' %></td>
+            <td><%= project.is_fixed? ? 'Fixed' : 'Hourly' %></td>
             <td>
               <div class='form-group'>
                 <% if project.users.exists?(current_user.id) %>
-                  <%= link_to new_time_log_path(project_id: project.id), {:remote => true, 'data-toggle' =>  'modal', 'data-target' => '#modal-window', class: 'btn btn-primary bg-success' } do %>
+                  <%= link_to new_time_log_path(project_id: project.id), { remote: true, 'data-toggle' =>  'modal', 'data-target' => '#modal-window', class: 'btn btn-primary bg-success' } do %>
                     <i class='fa fa-plus'>Log time</i>
                   <% end %>
                   <div id='time-log-modal-window' class='modal hide fade' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>

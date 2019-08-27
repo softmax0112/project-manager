@@ -46,7 +46,7 @@ class Manager::ClientsController < ApplicationController
   private
 
   def set_manager_client
-    @manager_client = Client.find(params[:id])
+    @manager_client = Client.includes(:projects).find(params[:id])
     authorize @manager_client
   end
 

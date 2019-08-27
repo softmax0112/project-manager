@@ -15,7 +15,9 @@
     <table class='table table-condensed table-hover table-striped text-white'>
       <thead>
         <tr>
-          <th>Time Log Information</th>
+          <th>Hours</th>
+          <th>Project</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
@@ -23,27 +25,25 @@
         <% @time_logs.each do |time_log| %>
           <tr>
             <td>
-              <div class='row'>
-                <div class='col'>
-                  <div class='form-group text-white'>
-                    <b>Hours: </b><%= time_log.hours %>
-                  </div>
-                  <div class='form-group text-white'>
-                    <b>Project: </b><%= Project.find(time_log.project_id).title %>
-                  </div>
-                  <div class='form-group text-white'>
-                    <b>Creator: </b><%= User.find(time_log.user_id).name %>
-                  </div>
-                </div>
-                <div class='col'>
-                  <div class='float-right'>
-                    <div class='form-group'>
-                      <%= link_to decide_time_log_path(time_log), class: 'btn btn-primary bg-success' do %>
-                        <i class='fa fa-eye'></i>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
+              <div class='form-group text-white'>
+                <div class='clearfix'></div>
+                <%= time_log.created_at.to_date %>
+                <div class='clearfix'></div>
+                <%= time_log.created_at.to_s(:time) %>
+                -
+                <%= (time_log.created_at + time_log.hours.hours).to_s(:time) %>
+              </div>
+            </td>
+            <td>
+              <div class='form-group text-white'>
+                <%= time_log.project.title %>
+              </div>
+            </td>
+            <td>
+              <div class='form-group'>
+                <%= link_to decide_time_log_path(time_log), class: 'btn btn-primary bg-success' do %>
+                  <i class='fa fa-eye'></i>
+                <% end %>
               </div>
             </td>
           </tr>

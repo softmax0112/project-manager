@@ -1,7 +1,7 @@
 <%= render 'shared/navbar' %>
 
 <div class='card indigo text-white'>
-  <h2 class='font-up font-bold py-4 float-left text-center'>
+  <h2 class='font-up font-bold py-4 text-center'>
     Administrative User Management
   </h2>
   <div class='card-body'>
@@ -14,7 +14,7 @@
       <div class='p-2 bd-highlight'>
         <div class='form-inline d-flex flex-row-reverse'>
           <div class='form-group'>
-            <%= form_tag(admin_user_path(current_user), method: :get) do %>
+            <%= form_tag(admin_users_path, method: :get) do %>
               <%= text_field_tag :name, params[:name],
                 class: 'form-control indigo text-white' %>
               <%= button_tag(type: 'submit', name: nil, class: 'btn btn-primary') do %>

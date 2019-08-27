@@ -27,9 +27,10 @@ Style/BracesAroundHashParameters:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 120
+  Max: 170
 
 Metrics/MethodLength:
+  Max: 20
   Exclude:
     - db/**/*
 

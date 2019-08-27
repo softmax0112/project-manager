@@ -1,32 +1,27 @@
 <nav class='navbar navbar-expand-sm navbar-dark fixed-top indigo'>
   <ul class='navbar-nav'>
-    <li class='nav-item float-left'>
-      <a class='nav-link' href="<%= url_for home_path %>">
-        Dashboard
-      </a>
+    <li class='nav-item'>
+      <%= image_tag image_url_validate(current_user.image_url.to_s),
+        class: 'img-icon' %>
     </li>
-    <li class='nav-item float-left'>
-      <a class='nav-link' href='<%= url_for decide_client_path %>'>
-        Clients
-      </a>
+
+    <li class='nav-item'>
+      <%= link_to 'Dashboard', home_path, class: 'nav-link' %>
     </li>
-    <li class='nav-item float-left'>
-      <a class='nav-link' href='<%= url_for decide_projects_path %>'>
-        Projects
-      </a>
+    <li class='nav-item'>
+      <%= link_to 'Clients', decide_client_path, class: 'nav-link' %>
+    </li>
+    <li class='nav-item'>
+      <%= link_to 'Projects', decide_projects_path, class: 'nav-link' %>
     </li>
     <% if current_user.user? %>
-      <li class='nav-item float-left'>
-        <a class='nav-link' href='<%= url_for time_logs_path %>'>
-          Time Logs
-        </a>
+      <li class='nav-item'>
+        <%= link_to 'Time Logs', time_logs_path, class: 'nav-link' %>
       </li>
     <% end %>
     <% if current_user.admin? %>
-      <li class='nav-item float-left'>
-        <a class='nav-link' href='<%= url_for admin_users_path %>'>
-          Users
-        </a>
+      <li class='nav-item'>
+        <%= link_to 'Users', admin_users_path, class: 'nav-link' %>
       </li>
     <% end %>
   </ul>
@@ -38,17 +33,12 @@
         Edit Profile
       </a>
       <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-        <a class='dropdown-item' href='<%= url_for edit_user_path(current_user) %>'>
-          Edit Info
-        </a>
-        <a class='dropdown-item'
-          href='<%= url_for change_password_user_path(current_user) %>'>
-          Change Password
-        </a>
+        <%= link_to 'Edit Info', edit_user_path(current_user), class: 'dropdown-item' %>
+        <%= link_to 'Change Password', change_password_user_path(current_user), class: 'dropdown-item' %>
       </div>
     </li>
     <li class='nav-item active'>
-      <a class='nav-link' href='<%= url_for destroy_user_session_path %>'> Sign Out </a>
+      <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link' %>
     </li>
   </ul>
 </nav>

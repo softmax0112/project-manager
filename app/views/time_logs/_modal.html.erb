@@ -1,0 +1,80 @@
+<div class='row'>
+  <div class='col'>
+    <h2 class='font-up font-bold py-4 text-white float-left'>
+      <%= current_user.user? ? 'Your Logs' : 'Project Logs' %>
+    </h2>
+  </div>
+  <div class='col'>
+  </div>
+</div>
+
+<div class='clearfix'></div>
+
+<%= page_entries_info @time_logs %>
+
+<table id='time-logs-table' class='table table-condensed table-hover table-striped text-white'>
+  <thead>
+    <tr>
+      <th>Hours Logged</th>
+      <th>Logged By</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @time_logs.reverse.each do |time_log| %>
+      <tr>
+        <td class='text-white'>
+          <%= time_log.created_at.to_date %>
+          <div class='clearfix'></div>
+          <%= time_log.created_at.to_s(:time) %>
+          -
+          <%= (time_log.created_at + time_log.hours.hours).to_s(:time) %>
+        </td>
+        <td class='text-white'>
+          <%= time_log.user.name.truncate(50) %>
+        </td>
+        <td>
+          <div class='form-group'>
+            <%= link_to decide_time_log_path_with_project(time_log, @project.id), class: 'btn btn-primary bg-success' do %>
+              <i class='fa fa-eye'></i>
+            <% end %>
+            <%= link_to edit_time_log_path(time_log), class: 'btn btn-primary bg-warning' do %>
+              <i class='fa fa-pencil'></i>
+            <% end %>
+            <%= link_to decide_time_log_path_with_project(time_log, @project.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
+              <i class='fa fa-close'></i>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @time_logs, theme: 'twitter-bootstrap-4' %>
+
+<% unless current_user.user? %>
+  <h4 class='font-up font-bold py-4 text-white text-center'>Add Timelog</h4>
+
+  <%= form_with(model: @time_log, remote: true) do |form| %>
+    <%= form.hidden_field :project_id, value: @project.id %>
+    <span id='helpBlock-timelogs' class='help-block'></span>
+
+    <div class='form-group text-white'>
+      <%= form.label :hours %>
+      <%= form.number_field :hours, class: 'text-white', required: true %>
+    </div>
+
+    <div class='form-group text-dark'>
+      <%= form.label :user_id, class: 'text-white' %>
+      <%= form.select :user_id, User.employees.map { |u| [u.name, u.id] }, {}, { class: 'chosen-select chosen-select-fix' } %>
+    </div>
+
+    <div class='actions'>
+      <%= button_tag(type: 'submit', title: nil, class: 'btn btn-primary bg-success') do %>
+        <i class='fa fa-plus'></i>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+</div>

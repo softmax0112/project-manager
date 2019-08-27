@@ -14,7 +14,7 @@
 
     <%= render 'shared/errors' %>
 
-    <%= form_for(@user, url:admin_user_path(@user),
+    <%= form_for(@user, url: admin_user_path(@user),
       html: { method: :put, multipart: :true }) do |f| %>
       <%= image_tag image_url_validate(@user.image_url.to_s), class: 'img-thumbnail' %>
 

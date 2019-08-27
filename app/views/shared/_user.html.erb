@@ -1,10 +1,52 @@
 <%= render 'shared/navbar' %>
 
-<div class='card card-size indigo'>
-  <%= image_tag image_url_validate(current_user.image_url.to_s),
-    class: 'img-thumbnail' %>
-  <div class='card-body'>
-    <h4 class='card-title text-white'><%= current_user.name %></h4>
-    <p class='card-text text-white'><small><%= current_user.email %></small></p>
+<div class='row'>
+  <div class='col'>
+    <%= render partial: 'projects/table', locals: { projects: @top_projects, position: 'Top' } %>
+  </div>
+  <div class='col'>
+    <%= render partial: 'projects/table', locals: { projects: @bottom_projects, position: 'Bottom' } %>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between bd-highlight mb-2">
+  <div class='p-2 bd-highlight'>
+    <div>
+      <h4 class='font-up font-bold py-4 text-center'>Highest earning projects this month</h4>
+
+      <%= column_chart @payment_sorted_projects.reverse.slice(0..4).map {
+        |t| [t.title, t.payment_this_month]
+        } %>
+    </div>
+  </div>
+  <div class='p-2 bd-highlight'>
+    <div>
+      <h4 class='font-up font-bold py-4 text-center'>Lowest earning projects this month</h4>
+
+      <%= column_chart @payment_sorted_projects.slice(0..4).map {
+        |t| [t.title, t.payment_this_month]
+        } %>
+    </div>
+  </div>
+</div>
+
+<div class='d-flex justify-content-between bd-highlight mb-2'>
+  <div class='p-2 bd-highlight'>
+    <div>
+      <h4 class='font-up font-bold py-4 text-center'>Highest logged hours this month</h4>
+
+      <%= column_chart @time_log_sorted_projects.reverse.slice(0..4).map {
+        |t| [t.title, t.time_logged_this_month]
+        } %>
+    </div>
+  </div>
+  <div class='p-2 bd-highlight'>
+    <div>
+      <h4 class='font-up font-bold py-4 text-center'>Lowest logged hours this month</h4>
+
+      <%= column_chart @time_log_sorted_projects.slice(0..4).map {
+        |t| [t.title, t.time_logged_this_month]
+        } %>
+    </div>
   </div>
 </div>

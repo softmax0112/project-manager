@@ -72,21 +72,11 @@
       <%= form.hidden_field :commentable_type, value: 'TimeLog' %>
       <%= hidden_field_tag :project_id, value: params[:project_id] %>
       <%= form.hidden_field :commenter_id, value: current_user.id %>
-      <% if @comment.errors.any? %>
-        <div id='error_explanation'>
-          <h2><%= pluralize(@comment.errors.count, 'error') %> prohibited this comment from being saved:</h2>
-
-          <ul>
-          <% @comment.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <span id='helpBlock-comments' class='help-block'></span>
 
       <div class='form-group text-white'>
         <%= form.label 'Add Comment' %>
-        <%= form.text_field :comment, autocomplete: 'off', class: 'text-white' %>
+        <%= form.text_field :comment, autocomplete: 'off', class: 'text-white', required: true %>
       </div>
 
       <div class='actions text-white'>
@@ -98,8 +88,8 @@
   </div>
 
   <div class='text-center'>
-    <%= link_to 'View all', comments_path(commentable_id: @time_log.id, commentable_type: 'TimeLog', project_id: params[:project_id]), { remote: true, 'data-toggle' =>  'modal', 'data-target' => '#modal-window3', class: 'btn btn-outline-white waves-effect waves-light' } %>
-    <div id='modal-window3' class='modal hide fade' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+    <%= link_to 'View all', comments_path(commentable_id: @time_log.id, commentable_type: 'TimeLog', project_id: params[:project_id]), { remote: true, 'data-toggle' =>  'modal', 'data-target' => '#modal-window-comments', class: 'btn btn-outline-white waves-effect waves-light' } %>
+    <div id='modal-window-comments' class='modal hide fade' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog' role='document'>
         <div class='modal-content'></div>
       </div>

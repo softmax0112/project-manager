@@ -35,8 +35,7 @@
 
       <div class="form-group">
         <%= form.label 'Status', class: 'text-white' %> <br>
-        <%= form.select :enabled, options_for_select([{'Enabled' => true},
-          {'Disabled' => false}], @user.enabled), {}, { class: 'chosen-select chosen-select-fix' } %>
+        <%= form.select :enabled, [%w[Enabled 1], %w[Disabled 0]], {}, { class: 'chosen-select chosen-select-fix' } %>
       </div>
 
       <p class='form-group'>

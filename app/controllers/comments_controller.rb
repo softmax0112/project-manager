@@ -2,34 +2,23 @@
 
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.search(params[:commentable_id], params[:commentable_type]).page(params[:page])
+    @comments = Comment.fetch_commentable_comments(params[:commentable_id], params[:commentable_type]).includes(:commenter).page(params[:page])
     authorize @comments
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def new
-    @comment = Comment.new
-    authorize @comment
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   def create
     @comment = Comment.new(comment_params)
     authorize @comment
 
-    if @comment.save
-      respond_to do |format|
+    respond_to do |format|
+      if @comment.save
         format.js
-      end
-    else
-      respond_to do |format|
-        format.js
+      else
+        format.js do
+          @comment.errors.any?
+          @comment.errors.each do |key, value|
+          end
+        end
       end
     end
   end

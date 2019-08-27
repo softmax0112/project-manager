@@ -5,6 +5,14 @@ class TimeLogPolicy < ApplicationPolicy
     true
   end
 
+  def edit?
+    user.admin?
+  end
+
+  def update?
+    user.admin?
+  end
+
   def new?
     true
   end

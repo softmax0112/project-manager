@@ -3,19 +3,7 @@
 class AttachmentsController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
-    @attachments = Attachment.search(params[:filename], @project).page(params[:page])
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def new
-    @attachment = Attachment.new
-
-    respond_to do |format|
-      format.js
-    end
+    @attachments = Attachment.fetch_project_attachments(params[:filename], @project.id).page(params[:page])
   end
 
   def create

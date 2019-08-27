@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_182157) do
+ActiveRecord::Schema.define(version: 2019_08_22_112846) do
 
   create_table "attachments", force: :cascade do |t|
     t.string "filename", null: false
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2019_08_13_182157) do
     t.integer "payments_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_progress", default: true
+    t.boolean "is_fixed", default: true
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["creator_id"], name: "index_projects_on_creator_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id"

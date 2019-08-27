@@ -1,9 +1,5 @@
 <div class='text-center'>
   <h2 class='font-up font-bold py-4'>Error 404. No such page.</h2>
   <p>The page you have requested is either removed or permanently deleted</p>
-  <% if user_signed_in? %>
-    <%= link_to 'Go Back?', home_path, class: 'btn btn-outline-white waves-effect waves-light' %>
-  <% else %>
-    <%= link_to 'Go Back?', root_path, class: 'btn btn-outline-white waves-effect waves-light' %>
-  <% end %>
+  <%= link_to 'Go Back?', user_signed_in? ? home_path : root_path, class: 'btn btn-outline-white waves-effect waves-light' %>
 </div>

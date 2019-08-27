@@ -1,0 +1,58 @@
+<table id='attachments-table' class='table table-condensed table-hover table-striped text-white'>
+  <tr>
+    <th>
+      Recent attachments
+    </th>
+    <th>
+      Actions
+    </th>
+  </tr>
+
+  <% @attachments.reverse.each do |attachment| %>
+    <tr>
+      <td class='text-white'>
+        <%= shorten_name(attachment) %>
+      </td>
+      <td>
+        <a href='<%= attachment.filename_url %>' download=''>
+          <i class='fa fa-download'></i>
+        </a>
+        <%= link_to attachment, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+          <i class='fa fa-close'></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= form_with(model: @attachment, remote: true, id: 'attachments-form') do |form| %>
+  <%= form.hidden_field :project_id, value: @project.id %>
+  <span id='helpBlock-attachments' class='help-block'></span>
+
+  <div class='form-group text-white'>
+    <%= form.label 'Upload Attachment' %>
+  </div>
+  <div class='form-group text-white'>
+    <%= form.file_field :filename, required: true %>
+  </div>
+
+  <div class='row'>
+    <div class='col'>
+      <div class='actions'>
+        <%= button_tag(type: 'submit', name: nil, class: 'btn btn-primary bg-success') do %>
+          <i class='fa fa-upload'></i>
+        <% end %>
+      </div>
+    </div>
+    <div class='col'>
+      <div class='float-right'>
+        <%= link_to 'View all', attachments_path(project_id: @project.id), { remote: true, 'data-toggle' =>  'modal', 'data-target' => '#modal-attachments', class: 'btn btn-outline-white waves-effect waves-light'} %>
+      </div>
+      <div id='modal-attachments' class='modal hide fade' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+        <div class='modal-dialog' role='document'>
+          <div class='modal-content'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

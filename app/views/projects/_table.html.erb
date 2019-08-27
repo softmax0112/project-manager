@@ -1,0 +1,37 @@
+<table class='table table-condensed table-hover table-striped'>
+  <thead>
+    <tr>
+      <th><%= position %> 5 Earning Projects</th>
+      <th colspan="3"></th>
+    </tr>
+    <tr>
+      <th>Title</th>
+      <th>Hours Clocked</th>
+      <th>Earning</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% projects.each do |project| %>
+      <tr>
+        <td>
+          <%= project.title %>
+        </td>
+        <td>
+          <%= project.hours_spent %>
+        </td>
+        <td>
+          <%= project.total_payment %>
+        </td>
+        <td>
+          <div class='form-group'>
+            <%= link_to decide_project_path(project), class: 'btn btn-primary bg-success' do %>
+              <i class='fa fa-eye'></i>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

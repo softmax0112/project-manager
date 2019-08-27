@@ -6,27 +6,27 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    return ((user.id == record.id) && (user.role == record.role)) unless user.admin?
+    return (user.id == record.id) unless user.admin?
 
     true
   end
 
   def update?
-    return ((user.id == record.id) && (user.role == record.role)) unless user.admin?
+    return (user.id == record.id) unless user.admin?
 
     true
   end
 
   def change_password?
-    ((user.id == record.id) && (user.role == record.role))
+    (user.id == record.id)
   end
 
   def update_password?
-    ((user.id == record.id) && (user.role == record.role))
+    (user.id == record.id)
   end
 
   def show?
-    return ((user.id == record.id) && (user.role == record.role)) unless user.admin?
+    return (user.id == record.id) unless user.admin?
 
     true
   end

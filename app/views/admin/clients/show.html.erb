@@ -12,41 +12,6 @@
         <%= @admin_client.affiliation %>
       </p>
     </h2>
-
-    <%= page_entries_info @projects %>
-    <table class='table table-condensed table-hover table-striped text-white'>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Payment</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @projects.each do |project| %>
-          <tr>
-            <td>
-              <div class='form-group text-white'>
-                <%= project.title %>
-              </div>
-            </td>
-            <td>
-              <div class='form-group text-white'>
-                <%= project.total_payment %>
-              </div>
-            </td>
-            <td>
-              <div class='form-group'>
-                <%= link_to decide_project_path(project), class: 'btn btn-primary bg-success' do %>
-                  <i class='fa fa-eye'></i>
-                <% end %>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= paginate @projects, theme: 'twitter-bootstrap-4' %>
+    <%= render partial: 'shared/client_projects' %>
   </div>
 </div>

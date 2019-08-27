@@ -17,7 +17,7 @@ class Admin::UsersController < ApplicationController
     authorize @user
 
     if @user.save
-      redirect_to home_path, notice: 'User succesfully created'
+      redirect_to admin_users_path, notice: 'User succesfully created'
     else
       render 'new'
     end
@@ -27,25 +27,30 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to home_path, notice: 'User succesfully updated'
+      redirect_to admin_users_path, notice: 'User succesfully updated'
     else
       render 'edit'
     end
   end
 
   def show
+    @top_projects = Project.highest_earning
+    @bottom_projects = Project.lowest_earning
+
+    @time_log_sorted_projects = Project.sort_by_time_logged_this_month
+    @payment_sorted_projects = Project.sort_by_payment_this_month
   end
 
   def destroy
     @user.destroy
-    redirect_to home_path, notice: 'User succesfully deleted'
+    redirect_to admin_users_path, notice: 'User succesfully deleted'
   end
 
   def toggle
     @user.update(enabled: !@user.enabled)
 
     flash[:notice] = @user.toggle_message
-    redirect_to home_path
+    redirect_to admin_users_path
   end
 
   def set_user
@@ -56,6 +61,6 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :password, :role, :image)
+    params.require(:user).permit(:email, :name, :password, :role, :image, :enabled)
   end
 end

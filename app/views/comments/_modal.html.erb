@@ -1,0 +1,65 @@
+<table id='comms' class='table table-condensed table-hover table-striped text-white'>
+  <tr>
+    <th class='text-white'>Recent Comments</th>
+    <th></th>
+  </tr>
+
+  <% @comments.reverse.each do |cmnt| %>
+  <tr>
+    <td>
+      <div class='form-group text-white'>
+        <strong><%= cmnt.commenter.name %></strong>
+      </div>
+      <div class='form-group text-white'>
+        <%= cmnt.comment %>
+      </div>
+    </td>
+    <td>
+      <% unless current_user.user? %>
+        <div class='float-right'>
+          <%= link_to cmnt, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+            <i class='fa fa-close'></i>
+          <% end %>
+        </div>
+      <% end %>
+      <% if current_user.comments.exists?(cmnt.id) && current_user.user? %>
+        <div class='float-right'>
+          <%= link_to cmnt, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
+            <i class='fa fa-close'></i>
+          <% end %>
+        </div>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<div class='container'>
+  <%= form_with(model: @comment, remote: true) do |form| %>
+    <%= form.hidden_field :commentable_id, value: @project.id %>
+    <%= form.hidden_field :commentable_type, value: 'Project' %>
+    <%= hidden_field_tag :project_id, value: params[:project_id] %>
+    <%= form.hidden_field :commenter_id, value: current_user.id %>
+    <span id='helpBlock-comments' class='help-block'></span>
+
+    <div class='form-group text-white'>
+      <%= form.label current_user.name %>
+      <%= form.text_field :comment, autocomplete: 'off', class: 'text-white', required: true %>
+    </div>
+
+    <div class='actions text-white'>
+      <%= button_tag(type: 'submit', title: nil, class: 'btn btn-primary bg-success') do %>
+        <i class='fa fa-plus'></i>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class='text-right'>
+  <%= link_to 'View all', comments_path(commentable_id: @project.id, commentable_type: 'Project'), { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window-comments', class: 'btn btn-outline-white waves-effect waves-light' } %>
+  <div id='modal-window-comments' class='modal hide fade' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+    <div class='modal-dialog' role='document'>
+      <div class='modal-content'></div>
+    </div>
+  </div>
+</div>

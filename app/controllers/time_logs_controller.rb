@@ -4,7 +4,7 @@ class TimeLogsController < ApplicationController
   before_action :set_time_log, only: %i[show edit update destroy]
 
   def index
-    @time_logs = current_user.time_logs.page(params[:page])
+    @time_logs = current_user.time_logs.includes(:user).page(params[:page])
     authorize @time_logs
   end
 
@@ -24,15 +24,22 @@ class TimeLogsController < ApplicationController
     @project = Project.find(params[:time_log][:project_id])
     @time_log = TimeLog.new(time_log_params)
 
-    if @time_log.save
-      @project.time_logs << @time_log
-
-      respond_to do |format|
-        format.js
-      end
-    else
-      respond_to do |format|
-        format.js
+    respond_to do |format|
+      if @time_log.save
+        @project.time_logs << @time_log
+        if current_user.user?
+          format.html do
+            redirect_to decide_projects_path, notice: 'Time successfully logged!'
+          end
+        else
+          format.js
+        end
+      else
+        format.js do
+          @time_log.errors.any?
+          @time_log.errors.each do |key, value|
+          end
+        end
       end
     end
   end
@@ -54,7 +61,7 @@ class TimeLogsController < ApplicationController
   private
 
   def set_time_log
-    @time_log = TimeLog.find(params[:id])
+    @time_log = TimeLog.includes(:comments, :user).find(params[:id])
     authorize @time_log
   end
 

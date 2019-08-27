@@ -35,145 +35,23 @@
   <%= @project.client.name %>
 </p>
 
+<p>
+  <strong>Status:</strong>
+  <%= @project.is_progress? ? 'In Progress' : 'Completed' %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @project.is_fixed? ? 'Fixed' : 'Hourly' %>
+</p>
+
 <div class='card indigo'>
-  <table id='comms' class='table table-condensed table-hover table-striped text-white'>
-    <tr>
-      <th class='text-white'>Recent Comments</th>
-      <th></th>
-    </tr>
-
-    <% @comments.reverse.each do |cmnt| %>
-    <tr>
-      <td>
-        <div class='form-group text-white'>
-          <strong><%= cmnt.commenter.name %></strong>
-        </div>
-        <div class='form-group text-white'>
-          <%= cmnt.comment %>
-        </div>
-      </td>
-      <td>
-        <% unless current_user.user? %>
-          <div class='float-right'>
-            <%= link_to cmnt, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
-              <i class='fa fa-close'></i>
-            <% end %>
-          </div>
-        <% end %>
-        <% if current_user.comments.exists?(cmnt.id) && current_user.user? %>
-          <div class='float-right'>
-            <%= link_to cmnt, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
-              <i class='fa fa-close'></i>
-            <% end %>
-          </div>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
-
-  <div class='container'>
-    <%= form_with(model: @comment, remote: true) do |form| %>
-      <%= form.hidden_field :commentable_id, value: @project.id %>
-      <%= form.hidden_field :commentable_type, value: 'Project' %>
-      <%= hidden_field_tag :project_id, value: params[:project_id] %>
-      <%= form.hidden_field :commenter_id, value: current_user.id %>
-      <% if @comment.errors.any? %>
-        <div id='error_explanation'>
-          <h2><%= pluralize(@comment.errors.count, 'error') %> prohibited this comment from being saved:</h2>
-
-          <ul>
-          <% @comment.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <div class='form-group text-white'>
-        <%= form.label current_user.name %>
-        <%= form.text_field :comment, autocomplete: 'off', class: 'text-white' %>
-      </div>
-
-      <div class='actions text-white'>
-        <%= button_tag(type: 'submit', title: nil, class: 'btn btn-primary bg-success') do %>
-          <i class='fa fa-plus'>Add Comment</i>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class='text-center'>
-    <%= link_to 'View all', comments_path(commentable_id: @project.id, commentable_type: 'Project'), { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'btn btn-outline-white waves-effect waves-light' } %>
-    <div id='modal-window3' class='modal hide fade' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-      <div class='modal-dialog' role='document'>
-        <div class='modal-content'></div>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'comments/modal' %>
 </div>
 
 <div class='card indigo', class='text-white'>
   <h2 class='font-up font-bold py-4 text-center text-white'>Attachments</h2>
-
-  <table id='attachments-table' class='table table-condensed table-hover table-striped text-white'>
-    <tr>
-      <th>
-        Recent attachments
-      </th>
-      <th>
-        Actions
-      </th>
-    </tr>
-
-    <% @attachments.reverse.each do |attachment| %>
-      <tr>
-        <td class='text-white'>
-          <%= shorten_name(attachment) %>
-        </td>
-        <td>
-          <a href='<%= attachment.filename_url %>' download=''>
-            <i class='fa fa-download'></i>
-          </a>
-          <%= link_to attachment, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
-            <i class='fa fa-close'></i>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-
-  <%= form_with(model: @attachment, remote: true, id: 'attachments-form') do |form| %>
-    <%= form.hidden_field :project_id, value: @project.id %>
-    <span id='helpBlock' class='help-block'></span>
-
-    <div class='form-group text-white'>
-      <%= form.label 'Upload Attachment' %>
-    </div>
-    <div class='form-group text-white'>
-      <%= form.file_field :filename, required: true %>
-    </div>
-
-    <div class='row'>
-      <div class='col'>
-        <div class='actions'>
-          <%= button_tag(type: 'submit', name: nil, class: 'btn btn-primary bg-success') do %>
-            <i class='fa fa-upload'></i>
-          <% end %>
-        </div>
-      </div>
-      <div class='col'>
-        <div class='float-right'>
-          <%= link_to 'View all', attachments_path(project_id: @project.id), { remote: true, 'data-toggle' =>  'modal', 'data-target' => '#modal-attachments', class: 'btn btn-outline-white waves-effect waves-light'} %>
-        </div>
-        <div id='modal-attachments' class='modal hide fade' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-          <div class='modal-dialog' role='document'>
-            <div class='modal-content'></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <%= render partial: 'attachments/modal' %>
 </div>
 
 <div class='card indigo text-white'>
@@ -181,143 +59,10 @@
 
     <div class='row'>
       <div class='col'>
-        <div class='row'>
-          <div class='col'>
-            <h2 class='font-up font-bold py-4 text-white float-left'>
-              <%= current_user.user? ? 'Your Logs' : 'Project Logs' %>
-            </h2>
-          </div>
-          <div class='col'>
-          </div>
-        </div>
-
-        <div class='clearfix'></div>
-
-        <%= page_entries_info @time_logs %>
-
-        <table id='time-logs-table' class='table table-condensed table-hover table-striped text-white'>
-          <thead>
-            <tr>
-              <th>Hours Logged</th>
-              <th>Logged By</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @time_logs.reverse.each do |time_log| %>
-              <tr>
-                <td class='text-white'>
-                  <%= time_log.created_at.to_date %>
-                  <div class='clearfix'></div>
-                  <%= time_log.created_at.to_s(:time) %>
-                  -
-                  <%= (time_log.created_at + time_log.hours.hours).to_s(:time) %>
-                </td>
-                <td class='text-white'>
-                  <%= time_log.user.name.truncate(50) %>
-                </td>
-                <td>
-                  <div class='form-group'>
-                    <%= link_to decide_time_log_path_with_project(time_log, @project.id), class: 'btn btn-primary bg-success' do %>
-                      <i class='fa fa-eye'></i>
-                    <% end %>
-                    <%= link_to decide_time_log_path_with_project(time_log, @project.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
-                      <i class='fa fa-close'></i>
-                    <% end %>
-                  </div>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <%= paginate @time_logs, theme: 'twitter-bootstrap-4' %>
-
+        <%= render partial: 'time_logs/modal' %>
         <% unless current_user.user? %>
-          <%= form_with(model: @time_log, remote: true) do |form| %>
-            <%= form.hidden_field :project_id, value: @project.id %>
-
-            <div class='form-group text-white'>
-              <%= form.label :hours %>
-              <%= form.number_field :hours, required: true, class: 'text-white' %>
-            </div>
-
-            <div class='form-group text-dark'>
-              <%= form.label :user_id, class: 'text-white' %>
-              <%= form.select :user_id, User.employees.map { |u| [u.name, u.id] }, {}, { class: 'chosen-select chosen-select-fix' } %>
-            </div>
-
-            <div class='actions'>
-              <%= button_tag(type: 'submit', title: nil, class: 'btn btn-primary bg-success') do %>
-                <i class='fa fa-plus'>Add Time Log</i>
-              <% end %>
-            </div>
-          <% end %>
+          <%= render partial: 'payments/modal' %>
         <% end %>
-      </div>
-      <% unless current_user.user? %>
-        <div class='col'>
-          <div class='row'>
-            <div class='col'>
-              <h2 class='font-up font-bold py-4 text-white float-left'>Payments</h2>
-            </div>
-            <div class='col'>
-            </div>
-          </div>
-          <div class='clearfix'></div>
-
-          <%= page_entries_info @payments %>
-          <table id='payments-table' class='table table-condensed table-hover table-striped text-white'>
-            <thead>
-              <tr>
-                <th>Amount</th>
-                <th>Creator</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% @payments.reverse.each do |payment| %>
-                <tr>
-                  <td class='text-white'>
-                    <%= payment.amount %>
-                  </td>
-                  <td class='text-white'>
-                    <%= payment.creator.name %>
-                  </td>
-                  <td>
-                    <div class='form-group'>
-                      <%= link_to decide_payment_path_with_project(payment, @project.id), class: 'btn btn-primary bg-success' do %>
-                        <i class='fa fa-eye'></i>
-                      <% end %>
-                      <%= link_to decide_payment_path_with_project(payment, @project.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary bg-danger' do %>
-                        <i class='fa fa-close'></i>
-                      <% end %>
-                    </div>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <%= paginate @payments, theme: 'twitter-bootstrap-4' %>
-
-          <%= form_with(model: @payment, remote: true) do |form| %>
-            <%= form.hidden_field :project_id, value: @project.id %>
-            <%= form.hidden_field :creator_id, value: current_user.id %>
-
-            <div class='form-group text-white'>
-              <%= form.label :amount %>
-              <%= form.number_field :amount, required: true, class: 'text-white' %>
-            </div>
-
-            <div class='actions'>
-              <%= button_tag(type: 'submit', title: nil, class: 'btn btn-primary bg-success') do %>
-                <i class='fa fa-plus'>Add Payment</i>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>
