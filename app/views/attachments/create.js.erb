@@ -3,5 +3,5 @@
 <% end %>
 
 <% if @attachment.persisted? %>
-  $('table#attachments-table tbody').append('<tr><td class="text-white"><%= @str = shorten_name(@attachment) %></td><td><a href="<%= @attachment.filename_url %>" download=""><i class="fa fa-download"></i></a><%= link_to @attachment, method: :delete, data: { confirm: "Are you sure?" }, remote: true do %><i class="fa fa-close"></i><% end %></td></tr>').fadeIn()
+  $('table#attachments-table tbody').append('<tr><td class="text-white"><%= @str = shorten_name(@attachment) %></td><td><a href="<%= @attachment.filename_url %>" download=""><i class="fa fa-download"></i></a></td></tr>').fadeIn()
 <% end %>
