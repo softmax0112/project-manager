@@ -33,9 +33,6 @@
           <a href='<%= attachment.filename_url %>' download=''>
             <i class='fa fa-download'></i>
           </a>
-          <%= link_to attachment, method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
-            <i class='fa fa-close'></i>
-          <% end %>
         </td>
       </tr>
     <% end %>
