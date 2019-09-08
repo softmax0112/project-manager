@@ -43,11 +43,11 @@ class Project < ApplicationRecord
   end
 
   def payment_this_month
-    payments.where('strftime("%m", created_at) = ? AND strftime("%Y", created_at) = ?', "0#{Date.today.month}", "#{Date.today.year}").sum(:amount)
+    payments.where('extract(month FROM created_at) = ? AND extract(year FROM created_at) = ?', Date.today.month, Date.today.year).sum(:amount)
   end
 
   def time_logged_this_month
-    time_logs.where('strftime("%m", created_at) = ? AND strftime("%Y", created_at) = ?', "0#{Date.today.month}", "#{Date.today.year}").sum(:hours)
+    time_logs.where('extract(month FROM created_at) = ? AND extract(year FROM created_at) = ?', Date.today.month, Date.today.year).sum(:hours)
   end
 
   def add_to_payments(payment)
